@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>IE에서 jQuery로 border width 가져오기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/07/06/jquery-get-border-width/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="var borderW = $(&amp;#39;.selector&amp;#39;).css(&amp;#39;border&amp;#39;).split(&amp;#39;px&amp;#39;)[0];  Chrome = ex) 2px;IE = 빈값 노출   var borderW = $(&amp;#39;.selector&amp;#39;).css(&amp;#39;border-left-width&amp;#39;).split(&amp;#39;px&amp;">
+<meta name="keywords" content="javascript,IE,jQuery,desktop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IE에서 jQuery로 border width 가져오기">
+<meta property="og:url" content="https://note.toice.net/2018/07/06/jquery-get-border-width/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="var borderW = $(&amp;#39;.selector&amp;#39;).css(&amp;#39;border&amp;#39;).split(&amp;#39;px&amp;#39;)[0];  Chrome = ex) 2px;IE = 빈값 노출   var borderW = $(&amp;#39;.selector&amp;#39;).css(&amp;#39;border-left-width&amp;#39;).split(&amp;#39;px&amp;">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IE에서 jQuery로 border width 가져오기">
+<meta name="twitter:description" content="var borderW = $(&amp;#39;.selector&amp;#39;).css(&amp;#39;border&amp;#39;).split(&amp;#39;px&amp;#39;)[0];  Chrome = ex) 2px;IE = 빈값 노출   var borderW = $(&amp;#39;.selector&amp;#39;).css(&amp;#39;border-left-width&amp;#39;).split(&amp;#39;px&amp;">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>IE에서 jQuery로 border width 가져오기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-07-06T10:33:00+09:00">2018년 7월 6일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/IE/">IE</a><a class="tag-link" href="/tags/desktop/">desktop</a><a class="tag-link" href="/tags/jQuery/">jQuery</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle">
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">var borderW = $(&#39;.selector&#39;).css(&#39;border&#39;).split(&#39;px&#39;)[0];
+</code></pre>
+<p>Chrome = ex) 2px;<br>IE = 빈값 노출</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">var borderW = $(&#39;.selector&#39;).css(&#39;border-left-width&#39;).split(&#39;px&#39;)[0];
+</code></pre>
+<p>상세값을 지정하면 IE에서도 정상 노출<br>편하게 가는 법 없는 IE</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/06/29/history-restore-scroll/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>뒤로가기에서 스크롤 위치는 저장하지 않기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/08/13/regExp-html-blank-line/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>빈칸을 포함한 빈줄을 처리하기 위한 정규식</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/07/06/jquery-get-border-width/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

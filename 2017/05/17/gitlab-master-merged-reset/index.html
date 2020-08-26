@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>GitLab Master 브랜치 머지 후 되돌리기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2017/05/17/gitlab-master-merged-reset/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="팀에서 소스관리를 git으로 브랜치 단위로 운영하다보니 예견된 인재가 발생하여 해결할 수 있는 방법을 찾아봤는데 당연히 다행히 방법이 있다. Gitlab 사용시 master 브랜치에 잘못 Merge 하고 Push까지 진행된 경우 잘못된 Merge 이전 시점으로 초기화 하는 방법. ※ Merge Request에서 Merge 버튼 클릭시 Remove Sourc">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitLab Master 브랜치 머지 후 되돌리기">
+<meta property="og:url" content="https://note.toice.net/2017/05/17/gitlab-master-merged-reset/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="팀에서 소스관리를 git으로 브랜치 단위로 운영하다보니 예견된 인재가 발생하여 해결할 수 있는 방법을 찾아봤는데 당연히 다행히 방법이 있다. Gitlab 사용시 master 브랜치에 잘못 Merge 하고 Push까지 진행된 경우 잘못된 Merge 이전 시점으로 초기화 하는 방법. ※ Merge Request에서 Merge 버튼 클릭시 Remove Sourc">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitLab Master 브랜치 머지 후 되돌리기">
+<meta name="twitter:description" content="팀에서 소스관리를 git으로 브랜치 단위로 운영하다보니 예견된 인재가 발생하여 해결할 수 있는 방법을 찾아봤는데 당연히 다행히 방법이 있다. Gitlab 사용시 master 브랜치에 잘못 Merge 하고 Push까지 진행된 경우 잘못된 Merge 이전 시점으로 초기화 하는 방법. ※ Merge Request에서 Merge 버튼 클릭시 Remove Sourc">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>GitLab Master 브랜치 머지 후 되돌리기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2017-05-17T10:33:00+09:00">2017년 5월 17일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/git/">git</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>팀에서 소스관리를 git으로 브랜치 단위로 운영하다보니 예견된 인재가 발생하여 해결할 수 있는 방법을 찾아봤는데 <del>당연히</del> 다행히 방법이 있다.</p>
+<p>Gitlab 사용시 master 브랜치에 잘못 Merge 하고 Push까지 진행된 경우 잘못된 Merge 이전 시점으로 초기화 하는 방법.</p>
+<p>※ Merge Request에서 Merge 버튼 클릭시 Remove Source Branch를 체크하여 Merge 한 경우, Remote에 있는 작업 브랜치도 삭제되었기 때문에 대상 브랜치가 로컬 브랜치로 존재하는지 확인 필요.</p>
+<ol>
+<li>master 브랜치에서 복구 시점 커밋 ID를 확인하여 Merge 전 시점으로 되돌림.
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-clike">git reset --hard {commit id}
+</code></pre>
+</li>
+</ol>
+<p><code>ex) git reset --hard 3f1fcdb</code></p>
+<ol>
+<li>초기화된 상태에서 push
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-clike">git push origin master
+</code></pre>
+</li>
+</ol>
+<p>만약 push 되지 않을 경우 force push<br>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-clike">git push origin +master
+</code></pre></p>
+<p>권한 문제가 발생할 경우 관리자에게 관련사항을 전달하여 권한을 부여받고 다시 force push 진행.<br>Remote에 작업 브랜치가 삭제되었다면 로컬 브랜치에서 push. 삭제되지 않았다면 이 과정은 건너띄어도 무방.</p>
+<p>Merge된 기존 Merge Request 를 참고하여 Merge Request를 새로 작성.</p>
+<p>참고<br><a href="http://donggov.tistory.com/29" target="_blank" rel="noopener">http://donggov.tistory.com/29</a><br><a href="https://git-scm.com/docs/git-push#git-push---force" target="_blank" rel="noopener">https://git-scm.com/docs/git-push#git-push---force</a></p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2017/04/28/osx-git-check-password-again/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>맥에서 소스트리 사용시 Git 비밀번호를 재차 묻는 현상</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2017/05/23/svg-filter-with-ie-and-chrome/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>SVG를 이용한 Blur, IE와 Chrome 동시 적용하기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2017/05/17/gitlab-master-merged-reset/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

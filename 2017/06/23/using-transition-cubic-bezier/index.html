@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>CSS3 cubic-bezier 를 이용한 transition 효과 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2017/06/23/using-transition-cubic-bezier/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="CSS에서 트랜지션을 활용한 타이밍 효과는 주로 linear, ease, ease-in, ease-out, ease-in-out 를 사용하는데 이 규정된 효과 외에 디테일한 타이밍 조절 요청이 있었다.  사실 디테일한 설정이 될거라고 생각 안했는데 언젠가 이걸 어디다 쓰나 싶었던 베지에 곡선이 여기에 활용 되었다. cubic-bezier는 위 이미지에 있는">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 cubic-bezier 를 이용한 transition 효과">
+<meta property="og:url" content="https://note.toice.net/2017/06/23/using-transition-cubic-bezier/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="CSS에서 트랜지션을 활용한 타이밍 효과는 주로 linear, ease, ease-in, ease-out, ease-in-out 를 사용하는데 이 규정된 효과 외에 디테일한 타이밍 조절 요청이 있었다.  사실 디테일한 설정이 될거라고 생각 안했는데 언젠가 이걸 어디다 쓰나 싶었던 베지에 곡선이 여기에 활용 되었다. cubic-bezier는 위 이미지에 있는">
+<meta property="og:locale" content="KO">
+<meta property="og:image" content="https://note.toice.net/images/2017/06/23/bezierCurve.png">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3 cubic-bezier 를 이용한 transition 효과">
+<meta name="twitter:description" content="CSS에서 트랜지션을 활용한 타이밍 효과는 주로 linear, ease, ease-in, ease-out, ease-in-out 를 사용하는데 이 규정된 효과 외에 디테일한 타이밍 조절 요청이 있었다.  사실 디테일한 설정이 될거라고 생각 안했는데 언젠가 이걸 어디다 쓰나 싶었던 베지에 곡선이 여기에 활용 되었다. cubic-bezier는 위 이미지에 있는">
+<meta name="twitter:image" content="https://note.toice.net/images/2017/06/23/bezierCurve.png">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>CSS3 cubic-bezier 를 이용한 transition 효과</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2017-06-23T17:51:36+09:00">2017년 6월 23일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>CSS에서 트랜지션을 활용한 타이밍 효과는 주로 <code>linear</code>, <code>ease</code>, <code>ease-in</code>, <code>ease-out</code>, <code>ease-in-out</code> 를 사용하는데 이 규정된 효과 외에 디테일한 타이밍 조절 요청이 있었다.</p>
+<p><img src="/images/2017/06/23/bezierCurve.png" alt="img"></p>
+<p>사실 디테일한 설정이 될거라고 생각 안했는데 언젠가 이걸 어디다 쓰나 싶었던 베지에 곡선이 여기에 활용 되었다. cubic-bezier는 위 이미지에 있는 그래프를 이용하면 쉽게 이해할 수 있는데 흰색점 (0, 0)지점에서 (1, 1)지점으로 진행되는 동안 중간 조절점 2개(핑크색점, 하늘색점)를 이용하여 곡선 그래프(3차 베지에 곡선)를 만들어 X축 시간이 가는동안 Y축인 진행속도를 조절할 수 있다. 값은 조절점 2개로 x축, y축 값을 지정하여 설정. (<strong>x, y, x, y</strong>).<br>예시 그래프는 처음엔. 속도가 빨랐다가 점차 속도가 늦춰지면서 흰색점 (1, 1)에 도착하며 끝이나는 효과.</p>
+<p>흥미롭기도 하고 이번에 적용한 방법이기도 한데 진행(y)값에 0~1사이의 일반적인 값이 아닌 이를 벗어나는 0이하의 음수 혹은 1보다 큰 숫자를 쓰는 경우 역으로 갔다가 정상적인 방향으로 돌아오거나(음수) 지나쳤다가 다시 돌아오는(1보다 큰 숫자) 형태로 일반적인 한가지 방향이 아닌 진행방향의 변화를 주는 추가적인 효과를 볼 수도 있다.</p>
+<p><a href="http://cubic-bezier.com/" target="_blank" rel="noopener">http://cubic-bezier.com</a> 를 이용하면 조금 더 편리하게 값을 조절할 수 있다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2017/05/23/svg-filter-with-ie-and-chrome/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>SVG를 이용한 Blur, IE와 Chrome 동시 적용하기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2017/09/12/try-mobile-background-attachment-fixed/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>iOS 배경 고정하는 방법 background-attachment: fixed 대체 방법 고민</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2017/06/23/using-transition-cubic-bezier/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>toice&#39;s note</title>
+  
+  <subtitle>내가 기억하려고 남기는 기록</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://note.toice.net/"/>
+  <updated>2020-08-26T02:11:52.785Z</updated>
+  <id>https://note.toice.net/</id>
+  
+  <author>
+    <name>Jungwoo Jang(toice)</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nodemon 재시작 명령어 rs</title>
+    <link href="https://note.toice.net/2020/07/28/nodemon-restart-command-rs/"/>
+    <id>https://note.toice.net/2020/07/28/nodemon-restart-command-rs/</id>
+    <published>2020-07-28T11:57:36.000Z</published>
+    <updated>2020-08-26T02:11:52.785Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>nodemon</code>으로 구동되는 프레임워크 환경에서 작업하면서 당연하게도 서버가 중단되는 오류가 자주 발생하게 되고 서버 재시작이 되는 <code>app.js</code>나 <code>json</code>을 열고 있는 경우에는 일부러 저장을 하거나 <code>json</code>이 없는 작업이면 그때마다 취소하고 새로 켰는데 동료 자리에 갔다가 터미널에서 <code>rs</code>를 입력해서 간단히 재시작 하는걸 보게 됐다.</p><p>와 이런 신세계가 이걸 이제 알았네 하면서 블로그에 적어야지 했는데…</p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-shell">[nodemon] 2.0.1[nodemon] to restart at any time, enter `rs`[nodemon] watching dir(s): *.*[nodemon] watching extensions: js,json[nodemon] starting `node app.js`</code></pre><p>…시작할 때 친절히 무려 버전 표기 다음으로 알려주고 있었다.</p><blockquote><p>[nodemon] to restart at any time, enter <code>rs</code></p></blockquote><p>영어가 모국어였으면 봤을려나.. (…)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;nodemon&lt;/code&gt;으로 구동되는 프레임워크 환경에서 작업하면서 당연하게도 서버가 중단되는 오류가 자주 발생하게 되고 서버 재시작이 되는 &lt;code&gt;app.js&lt;/code&gt;나 &lt;code&gt;json&lt;/code&gt;을 열고 있는 경우에는 
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="node.js" scheme="https://note.toice.net/tags/node-js/"/>
+    
+      <category term="nodemon" scheme="https://note.toice.net/tags/nodemon/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IE에서 비활성 input에 onChange 이벤트 미작동 문제</title>
+    <link href="https://note.toice.net/2020/07/22/input-disabled-cannot-onchange-ie/"/>
+    <id>https://note.toice.net/2020/07/22/input-disabled-cannot-onchange-ie/</id>
+    <published>2020-07-22T03:54:03.000Z</published>
+    <updated>2020-08-22T07:35:03.344Z</updated>
+    
+    <content type="html"><![CDATA[<p>왜 문제냐면 이 문제는 IE에서만 발생하기 때문이다.</p><h5 id="IE에서-안되는-케이스"><a href="#IE에서-안되는-케이스" class="headerlink" title="IE에서 안되는 케이스"></a>IE에서 안되는 케이스</h5><p><input type="text" class="testInput" value="0" disabled> <button type="button" class="testBtn">button</button></p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-html">&lt;input type=&quot;text&quot; class=&quot;testInput&quot; value=&quot;0&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;testBtn&quot;&gt;button&lt;&#x2F;button&gt;</code></pre><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-javascript">const testInput = document.querySelector(&#39;.testInput&#39;);const testBtn = document.querySelector(&#39;.testBtn&#39;);testInput.addEventListener(&#39;change&#39;, function() {  testBtn.innerText = &#39;button &#39; + this.value;});testBtn.addEventListener(&#39;click&#39;, () =&gt; {  testInput.value++;  const event = document.createEvent(&#39;HTMLEvents&#39;);  event.initEvent(&#39;change&#39;, true, false);  testInput.dispatchEvent(event);});</code></pre><p>코드대로라면 버튼을 누르면 인풋에 숫자가 올라가고 인풋에 숫자가 올라가면 버튼에도 숫자가 올라가야한다.</p><p>이 경우가 IE에서<strong>만</strong> 안되는데 이게 이렇게 간단한 예제로, 결과를 놓고 봐서 쉽게 받아들일 수 있지 꽤 복잡한 구성에서 IE에서만 정상적인 값 계산이 안되서, 걸려있는 이벤트를 다 체크하고 의심하며 이유가 뭔지 찾는데 한참 시간을 들였다.</p><h5 id="IE에서-되는-케이스"><a href="#IE에서-되는-케이스" class="headerlink" title="IE에서 되는 케이스"></a>IE에서 되는 케이스</h5><p><input type="text" class="testInput2" value="0" disabled> <button type="button" class="testBtn2">button</button></p><p>확인해본 결과 원인은 <code>input</code> 상태가 <code>disabled</code>이기 때문이라 다른 방법을 취해야한다.<br>방법에는 여러가지가 있을 것 같다. <code>disabled</code> 제거하고 대신에 클릭이나 포커스를 막아서 사용할 수 없게 하던지…<br>이 업무에선 굳이 비활성 안해도 되는 부분이라 비활성 자체를 해제해버렸는데 만약 비활성을 유지해야한다면 <code>disabled</code>를 풀고 트리거 후에 <code>disabled</code>를 다시 추가하는 형태로 바꿔도 딱히 문제는 없어보인다.</p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-javascript">testBtn.addEventListener(&#39;click&#39;, () =&gt; {  testInput.value++;  const event = document.createEvent(&#39;HTMLEvents&#39;);  event.initEvent(&#39;change&#39;, true, false);  testInput.disabled = false;  testInput.dispatchEvent(event);  testInput.disabled = true;});</code></pre><script>const testInput = document.querySelector('.testInput');const testBtn = document.querySelector('.testBtn');testInput.addEventListener('change', function() {  testBtn.innerText = 'button ' + this.value;});testBtn.addEventListener('click', () => {  testInput.value++;  const event = document.createEvent('HTMLEvents');  event.initEvent('change', true, false);  testInput2.disabled = false;  testInput.dispatchEvent(event);  testInput2.disabled = true;});const testInput2 = document.querySelector('.testInput2');const testBtn2 = document.querySelector('.testBtn2');testInput2.addEventListener('change', function() {  testBtn2.innerText = 'button ' + this.value;});testBtn2.addEventListener('click', () => {  testInput2.value++;  const event = document.createEvent('HTMLEvents');  event.initEvent('change', true, false);  testInput2.disabled = false;  testInput2.dispatchEvent(event);  testInput2.disabled = true;});</script>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;왜 문제냐면 이 문제는 IE에서만 발생하기 때문이다.&lt;/p&gt;
+&lt;h5 id=&quot;IE에서-안되는-케이스&quot;&gt;&lt;a href=&quot;#IE에서-안되는-케이스&quot; class=&quot;headerlink&quot; title=&quot;IE에서 안되는 케이스&quot;&gt;&lt;/a&gt;IE에서 안되는 케이스&lt;
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="javascript" scheme="https://note.toice.net/tags/javascript/"/>
+    
+      <category term="IE" scheme="https://note.toice.net/tags/IE/"/>
+    
+      <category term="form" scheme="https://note.toice.net/tags/form/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS Content에 attr, url 넣기</title>
+    <link href="https://note.toice.net/2020/07/17/style-content-attr/"/>
+    <id>https://note.toice.net/2020/07/17/style-content-attr/</id>
+    <published>2020-07-17T08:48:47.000Z</published>
+    <updated>2020-08-22T07:36:21.251Z</updated>
+    
+    <content type="html"><![CDATA[<p>CSS의 <code>content</code>는 도무지 쓸모 없는 요소라고 생각했는데 아래와 같이도 쓸 수 있었다.</p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-html">&lt;span data-number=&quot;1&quot;&gt;1&lt;&#x2F;span&gt;</code></pre><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-scss">&amp;::before {  content: url(imgurl);}&amp;::after {  content: attr(data-number);}</code></pre><p>보통 <code>content</code> 값을 넣을래도 그렇게 넣는 경우는 웹접근성에 위배되는 경우가 대다수기 때문에 실제로는 <code>::before</code>, <code>::after</code>를 쓸 때 반드시 따라가는 요소정도로만 쓰거나 그나마 기능적으로 쓸만한게 <code>counter</code>로 쓰는거였는데 이렇게도 쓸 수 있다는걸 11년차만에 알게 됐다. 그래서 기록.</p><h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul><li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/CSS/attr</a></li></ul><h4 id="잡담"><a href="#잡담" class="headerlink" title="잡담"></a>잡담</h4><p>요즘 회사 새 프로젝트의 UI개발 부분 리드를 하고 있는데, 팀에 코드 리뷰 문화가 안잡혀 있어 내가 리더란 핑계로 이 프로젝트만큼은 코드 리뷰를 시도하고 있는데 같이 하는 동료들이 아무래도 부담이 가는지 사실상 내 일방적인 코드리뷰(코드스멜에 가깝긴한데)가 되고 있어서 의견만 전달하다 리뷰하던 코드에서 나도 하나 배웠다!</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;CSS의 &lt;code&gt;content&lt;/code&gt;는 도무지 쓸모 없는 요소라고 생각했는데 아래와 같이도 쓸 수 있었다.&lt;/p&gt;
+
+&lt;!-- Has Prism --&gt;
+&lt;pre class=&quot;line-numbers&quot; style=&quot;&quot;&gt;&lt;code class=&quot;
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="CSS" scheme="https://note.toice.net/tags/CSS/"/>
+    
+      <category term="코드리뷰" scheme="https://note.toice.net/tags/%EC%BD%94%EB%93%9C%EB%A6%AC%EB%B7%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>모바일에서 유튜브, 구글지도 아이프레임 모서리 둥굴게(border-radius) 적용하기</title>
+    <link href="https://note.toice.net/2020/06/26/border-radius-for-iframe-at-mobile/"/>
+    <id>https://note.toice.net/2020/06/26/border-radius-for-iframe-at-mobile/</id>
+    <published>2020-06-26T04:42:22.000Z</published>
+    <updated>2020-08-20T22:14:14.723Z</updated>
+    
+    <content type="html"><![CDATA[<p>디자인상 페이지내 모든 오브젝트에 모서리 둥굴게 처리가 필요했고 유튜브랑 구글지도를 보통 <code>iframe</code>으로 넣다보니 프레임 자체에 모서리 둥굴게 처리하면 이것 또한 문제 없이 되지 않을까 싶었는데 데스크톱에서는 문제가 없었으나 모바일에서는 둥글어지지 않는 문제가 있었다. 다행히 쉽게 구글링 되었는데</p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-SCSS">.video {    position: relative;    padding-top: percentage(9 &#x2F; 16);    border-radius: 1rem;    overflow: hidden;    mask-image: radial-gradient(#fff, #000);}</code></pre><p>와 같이 <code>mask-image</code>를 사용하는걸로 구현이 가능했다. IE에서는 안되지만 어차피 모바일에 적용하는 목적이라 상관없다.</p><h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul><li><a href="https://stackoverflow.com/questions/45425044/rounded-corners-for-an-iframe-not-working-in-safari" target="_blank" rel="noopener">https://stackoverflow.com/questions/45425044/rounded-corners-for-an-iframe-not-working-in-safari</a></li><li><a href="https://shlee1353.github.io/2019/07/15/css-clip-mask/" target="_blank" rel="noopener">https://shlee1353.github.io/2019/07/15/css-clip-mask/</a></li></ul><h4 id="잡담"><a href="#잡담" class="headerlink" title="잡담"></a>잡담</h4><p>나랑 경력이 비슷한 동일직군의 사람은 공감할텐데<del>내 노력이 부족했을 수도 있긴한데</del> CSS3를 공부하던 시점에 실 업무에서는 CSS3를 사용할 수 없었기 때문에(모바일도 아이폰3, 옴니아 시절이라 모바일에서도 안되는게 많았다) 공부했어도 잊어버리거나 이 경우처럼 아예 생소한 경우도 있는 것 같다. 마치 알고리즘 문제를 신입 개발자가 훨씬 잘 푸는 것처럼 CSS3도 결국 신입UI개발자가 더 잘하는(해야되는) 항목이 아닐지.. 어쨋거나 구브라우저가 많이 없어지고 사실상의 꼼수로 해결하기 위해 삽질하던 시절이 거의 지나간 것 같아 좋은 작업환경이 된 것 같다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;디자인상 페이지내 모든 오브젝트에 모서리 둥굴게 처리가 필요했고 유튜브랑 구글지도를 보통 &lt;code&gt;iframe&lt;/code&gt;으로 넣다보니 프레임 자체에 모서리 둥굴게 처리하면 이것 또한 문제 없이 되지 않을까 싶었는데 데스크톱에서는 문제가 없었으
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="CSS" scheme="https://note.toice.net/tags/CSS/"/>
+    
+      <category term="youtube" scheme="https://note.toice.net/tags/youtube/"/>
+    
+      <category term="iframe" scheme="https://note.toice.net/tags/iframe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>구글 지도 Places opening_hours.open_now 대신 isOpen() 함수 쓰기</title>
+    <link href="https://note.toice.net/2020/06/19/google-map-place-opening-hours-open-now-to-isOpen-func/"/>
+    <id>https://note.toice.net/2020/06/19/google-map-place-opening-hours-open-now-to-isOpen-func/</id>
+    <published>2020-06-19T09:04:34.000Z</published>
+    <updated>2020-08-26T02:22:36.127Z</updated>
+    
+    <content type="html"><![CDATA[<p>구글 지도 API에서 장소정보중에 <code>open_now</code>라고 해당 스팟이 영업중인지 확인하는 데이터가 있었는데 디프리케이티드 되어 2020년 11월부터는 중단된다는 메시지가 콘솔에 나타났다.</p><blockquote><p>js?key=<strong>APIKEY</strong>&amp;libraries=places&amp;callback=UIPrototypeMap:57 open_now is deprecated as of November 2019 and will be turned off in November 2020. Use the isOpen() function from a PlacesService.getDetails() result instead. See <a href="https://goo.gle/js-open-now" target="_blank" rel="noopener">https://goo.gle/js-open-now</a></p></blockquote><p>쓰는 방식이 좀 달라서 시간 작업 소요가 좀 있던터라 기록을 남겨둔다.</p><p><code>PlaceResult</code>가 받아온 오브젝트라면 <code>PlaceResult.opening_hours.open_now</code>만으로도 Boolean 타입으로 값을 받아올 수 있어서 영업중인지 아닌지 영업정보가 없는지를 바로 판별할 수가 있었는데 콘솔창에 안내되어 있는 것만 얼핏보고 <code>PlaceResult.opening_hours.isOpen()</code>과 같이 해서는 모두 <code>undefined</code> 값만 받아보게 된다.</p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-javascript">new google.maps.places.PlacesService(attrContainer).getDetails({  placeId: &#39;...&#39;,  fields: [&#39;opening_hours&#39;,&#39;utc_offset_minutes&#39;],  }, function (place, status) {    if (status !== &#39;OK&#39;) return; &#x2F;&#x2F; something went wrong    const isOpenAtTime = place.opening_hours.isOpen(new Date(&#39;December 17, 2020 03:24:00&#39;));    if (isOpenAtTime) {        &#x2F;&#x2F; We know it&#39;s open.    }    const isOpenNow = place.opening_hours.isOpen();    if (isOpenNow) {        &#x2F;&#x2F; We know it&#39;s open.    }});</code></pre><p>출처 : <a href="https://developers.google.com/maps/documentation/javascript/place_field_js_migration" target="_blank" rel="noopener">https://developers.google.com/maps/documentation/javascript/place_field_js_migration</a></p><p>위 예제가 더 정확한데 저렇게 별도로 영업시간 체크를 해줘야한다. 게다가 비동기로 결과를 받기 때문에 체크하는 방식을 변경해줄 수 밖에 없었다.</p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-javascript">&#x2F;&#x2F; service는 다른 곳에서 new google.maps.places.PlacesService(attrContainer) 선언함function placeIsOpen(id) {  if (!service) {    return undefined;  }  service.getDetails({    placeId: id,    fields: [&#39;opening_hours&#39;, &#39;utc_offset_minutes&#39;]  }, function(place, status) {    if (status !== &#39;OK&#39;) {      return undefined;    }    return place.opening_hours.isOpen();  });  return undefined;}</code></pre><p>같이 만들어놓고 바로바로 <code>open_now</code> 쓰던 것처럼 넣었더니 한번에 넣는 값이 8개가 넘으면 <code>OVER QUERY LIMIT</code> 오류를 뱉고, 어차피 비동기로 처리되기 때문에 제 시점에 영업 여부를 넣을 수가 없었다.</p><p>그래서 ① 담아 놓고 넣거나, ②. 8개 이하로 끊어서 넣거나, ③ 필요할 시점에 넣어야 했는데 다행히 스팟 정보는 스와이퍼 형태로 제공하는 화면이어서 활성화된 스팟 지점인 경우에만 영업 여부 체크하여 넣는 것으로 변경했다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;구글 지도 API에서 장소정보중에 &lt;code&gt;open_now&lt;/code&gt;라고 해당 스팟이 영업중인지 확인하는 데이터가 있었는데 디프리케이티드 되어 2020년 11월부터는 중단된다는 메시지가 콘솔에 나타났다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;j
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="Javascript" scheme="https://note.toice.net/tags/Javascript/"/>
+    
+      <category term="API" scheme="https://note.toice.net/tags/API/"/>
+    
+      <category term="Google Map" scheme="https://note.toice.net/tags/Google-Map/"/>
+    
+      <category term="Google Places" scheme="https://note.toice.net/tags/Google-Places/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>알고리즘 테스트 - 정해진 숫자 조합으로 나올 수 있는 소수 찾기</title>
+    <link href="https://note.toice.net/2020/06/14/algorithm-test/"/>
+    <id>https://note.toice.net/2020/06/14/algorithm-test/</id>
+    <published>2020-06-14T12:50:26.000Z</published>
+    <updated>2020-06-19T03:05:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>회사에 코딩 관련 동호회가 만들어져 신규 회원을 모집하면서 알고리즘 문제를 냈는데 딱히 알고리즘 문제를 풀어본 적은 없지만 문제를 보니 해볼만 하겠다 싶어<del>경품 중 하나인 에어팟 무선 충전 케이스가 갖고 싶어서</del> 참여해보게 됐다.</p><h1 id="소수-찾기"><a href="#소수-찾기" class="headerlink" title="소수 찾기"></a>소수 찾기</h1><h2 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a>문제 설명</h2><blockquote><p>한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.</p><p>각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.</p></blockquote><h2 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h2><blockquote><ul><li>numbers는 길이 1 이상 7 이하인 문자열입니다.</li><li>numbers는 0~9까지 숫자만으로 이루어져 있습니다.</li><li>013은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.</li></ul></blockquote><h2 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h2><blockquote><p>“17”  3<br>“011” 2</p><p>입출력 예 설명</p><p>예제 #1<br>[1, 7]으로는 소수 [7, 17, 71]를 만들 수 있습니다.</p><p>예제 #2<br>[0, 1, 1]으로는 소수 [11, 101]를 만들 수 있습니다.</p><p>11과 011은 같은 숫자로 취급합니다.</p></blockquote><h2 id="제출코드"><a href="#제출코드" class="headerlink" title="제출코드"></a>제출코드</h2><p>아래 코드가 제출코드인데 언어 사용에 제한은 없었지만 제일 능숙한 자바스크립트 웹환경에서 했고 집에서 할때는 재귀함수 형태로 구현했는데 회사에서 해보니 자릿수가 6자리 이상되면 무한 재귀 호출 오류<code>Maximum call stack size exceeded</code>가 발생해 부랴부랴 수정해서 제출했다.</p><h3 id="제출코드-반복문-형태"><a href="#제출코드-반복문-형태" class="headerlink" title="제출코드 - 반복문 형태"></a>제출코드 - 반복문 형태</h3><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-javascript">function solution(numbers) {  if (typeof numbers !== &#39;string&#39; || numbers.length &lt; 1 || numbers.length &gt; 7) {    return;  }  var arr = [numbers.split(&#39;&#39;)]; &#x2F;&#x2F; 모든 경우의 조합을 담을 배열  var pointer = 0; &#x2F;&#x2F; 모든 경우의 조합을 담을 때 필요한 앞자리수의 위치  var depth = arr.length; &#x2F;&#x2F; 모든 경우의 조합을 담을 때 필요한 자리수  var source = []; &#x2F;&#x2F; 중복방지를 위한 어떤 앞자리에서 가져왔는지 출처를 담아놓을 배열  var list = []; &#x2F;&#x2F; 모든 경우의 조합을 하나의 배열로 담기 위한 배열  var checkList = []; &#x2F;&#x2F; 조건에 맞는 값만 담을 배열  &#x2F;&#x2F; 나올 수 있는 모든 조합 구하는 반복문  var combi = function() {    while (pointer &lt; arr[depth - 1].length) {      arr[depth] = arr[depth] || [];      source[depth] = source[depth] || [];      for (var i = 0; i &lt; arr[0].length; i++) {        if (source[depth - 1]) {          if (source[depth - 1][pointer].includes(i)) {            continue;          }        } else {          if (pointer === i) {            continue;          }        }        arr[depth].push(arr[depth - 1][pointer] + arr[0][i]);        if (source[depth - 1]) {          source[depth].push(source[depth - 1][pointer].concat(i));        } else {          source[depth].push([pointer, i]);        }      }      pointer++;    }    depth++;    pointer = 0;  };  &#x2F;&#x2F; 소수 판별  var checkNumber = function(number) {    number = Number(number);    if (number === 2) {      return true;    }    if (number &lt; 2 || number % 2 === 0) {      return false;    }    for (var i = 3; i &lt; number; i+=2) {      if (number % i === 0) {        return false;      }    }    return true;  };  &#x2F;&#x2F; 나올 수 있는 모든 조합 구하기 실행  do {    combi();  } while(depth &lt; arr[0].length);  &#x2F;&#x2F; 위에 구한 모든 조합을 한 배열에 몰아넣기  for (var i = 0; i &lt; arr.length; i++) {    list = list.concat(arr[i]);  }  &#x2F;&#x2F; 앞자리가 0이면 거르고, 소수 체크하여 해당되는 숫자 담기  for (i = 0; i &lt; list.length; i++) {    if (list[i][0] == 0) {      continue;    }    if (checkNumber(list[i]) &amp;&amp; !checkList.includes(list[i])) {      checkList.push(list[i]);    }  }  &#x2F;&#x2F; 조건에 맞는 배열이 몇갠지 반환  return checkList.length;}console.log(solution(&#39;17&#39;));console.log(solution(&#39;011&#39;));</code></pre><p>아래 코드가 무한 재귀 호출 오류가 발생하는 원코드..</p><h3 id="제출코드-재귀함수-형태"><a href="#제출코드-재귀함수-형태" class="headerlink" title="제출코드 - 재귀함수 형태"></a>제출코드 - 재귀함수 형태</h3><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-javascript">function solution(numbers) {  if (typeof numbers !== &#39;string&#39; || numbers.length &lt; 1 || numbers.length &gt; 7) {    return;  }  var checkNumber = function(number) {    number = Number(number);    if (number === 2) {      return true;    }    if (number &lt; 2 || number % 2 === 0) {      return false;    }    for (var i = 3; i &lt; number; i+=2) {      if (number % i === 0) {        return false;      }    }    return true;  };  var combination = function(arr = [numbers.split(&#39;&#39;)], pointer = 0, depth = 1, source = []) {    arr[depth] = arr[depth] || [];    source[depth] = source[depth] || [];    if (pointer &lt; arr[depth - 1].length) {      for (var i = 0; i &lt; arr[0].length; i++) {        if (source[depth - 1]) {          if (source[depth - 1][pointer].includes(i)) {            continue;          }        } else {          if (pointer === i) {            continue;          }        }        arr[depth].push(arr[depth - 1][pointer] + arr[0][i]);        if (source[depth - 1]) {          source[depth].push(source[depth - 1][pointer].concat(i));        } else {          source[depth].push([pointer, i]);        }      }      pointer++;    } else {      depth++;      pointer = 0;    }    if (depth &lt; arr[0].length) {      combination(arr, pointer, depth, source);    }    return arr;  };  var arr = combination();  var list = [];  var checkList = [];  for (var i = 0; i &lt; arr.length; i++) {    list = list.concat(arr[i]);  }  for (var i = 0; i &lt; list.length; i++) {    if (list[i][0] == 0) {      continue;    }    if (checkNumber(list[i]) &amp;&amp; !checkList.includes(list[i])) {      checkList.push(list[i]);    }  }  return checkList;}console.log(&#39;result&#39;, solution(&#39;017&#39;));</code></pre><p>첫번째의 코드는 마감시간이 다 되어가 어쩔 수 없이 재귀함수를 반복문으로 바꿔 풀어쓴 형태라 아쉬움이 좀 남는데 일단 잘 되더라도 일주일만 지나도 내 코드는 아쉬움 덩어리 차후에 다시 해보기로 한다. <del>결과 상관없이 참여자 추첨이던 경품은 결국 하나도 못탔다.</del></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;회사에 코딩 관련 동호회가 만들어져 신규 회원을 모집하면서 알고리즘 문제를 냈는데 딱히 알고리즘 문제를 풀어본 적은 없지만 문제를 보니 해볼만 하겠다 싶어&lt;del&gt;경품 중 하나인 에어팟 무선 충전 케이스가 갖고 싶어서&lt;/del&gt; 참여해보게 됐다.
+      
+    
+    </summary>
+    
+      <category term="etc" scheme="https://note.toice.net/categories/etc/"/>
+    
+    
+      <category term="javascript" scheme="https://note.toice.net/tags/javascript/"/>
+    
+      <category term="algorithm" scheme="https://note.toice.net/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>윈도우 크롬 셀렉트박스 스타일(CSS) 옵션까지 상속</title>
+    <link href="https://note.toice.net/2020/03/23/form-select-option-style-in-windows/"/>
+    <id>https://note.toice.net/2020/03/23/form-select-option-style-in-windows/</id>
+    <published>2020-03-23T07:19:12.000Z</published>
+    <updated>2020-08-22T07:39:05.847Z</updated>
+    
+    <content type="html"><![CDATA[<p>운좋게 크롬만 고려하면 되는 작업이 있었는데 요청사항 중에 셀렉트박스에 특정 값이 선택되면 셀렉트박스 텍스트 컬러를 변경해달라는 줄 알고 작업한 내용이 있었다. 그런데 알고보니 셀렉트박스를 눌러 보이는 옵션 목록에까지 특정 옵션 값에만 컬러를 변경해달라는 요청이었어서, 그건 별도의 드롭다운 UI로 가져가야한다고 디자인부터 필요하다고 거절 의사를 전달했다.</p><p>디자인 리소스를 별로 들이지 않는 페이지라 그렇게 넘어갈 줄 알았는데 또 연락이 와서 다시 한번 확인 요청이 와 기본적인 폼요소에서는 스타일링이 불가능하다고 재전달했는데 전화로 기획자가 컬러가 들어간게 보인다고 하여 아무래도 서로 커뮤니케이션 문제가 있는게 아닐까 싶었다.</p><p>결국 자리에서 만나 확인해보니 커뮤니케이션 오류는 아니었고 같은 크롬이어도 운영체제별 차이가 있었다. 폼요소 모양이 다른 건 알고 있었지만 CSS의 영향까지 다를거라고는 생각 못했다.</p><p><img src="/images/2020/03/23/selectOptionColorMacOS.png" alt="macOS - Chrome에서 셀렉트, 옵션에 컬러넣기"></p><p>맥 크롬에서는 이렇게 셀렉트박스 옵션에 전혀 스타일링을 할 수가 없는데…</p><p><img src="/images/2020/03/23/formSelectColorWindows.png" alt="Windows7 - Chrome에서 셀렉트 컬러넣기"></p><p><img src="/images/2020/03/23/formOptionColorWindows.png" alt="Windows7 - Chrome에서 셀렉트 옵션 컬러넣기"></p><p>윈도우 크롬에서는 특정 값일 때 셀렉트에 넣은 컬러가 옵션에까지 상속되어 똑같이 컬러가 적용된 것처럼 보이는 현상이 있었다. 그래서 기획자가 컬러가 들어간게 보이는데 왜 불가능하다고 하냐는 이야기였던거다.</p><p>되돌아보면 폼요소를 쓰니까 브라우저 상관없이 윈도우도 체크했어야 하는데 생각이 짧았다.</p><p>결국 이 작업은 모바일까지 고려해야 하고 모바일에서도 옵션에 스타일링 되지 않기 때문에 결국 이 부분은 디자인 전달받아 드롭다운UI로 만들어 넣을 수 밖에 없었다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;운좋게 크롬만 고려하면 되는 작업이 있었는데 요청사항 중에 셀렉트박스에 특정 값이 선택되면 셀렉트박스 텍스트 컬러를 변경해달라는 줄 알고 작업한 내용이 있었다. 그런데 알고보니 셀렉트박스를 눌러 보이는 옵션 목록에까지 특정 옵션 값에만 컬러를 변
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="chrome" scheme="https://note.toice.net/tags/chrome/"/>
+    
+      <category term="CSS" scheme="https://note.toice.net/tags/CSS/"/>
+    
+      <category term="form" scheme="https://note.toice.net/tags/form/"/>
+    
+      <category term="select" scheme="https://note.toice.net/tags/select/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>10년만에 맥북 교체, 새 맥북 프로 16인치</title>
+    <link href="https://note.toice.net/2020/02/14/my-new-mbp16-2019/"/>
+    <id>https://note.toice.net/2020/02/14/my-new-mbp16-2019/</id>
+    <published>2020-02-14T12:35:19.000Z</published>
+    <updated>2020-02-14T12:35:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>원래 이 블로그의 취지랑은 맞지 않지만 워낙 감격스러운 순간이고 개발과도 관계가 되니깐 :)</p><h1 id="내-새-맥북-2019년형-맥북프로-16인치"><a href="#내-새-맥북-2019년형-맥북프로-16인치" class="headerlink" title="내 새 맥북 2019년형 맥북프로 16인치"></a>내 새 맥북 2019년형 맥북프로 16인치</h1><p><img src="/images/2020/02/14/84640289_180471309917884_8624624627137761016_n.jpg" alt="새 맥북 프로 16인치 2019년형"></p><p class="caption">새 맥북과 기존 맥북</p><h2 id="소회"><a href="#소회" class="headerlink" title="소회"></a>소회</h2><p>2010년에 구입한 2010년형 맥북프로 13인치(MBP-2010-mid)를 정말 딱 10년쓰고 살짝 충동구매스럽게 구매했다.</p><p>요즘은 맥북을 쓰나 윈도우 노트북을 쓰나 사용하는 용도에는 <del>게임 목적이 아니라면</del> 큰 차이가 없는데 처음에 맥을 쓰고나서부터 이제 윈도우는 못쓰겠다고 생각했던게 딱 내가 하고 싶은 것만 하면 되는게 좋았다. 윈도우 쓸 때는 백신 점검, 방화벽 점검, 조립식 PC를 사용했어서 그랬겠지만 그래픽 드라이버, 네트워크 연결 문제 등 <del>윈도우를 쓰면서 컴퓨터에 대해 할 수 없이 자연스럽게 알아가게 되는 부가적인 이점도 있긴 하지만</del> 그런 피곤한 과정들이 맥북을 쓰면서는 아예 없는게 좋았다. 솔직히 말하면 맥이나 윈도우나 사용 방식에 있어서 큰 차이가 있는지도 이제서는 잘 모르겠다.</p><p>그래서 다음 PC도 당연히 맥으로 한다고 생각했었고 원래 뭐든 사고나면 그 후속에는 크게 관심을 안가지는 편이지만 맥 관련 정보는 자연스럽게 조금씩 알게되어 들어보면 새로 출시되는 맥북에 키보드 문제(나비형?)에 대해서는 항상 이야기가 나오는 것 같아 그 문제가 해결되면 사야지 하고 마음 먹고 있었고 이젠 도무지 못쓰겠다 생각한게 3-4년쯤 된거 같은데 다시 원래의 키보드로 바뀐 첫 맥북이 이 맥북프로16인치 모델이다.</p><p>그리고 몇번을 다짐(?)했던 것 중에 하나가 기존 맥북프로가 너무 무거워서 다음에는 맥북에어를 사야겠다 생각했었는데 성능 뿐만 아니라 기존의 작은 화면도 아쉽긴 했어서 어차피 무거워서 잘 안갖고 다닐꺼 16인치도 괜찮겠다 싶었다. 어차피 무거워서 잘 안가지고 다니니까 아이맥을 살까도 잠깐 생각 했었는데 혹시 밖으로 갖고 나갈 일이 생겨서 기존 맥북을 가지고 나간다고 생각해보니 바로 결정할 수 있었다.</p><h2 id="사양"><a href="#사양" class="headerlink" title="사양"></a>사양</h2><p>아내가 또 오래 쓸테니 가장 좋은걸로 하라고 해서 용기를 냈지만 공홈 구매가 아니라서 메모리 업그레이드를 하지 못했다. 22개월 할부의 매력 때문에 메모리를 포기했다. ㅠㅠ</p><h3 id="MBP16-2019"><a href="#MBP16-2019" class="headerlink" title="MBP16-2019"></a>MBP16-2019</h3><blockquote><p>2.3GHz 8코어 Intel Core i9(최대 4.8GHz Turbo Boost, 16MB 공유 L3 캐시<br>1TB SSD<br>16GB 2666MHz DDR4 온보드 메모리<br>AMD Radeon Pro 5500M(4GB GDDR6 메모리 및 자동 그래픽 전환 기능 탑재) / Intel UHD Graphics 630</p></blockquote><h2 id="기본-세팅"><a href="#기본-세팅" class="headerlink" title="기본 세팅"></a>기본 세팅</h2><p>스노우레오파드 부터 시작해서 그런지 뒤에 나온 macOS의 기본 값들이 나한테 맞지 않아 내가 새 OS에 맞추기보단 OS 설정을 통해 다 바꿨다. 사실 회사 아이맥도 바꿔놓고 쓰는터라 당연히 새 맥북에도 그렇게 해야했다. (그래서 다른사람 맥을 만지면 키를 항상 모르겠는 단점이..) 다행히 추가 설치 없이 맥 기본 설정에서 다 바꿀 수 있어서 좋다.</p><blockquote><ol><li>트랙패드 탭클릭, 방향 바꾸기 및 설정 변경</li><li>독 방향 바꾸기</li><li>손쉬운 사용 3손가락 드래그 활성화</li><li>미션컨트롤 스페이스를 최근 내역으로 비활성</li><li>핫코너 설정</li><li>캡스록 컨트롤로 바꾸기</li><li>컨트롤 스트립 시리 제거</li><li>입력소스 전환 스팟라이트 단축키 바꾸기</li><li>크롬 자동완성 끄기, 번역 끄기</li></ol></blockquote><h2 id="애플케어-플러스"><a href="#애플케어-플러스" class="headerlink" title="애플케어 플러스"></a>애플케어 플러스</h2><p>첫 맥북을 쓸 때도 애플케어를 했었는데 아무짝에 쓸모없이 기간만 지나 새로 사면 할 계획도 없었고 주변에 맥북을 사는 사람이 있으면 안해도 된다고 했었는데 막상 알아보니 10년전 맥북과 다르게 요즘(?) 맥북은 얇게 만드느라 보드에 부품이 납땜 되어 나오기 때문에 어느 하나 문제가 생기면 비용이 크다는걸 알게됐다. 그래서 계획에 없던 비용 추가 지출.. (하지말래 놓고 난 해서 미안..)</p><p>아이팟 터치 쓰던 시절에 한국 앱스토어에 앱이 적어 미국 앱스토어용으로 계정을 만들고 그 계정을 지금까지도 메인으로 쓰고 있는데 애플케어 가입시 미국 계정은 안된다고 해서 보조로 갖고 있는 한국 계정을 불러줬더니 개명 전 이름으로 등록되어 큰 상관은 없겠지만 조금 아쉽다.(ㅋ)</p><p>보증은 2023년 4월 5일까지.</p><h2 id="MBP-2010-mid"><a href="#MBP-2010-mid" class="headerlink" title="MBP-2010-mid"></a>MBP-2010-mid</h2><p>내 스스로도 워낭소리에 나오는 소와 비슷하다고 할 만큼 오래 굴렸다. 그만큼 추억도 많아 당연히 처분하지 않고 갖고 있을 예정인데 어떻게 활용할지는 좀 생각해봐야겠다. 사람이 정말 간사한게 잠깐 16인치 썼다고 13인치가 너무 작게 느껴진다.</p><p>아래 사진은 내 인스타에서 퍼왔다.</p><p><img src="/images/2020/02/14/20838868_795356720625160_858346796039012352_n.jpg" alt="맥북 베터리 교체"></p><p class="caption" style="text-align: left">2017.08.19 - 맥북 베터리 교체, 이때 베터리가 0%가 되어 전원 연결이 없으면 아예 켜지지 않는 상태까지 갔었다. 구형의 장점이 뒷판을 열어 직접 교체할 수가 있다는건데 2-3만원에 알리에서 저렴하게 구입해서 쉽게 교체했다.</p><p><img src="/images/2020/02/14/11375850_857616787609082_1359872055_n.jpg" alt="ODD, SSD 교체"></p><p class="caption" style="text-align: left">2015.06.09 - ODD 자리에 하드, 하드 자리에 SSD를 넣는 작업 중에 이미 다 떼내었는데 참고했던 유튜브랑 내 맥북이 달라 아예 맥북 교체를 하게 될지도 모른다는 희망(?)이 있었다. 감으로 마무리 했는데 다행히 정상 작동했다.</p><p><img src="/images/2020/02/14/11176459_1599052003674051_1690203721_n.jpg" alt="아내와 카페에서"></p><p class="caption" style="text-align: left">2012.07.27 - 아내와 연애하던 시절 자주 카페에 가서 각자 해야될 일을 했었다.<br>업데이트 : 아내도 이때 쓰던 노트북을 지금까지 쓰고 있었는데 많이 느려지고 화면도 작아 17인치 그램으로 이번에 바꿨다. 옆에서 보니 확실히 가성비는 그램이 좋은 것 같다.</p><p><img src="/images/2020/02/14/11142896_1424625377843951_1816555597_n.jpg" alt="램교체를 위해 처음 뒷판 열었을 때"></p><p class="caption" style="text-align: left">2011.03.13 - 얼마나 오래 됐는지 인스타그램 필터가 지금은 없어진 옛날 필터다. MBP13-2010-mid에 램 최대치인 8기가로 올리기 위해 뒷판을 처음 열었는데 나사 길이가 규칙적이지 않은게 인상적이라 기록을 남겼었다. 그러고보니 이때도 램을 8기가 썼는데 이번에 산게 16기가니 아쉽긴 하다.</p><p><img src="/images/2020/02/14/11137914_1601757720082007_226138704_n.jpg" alt="외부 모니터 연결 했을 때"></p><p class="caption" style="text-align: left">2011.03.11 - 지금도 사용하고 있는 모니터와 연결, 반농담으로 외부 모니터를 연결했더니 맥북 속도가 빨라졌다고 하고 다녔다. 말이 안되는데 그렇게 느끼긴 했다.  아마도 화면이 크게보이니 시원시원해서 그랬던 것 같다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;원래 이 블로그의 취지랑은 맞지 않지만 워낙 감격스러운 순간이고 개발과도 관계가 되니깐 :)&lt;/p&gt;
+&lt;h1 id=&quot;내-새-맥북-2019년형-맥북프로-16인치&quot;&gt;&lt;a href=&quot;#내-새-맥북-2019년형-맥북프로-16인치&quot; class=&quot;header
+      
+    
+    </summary>
+    
+      <category term="etc" scheme="https://note.toice.net/categories/etc/"/>
+    
+    
+      <category term="mbp" scheme="https://note.toice.net/tags/mbp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>크롬 76, 77 객체 크기 변화 랜더링 오류</title>
+    <link href="https://note.toice.net/2019/09/25/chrome-76-77-render-error/"/>
+    <id>https://note.toice.net/2019/09/25/chrome-76-77-render-error/</id>
+    <published>2019-09-25T07:40:11.000Z</published>
+    <updated>2020-02-17T09:51:54.570Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/2019/10/25/normal.gif" alt="정상"></p><p>위 이미지는 정상적인 화면 캡쳐인데 캐러셀에서 액티브 아이템만 크기를 조금 더 확장하여 보여주는 형태를 취하고 있다.</p><p><img src="/images/2019/10/25/abnormal.gif" alt="비정상"></p><p>위 이미지는 비정상적 화면으로 캡쳐는 하단만 덜 노출되는데 때에 따라 우측까지 덜 노출될 때도 있었다. 크롬에서만 해당 문제가 생겼고 문제가 된 페이지는 작업된지 몇년이 지난 페이지라 크롬 업데이트로 인해 생긴 문제인게 거의 확실했다.</p><p>해당 문제가 확인 되었을 때 다른 업무로 바빠 일단 해결이 되면서 디자인 변화가 없는 방법으로 발견된 조치(가 알고보니 결정적인 해결 방법)를 취한 후 이제서야 정확한 원인 파악을 시도했다.</p><h3 id="문제가-생기는-상황"><a href="#문제가-생기는-상황" class="headerlink" title="문제가 생기는 상황"></a>문제가 생기는 상황</h3><ol><li>페이지 로드 후 캐로셀 형태든, 마우스 오버든 객체의 크기가 변하는 동작이 취해지는 경우면서,</li><li>객체의 크기 변화는 객체 자체가 아니라 해당 객체를 감싸는 부모의 영향을 받으면서,</li><li><code>box-shadow</code> 속성이 사용된 경우</li><li>그리고 변화하는 객체가 <code>img</code>, <code>iframe</code>류의 객체일 때</li></ol><p>4가지 조건이 모두 충족되야 하는데 3번이 매우 의외여서 추가로 여러가지 조건으로 테스트를 더 해보았는데 의외로 <code>transform</code> 과 관련된 속성에는 아무런 문제가 발생하지 않고 <code>transition</code>을 사용하는 경우도 간헐적으로 발생하는데 이 경우는 GPU 사용 핵 <code>translateZ(0)</code>을 사용하면 쉽게 해결이 되었다.</p><p>대체 <code>box-shadow</code>는 뭐하는 놈이기에 이런 문제를 일으키나 하고 좀 찾아보니 변화를 주는 경우 성능을 제법 먹는 것 같다. 성능을 고려하여 <code>box-shadow</code> 는 가상 엘리먼트에 적용하고 <code>opacity</code> 로 조절하리는 <a href="https://tobiasahlin.com/blog/how-to-animate-box-shadow/" target="_blank" rel="noopener">팁</a>이 있을 정도.</p><h3 id="확인된-Desktop-기준-문제-발생-버전"><a href="#확인된-Desktop-기준-문제-발생-버전" class="headerlink" title="확인된 Desktop 기준 문제 발생 버전"></a>확인된 Desktop 기준 문제 발생 버전</h3><ul><li>77.0.3865.75</li><li>76.0.3809.132</li><li>76.0.3809.100</li></ul><p>그리고 이 글을 쓰는 시점에서 해당 문제가 재현되지 않아 확인하여보니 크롬 <strong>77.0.3865.90</strong> 부터는 해당 문제가 해결 된 것으로 보인다. <a href="https://chromium.googlesource.com/chromium/src/+log/77.0.3865.75..77.0.3865.90?pretty=fuller&amp;n=10000" target="_blank" rel="noopener">로그</a>를 봐도 이와 관련된 직접적인 내용은 없는데 다른 문제를 해결하면서 이 문제까지 함께 해결 된 것으로 추측된다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/images/2019/10/25/normal.gif&quot; alt=&quot;정상&quot;&gt;&lt;/p&gt;
+&lt;p&gt;위 이미지는 정상적인 화면 캡쳐인데 캐러셀에서 액티브 아이템만 크기를 조금 더 확장하여 보여주는 형태를 취하고 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img s
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="chrome" scheme="https://note.toice.net/tags/chrome/"/>
+    
+      <category term="CSS" scheme="https://note.toice.net/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS3 큰 글자에 얇은 밑줄 긋기</title>
+    <link href="https://note.toice.net/2019/09/10/control-text-underline-width-with-css3/"/>
+    <id>https://note.toice.net/2019/09/10/control-text-underline-width-with-css3/</id>
+    <published>2019-09-10T07:20:25.000Z</published>
+    <updated>2020-08-20T21:48:06.326Z</updated>
+    
+    <content type="html"><![CDATA[<p>정상적인 방법으로 밑줄을 그으면 폰트 크기가 큰 경우에는 거기에 맞게 두께가 자동으로 두꺼워진다. 이 두꺼운 밑줄은 대다수의 디자이너들이 좋아하지 않는 것 같은데 그래서 보통은 요청이 오면 정상적인 텍스트 꾸미기보다 <code>border-bottom</code>을 이용하여 라인을 그어주는 편이다.</p><p>그런데 이번 문제는 여러줄이라 <code>border-bottom</code>으로 하면 박스 하단에만 그어지니 안됐고 무엇보다 내가 보기에도 두꺼워진 언더라인이 보기가 싫어서 한참 고민했다. (왠지 CSS3 요소중에 언더라인 굵기를 지정하는게 있을 법한데 없더라)</p><p>고민 끝에 해결됐다. 고민은 길었는데 해결하고나니 너무 간단하다.</p><!-- Has Prism --><pre class="line-numbers" style=""><code class="language-SCSS">@mixin customUnderline($lineOffsetY, $lineSize: 1px, $lineColor: #000) {    background-image: linear-gradient(transparent $lineOffsetY - 1, $lineColor $lineSize);    background-size: auto $lineOffsetY;}p {    font-size: 20px;    line-height: 40px;    span {        @include customUnderline(36px);    }}</code></pre><p>각 줄마다 텍스트 길이에 맞게 백그라운드 라인이 끊어지게 하기 위해서 인라인 요소를 자식으로 쓸 수 밖에 없는데 덕분에 하고자하는 줄간격과 그리는 라인간격이 일치하지 않을 수 있다(즉 <code>line-height</code>값과 <code>$lineOffsetY</code> 값이 일치하지 않을 수 있다, 블록요소라면 일치해도 된다).<br>폰트 종류마다 줄간격이 다르니 어떻게 자동으로 해볼 수가 없었는데 폰트 크기가 변한다면 폰트 크기와 연계해서 <code>$lineOffsetY</code> 값을 수정하면서 맞출 수 밖에 없다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;정상적인 방법으로 밑줄을 그으면 폰트 크기가 큰 경우에는 거기에 맞게 두께가 자동으로 두꺼워진다. 이 두꺼운 밑줄은 대다수의 디자이너들이 좋아하지 않는 것 같은데 그래서 보통은 요청이 오면 정상적인 텍스트 꾸미기보다 &lt;code&gt;border-bot
+      
+    
+    </summary>
+    
+      <category term="worklog" scheme="https://note.toice.net/categories/worklog/"/>
+    
+    
+      <category term="CSS3" scheme="https://note.toice.net/tags/CSS3/"/>
+    
+      <category term="SCSS" scheme="https://note.toice.net/tags/SCSS/"/>
+    
+  </entry>
+  
+</feed>

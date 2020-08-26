@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Javascript로 코드파일 다운로드 구현시 인코딩 설정하기(실패) - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/11/28/script-download-file-charset/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="최근에 디자인팀을 위해 컴포넌트 형태로 항목을 추가하고 그 결과를 최종 코드로 HTML 형태로 다운로드 받을 수 있도록 구현한게 있다. 제작 자체를 UTF-8 인코딩으로 했기 때문에 다운로드된 HTML파일도 UTF-8 인코딩인데 확인해보니 어떤 경우는 EUC-KR로 인코딩이 되어 나와야되는 상황도 있었다. (차라리 일괄되었으면….)   var downloa">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript로 코드파일 다운로드 구현시 인코딩 설정하기(실패)">
+<meta property="og:url" content="https://note.toice.net/2018/11/28/script-download-file-charset/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="최근에 디자인팀을 위해 컴포넌트 형태로 항목을 추가하고 그 결과를 최종 코드로 HTML 형태로 다운로드 받을 수 있도록 구현한게 있다. 제작 자체를 UTF-8 인코딩으로 했기 때문에 다운로드된 HTML파일도 UTF-8 인코딩인데 확인해보니 어떤 경우는 EUC-KR로 인코딩이 되어 나와야되는 상황도 있었다. (차라리 일괄되었으면….)   var downloa">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript로 코드파일 다운로드 구현시 인코딩 설정하기(실패)">
+<meta name="twitter:description" content="최근에 디자인팀을 위해 컴포넌트 형태로 항목을 추가하고 그 결과를 최종 코드로 HTML 형태로 다운로드 받을 수 있도록 구현한게 있다. 제작 자체를 UTF-8 인코딩으로 했기 때문에 다운로드된 HTML파일도 UTF-8 인코딩인데 확인해보니 어떤 경우는 EUC-KR로 인코딩이 되어 나와야되는 상황도 있었다. (차라리 일괄되었으면….)   var downloa">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>Javascript로 코드파일 다운로드 구현시 인코딩 설정하기(실패)</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-11-28T14:33:00+09:00">2018년 11월 28일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>최근에 디자인팀을 위해 컴포넌트 형태로 항목을 추가하고 그 결과를 최종 코드로 HTML 형태로 다운로드 받을 수 있도록 구현한게 있다. 제작 자체를 UTF-8 인코딩으로 했기 때문에 다운로드된 HTML파일도 UTF-8 인코딩인데 확인해보니 어떤 경우는 EUC-KR로 인코딩이 되어 나와야되는 상황도 있었다. (차라리 일괄되었으면….)</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">var download = function(filename, content) {
+  var dummy = doc.createElement(&#39;a&#39;);
+
+  &#x2F;* 생략 *&#x2F;
+
+  dummy.setAttribute(&#39;href&#39;, &#39;data:text&#x2F;plain;charset=utf-8,&#39; + encodeURIComponent(content));
+  dummy.setAttribute(&#39;download&#39;, filename);
+
+  var e = doc.createEvent(&#39;MouseEvents&#39;);
+  e.initEvent(&#39;click&#39;, true, true);
+  dummy.dispatchEvent(e);
+};
+</code></pre>
+<p>해당 다운로드 부분이 이런식으로 트리거 형태로 작성한 코드였는데 <code>charset</code>을 <code>euc-kr</code>로 바꾸면 되지 않을까 하는 큰 오해를 했다.<br>서치해본 결과 iconv 등의 이용도 결국 서버단을 거쳐야해서 안될거 같다는 생각을 하는 와중에 여러가지 시도를 해보긴 했는데 결국 클라이언트단에서만 어떻게 할 수 있는게 아닌 것 같다.</p>
+<p>애초에 서버단을 거칠거였으면 이 프로젝트 자체가 이렇게 만들께 아니었어서 <del>고민이 깊다</del> 다운로드 받으면 인코딩 변경법을 알려주는 가이드를 넣는 것으로 마무리 지었다.</p>
+<h3 id="덧붙임"><a href="#덧붙임" class="headerlink" title="덧붙임"></a>덧붙임</h3><p>디자이너를 위한 작업이다보니 HTML 파일 수정할 때 에디터 주로 뭐 쓰는지 확인하니 드림위버라고 하여 드림위버에서 인코딩 변경하는 방법을 찾아봤는데 엄청 어렵다.</p>
+<blockquote>
+<p>드림위버에서 인코딩 변경하기</p>
+<ol>
+<li>파일을 열고 상단 메뉴에 Window - Properties 체크 (이미 되어있으면 할 필요 없음)</li>
+<li>Properties 윈도우 하단 중간쯤 \’Page Properties…\’ 클릭’</li>
+<li>Title/Encoding 선택 후 Encoding 에서 유니코드(UTF-8)을 한국어로 변경 후 저장</li>
+</ol>
+</blockquote>
+<p>그래서 이것만 가이드하려다 메모장으로 인코딩 변경하는 것도 덧붙였다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/10/04/mobile-inspector-weinre/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>모바일 디버깅(개발자 도구) - weinre</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/12/20/protect-double-execution/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>자바스크립트로 이중 클릭, 이중 터치 실행방지</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/11/28/script-download-file-charset/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

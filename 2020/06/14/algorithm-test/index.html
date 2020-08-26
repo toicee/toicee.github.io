@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>알고리즘 테스트 - 정해진 숫자 조합으로 나올 수 있는 소수 찾기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/06/14/algorithm-test/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="회사에 코딩 관련 동호회가 만들어져 신규 회원을 모집하면서 알고리즘 문제를 냈는데 딱히 알고리즘 문제를 풀어본 적은 없지만 문제를 보니 해볼만 하겠다 싶어경품 중 하나인 에어팟 무선 충전 케이스가 갖고 싶어서 참여해보게 됐다. 소수 찾기문제 설명 한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려">
+<meta name="keywords" content="javascript,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="알고리즘 테스트 - 정해진 숫자 조합으로 나올 수 있는 소수 찾기">
+<meta property="og:url" content="https://note.toice.net/2020/06/14/algorithm-test/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="회사에 코딩 관련 동호회가 만들어져 신규 회원을 모집하면서 알고리즘 문제를 냈는데 딱히 알고리즘 문제를 풀어본 적은 없지만 문제를 보니 해볼만 하겠다 싶어경품 중 하나인 에어팟 무선 충전 케이스가 갖고 싶어서 참여해보게 됐다. 소수 찾기문제 설명 한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-06-19T03:05:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="알고리즘 테스트 - 정해진 숫자 조합으로 나올 수 있는 소수 찾기">
+<meta name="twitter:description" content="회사에 코딩 관련 동호회가 만들어져 신규 회원을 모집하면서 알고리즘 문제를 냈는데 딱히 알고리즘 문제를 풀어본 적은 없지만 문제를 보니 해볼만 하겠다 싶어경품 중 하나인 에어팟 무선 충전 케이스가 갖고 싶어서 참여해보게 됐다. 소수 찾기문제 설명 한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>알고리즘 테스트 - 정해진 숫자 조합으로 나올 수 있는 소수 찾기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-06-14T21:50:26+09:00">2020년 6월 14일</time>
+  </dd>
+</dl>
+
+  <dl class="updatedTime">
+    <dt>updated</dt>
+    <dd>
+      <time datetime="2020-06-19T12:05:41+09:00" class="updated">2020년 6월 19일</time>
+    </dd>
+  </dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/etc/">etc</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/algorithm/">algorithm</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>회사에 코딩 관련 동호회가 만들어져 신규 회원을 모집하면서 알고리즘 문제를 냈는데 딱히 알고리즘 문제를 풀어본 적은 없지만 문제를 보니 해볼만 하겠다 싶어<del>경품 중 하나인 에어팟 무선 충전 케이스가 갖고 싶어서</del> 참여해보게 됐다.</p>
+<h1 id="소수-찾기"><a href="#소수-찾기" class="headerlink" title="소수 찾기"></a>소수 찾기</h1><h2 id="문제-설명"><a href="#문제-설명" class="headerlink" title="문제 설명"></a>문제 설명</h2><blockquote>
+<p>한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다.</p>
+<p>각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.</p>
+</blockquote>
+<h2 id="제한사항"><a href="#제한사항" class="headerlink" title="제한사항"></a>제한사항</h2><blockquote>
+<ul>
+<li>numbers는 길이 1 이상 7 이하인 문자열입니다.</li>
+<li>numbers는 0~9까지 숫자만으로 이루어져 있습니다.</li>
+<li>013은 0, 1, 3 숫자가 적힌 종이 조각이 흩어져있다는 의미입니다.</li>
+</ul>
+</blockquote>
+<h2 id="입출력-예"><a href="#입출력-예" class="headerlink" title="입출력 예"></a>입출력 예</h2><blockquote>
+<p>“17”  3<br>“011” 2</p>
+<p>입출력 예 설명</p>
+<p>예제 #1<br>[1, 7]으로는 소수 [7, 17, 71]를 만들 수 있습니다.</p>
+<p>예제 #2<br>[0, 1, 1]으로는 소수 [11, 101]를 만들 수 있습니다.</p>
+<p>11과 011은 같은 숫자로 취급합니다.</p>
+</blockquote>
+<h2 id="제출코드"><a href="#제출코드" class="headerlink" title="제출코드"></a>제출코드</h2><p>아래 코드가 제출코드인데 언어 사용에 제한은 없었지만 제일 능숙한 자바스크립트 웹환경에서 했고 집에서 할때는 재귀함수 형태로 구현했는데 회사에서 해보니 자릿수가 6자리 이상되면 무한 재귀 호출 오류<code>Maximum call stack size exceeded</code>가 발생해 부랴부랴 수정해서 제출했다.</p>
+<h3 id="제출코드-반복문-형태"><a href="#제출코드-반복문-형태" class="headerlink" title="제출코드 - 반복문 형태"></a>제출코드 - 반복문 형태</h3>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">function solution(numbers) {
+  if (typeof numbers !== &#39;string&#39; || numbers.length &lt; 1 || numbers.length &gt; 7) {
+    return;
+  }
+
+  var arr = [numbers.split(&#39;&#39;)]; &#x2F;&#x2F; 모든 경우의 조합을 담을 배열
+  var pointer = 0; &#x2F;&#x2F; 모든 경우의 조합을 담을 때 필요한 앞자리수의 위치
+  var depth = arr.length; &#x2F;&#x2F; 모든 경우의 조합을 담을 때 필요한 자리수
+  var source = []; &#x2F;&#x2F; 중복방지를 위한 어떤 앞자리에서 가져왔는지 출처를 담아놓을 배열
+  var list = []; &#x2F;&#x2F; 모든 경우의 조합을 하나의 배열로 담기 위한 배열
+  var checkList = []; &#x2F;&#x2F; 조건에 맞는 값만 담을 배열
+
+  &#x2F;&#x2F; 나올 수 있는 모든 조합 구하는 반복문
+  var combi = function() {
+    while (pointer &lt; arr[depth - 1].length) {
+      arr[depth] = arr[depth] || [];
+      source[depth] = source[depth] || [];
+
+      for (var i = 0; i &lt; arr[0].length; i++) {
+        if (source[depth - 1]) {
+          if (source[depth - 1][pointer].includes(i)) {
+            continue;
+          }
+        } else {
+          if (pointer === i) {
+            continue;
+          }
+        }
+
+        arr[depth].push(arr[depth - 1][pointer] + arr[0][i]);
+
+        if (source[depth - 1]) {
+          source[depth].push(source[depth - 1][pointer].concat(i));
+        } else {
+          source[depth].push([pointer, i]);
+        }
+      }
+
+      pointer++;
+    }
+
+    depth++;
+    pointer = 0;
+  };
+
+  &#x2F;&#x2F; 소수 판별
+  var checkNumber = function(number) {
+    number = Number(number);
+
+    if (number === 2) {
+      return true;
+    }
+
+    if (number &lt; 2 || number % 2 === 0) {
+      return false;
+    }
+
+    for (var i = 3; i &lt; number; i+=2) {
+      if (number % i === 0) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  &#x2F;&#x2F; 나올 수 있는 모든 조합 구하기 실행
+  do {
+    combi();
+  } while(depth &lt; arr[0].length);
+
+  &#x2F;&#x2F; 위에 구한 모든 조합을 한 배열에 몰아넣기
+  for (var i = 0; i &lt; arr.length; i++) {
+    list = list.concat(arr[i]);
+  }
+
+  &#x2F;&#x2F; 앞자리가 0이면 거르고, 소수 체크하여 해당되는 숫자 담기
+  for (i = 0; i &lt; list.length; i++) {
+    if (list[i][0] == 0) {
+      continue;
+    }
+
+    if (checkNumber(list[i]) &amp;&amp; !checkList.includes(list[i])) {
+      checkList.push(list[i]);
+    }
+  }
+
+  &#x2F;&#x2F; 조건에 맞는 배열이 몇갠지 반환
+  return checkList.length;
+}
+
+console.log(solution(&#39;17&#39;));
+console.log(solution(&#39;011&#39;));
+</code></pre>
+<p>아래 코드가 무한 재귀 호출 오류가 발생하는 원코드..</p>
+<h3 id="제출코드-재귀함수-형태"><a href="#제출코드-재귀함수-형태" class="headerlink" title="제출코드 - 재귀함수 형태"></a>제출코드 - 재귀함수 형태</h3>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">function solution(numbers) {
+  if (typeof numbers !== &#39;string&#39; || numbers.length &lt; 1 || numbers.length &gt; 7) {
+    return;
+  }
+
+  var checkNumber = function(number) {
+    number = Number(number);
+
+    if (number === 2) {
+      return true;
+    }
+
+    if (number &lt; 2 || number % 2 === 0) {
+      return false;
+    }
+
+    for (var i = 3; i &lt; number; i+=2) {
+      if (number % i === 0) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  var combination = function(arr = [numbers.split(&#39;&#39;)], pointer = 0, depth = 1, source = []) {
+    arr[depth] = arr[depth] || [];
+    source[depth] = source[depth] || [];
+
+    if (pointer &lt; arr[depth - 1].length) {
+      for (var i = 0; i &lt; arr[0].length; i++) {
+        if (source[depth - 1]) {
+          if (source[depth - 1][pointer].includes(i)) {
+            continue;
+          }
+        } else {
+          if (pointer === i) {
+            continue;
+          }
+        }
+
+        arr[depth].push(arr[depth - 1][pointer] + arr[0][i]);
+
+        if (source[depth - 1]) {
+          source[depth].push(source[depth - 1][pointer].concat(i));
+        } else {
+          source[depth].push([pointer, i]);
+        }
+      }
+
+      pointer++;
+    } else {
+      depth++;
+      pointer = 0;
+    }
+
+    if (depth &lt; arr[0].length) {
+      combination(arr, pointer, depth, source);
+    }
+
+    return arr;
+  };
+
+  var arr = combination();
+
+  var list = [];
+  var checkList = [];
+
+  for (var i = 0; i &lt; arr.length; i++) {
+    list = list.concat(arr[i]);
+  }
+
+  for (var i = 0; i &lt; list.length; i++) {
+    if (list[i][0] == 0) {
+      continue;
+    }
+
+    if (checkNumber(list[i]) &amp;&amp; !checkList.includes(list[i])) {
+      checkList.push(list[i]);
+    }
+  }
+
+  return checkList;
+}
+
+console.log(&#39;result&#39;, solution(&#39;017&#39;));
+</code></pre>
+<p>첫번째의 코드는 마감시간이 다 되어가 어쩔 수 없이 재귀함수를 반복문으로 바꿔 풀어쓴 형태라 아쉬움이 좀 남는데 일단 잘 되더라도 일주일만 지나도 내 코드는 아쉬움 덩어리 차후에 다시 해보기로 한다. <del>결과 상관없이 참여자 추첨이던 경품은 결국 하나도 못탔다.</del></p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/03/23/form-select-option-style-in-windows/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>윈도우 크롬 셀렉트박스 스타일(CSS) 옵션까지 상속</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/06/19/google-map-place-opening-hours-open-now-to-isOpen-func/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>구글 지도 Places opening_hours.open_now 대신 isOpen() 함수 쓰기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/06/14/algorithm-test/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

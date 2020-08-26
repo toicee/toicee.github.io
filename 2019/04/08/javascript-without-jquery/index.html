@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>jQuery 없이 Javascript 작성할 때 좋은 참조 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/04/08/javascript-without-jquery/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="http://youmightnotneedjquery.com/ 간단하게 trigger처리만 할 코드인데 jQuery를 굳이 쓰고 싶지 않아서 순수하게 자바스크립트로는 어떻게 하나 검색해보다 발견한 사이트인데 정리가 매우 잘되어 있는 것 같다. 예를 들어 이번처럼 트리거를 jQuery를 사용하지 않고 Javascript로 처리하면…   if (!$(&amp;#39;#">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery 없이 Javascript 작성할 때 좋은 참조">
+<meta property="og:url" content="https://note.toice.net/2019/04/08/javascript-without-jquery/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="http://youmightnotneedjquery.com/ 간단하게 trigger처리만 할 코드인데 jQuery를 굳이 쓰고 싶지 않아서 순수하게 자바스크립트로는 어떻게 하나 검색해보다 발견한 사이트인데 정리가 매우 잘되어 있는 것 같다. 예를 들어 이번처럼 트리거를 jQuery를 사용하지 않고 Javascript로 처리하면…   if (!$(&amp;#39;#">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery 없이 Javascript 작성할 때 좋은 참조">
+<meta name="twitter:description" content="http://youmightnotneedjquery.com/ 간단하게 trigger처리만 할 코드인데 jQuery를 굳이 쓰고 싶지 않아서 순수하게 자바스크립트로는 어떻게 하나 검색해보다 발견한 사이트인데 정리가 매우 잘되어 있는 것 같다. 예를 들어 이번처럼 트리거를 jQuery를 사용하지 않고 Javascript로 처리하면…   if (!$(&amp;#39;#">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>jQuery 없이 Javascript 작성할 때 좋은 참조</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-04-08T15:46:06+09:00">2019년 4월 8일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/etc/">etc</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p><a href="http://youmightnotneedjquery.com/" target="_blank" rel="noopener">http://youmightnotneedjquery.com/</a></p>
+<p>간단하게 <code>trigger</code>처리만 할 코드인데 <code>jQuery</code>를 굳이 쓰고 싶지 않아서 순수하게 자바스크립트로는 어떻게 하나 검색해보다 발견한 사이트인데 정리가 매우 잘되어 있는 것 같다.</p>
+<p>예를 들어 이번처럼 트리거를 <code>jQuery</code>를 사용하지 않고 <code>Javascript</code>로 처리하면…</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">if (!$(&#39;#targetContainer&#39;).hasClass(&#39;targetClass&#39;)) {
+  return;
+}
+
+$(&#39;.targetElement&#39;).eq(0).trigger(&#39;click&#39;);
+</code></pre>
+<p>를</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">if (!doc.getElementById(&#39;targetContainer&#39;).classList.contains(&#39;targetClass&#39;)) {
+  return;
+}
+
+var event = doc.createEvent(&#39;HTMLEvents&#39;);
+event.initEvent(&#39;click&#39;, true, false);
+doc.querySelector(&#39;.targetElement&#39;).dispatchEvent(event);
+</code></pre>
+<p>코드가 매우 늘어나긴 한데, 이해하는 재미가 있어서 뭐 이정도면 jQuery없이 쓸만한듯.<br>근데 사실 트리거는 jQuery의 트리거가 워낙 간단하다보니 ajax와 더불어 jQuery를 완전히 못 놓는 이유가 되는듯</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/04/05/back-to-sublime-text3/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>웹스톰, VSCode에서 다시 서브라임 텍스트3로...</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/04/23/python_scss_convert_batch/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>파이썬으로 SCSS 파일내 px, rem 수치 일괄 절반으로 변경하기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/04/08/javascript-without-jquery/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

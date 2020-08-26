@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>1부터 다음 줄에 앞줄의 숫자와 해당 숫자의 갯수 세며 반복하기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/03/05/javascript-before-numbering/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="지하철에서 학생(인걸로 추정되는) 둘이 하는 이야기를 우연히 듣다가 흥미롭기도 하고 구현 방법이 선뜻 떠오르지 않아 시간을 내어 시도해봤다. 문제(?) 내용은 1부터 시작하여 다음줄에는 앞줄에 숫자의 갯수를 표현하는 것이다. (내가 이해한게 맞다면)예를 들면 1 다음 줄엔 1 1(1이 1개), 그 다음 줄은 1 2(1이 2개), 그 다음줄은 1 1 2 1">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1부터 다음 줄에 앞줄의 숫자와 해당 숫자의 갯수 세며 반복하기">
+<meta property="og:url" content="https://note.toice.net/2019/03/05/javascript-before-numbering/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="지하철에서 학생(인걸로 추정되는) 둘이 하는 이야기를 우연히 듣다가 흥미롭기도 하고 구현 방법이 선뜻 떠오르지 않아 시간을 내어 시도해봤다. 문제(?) 내용은 1부터 시작하여 다음줄에는 앞줄에 숫자의 갯수를 표현하는 것이다. (내가 이해한게 맞다면)예를 들면 1 다음 줄엔 1 1(1이 1개), 그 다음 줄은 1 2(1이 2개), 그 다음줄은 1 1 2 1">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-08-22T08:12:38.145Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1부터 다음 줄에 앞줄의 숫자와 해당 숫자의 갯수 세며 반복하기">
+<meta name="twitter:description" content="지하철에서 학생(인걸로 추정되는) 둘이 하는 이야기를 우연히 듣다가 흥미롭기도 하고 구현 방법이 선뜻 떠오르지 않아 시간을 내어 시도해봤다. 문제(?) 내용은 1부터 시작하여 다음줄에는 앞줄에 숫자의 갯수를 표현하는 것이다. (내가 이해한게 맞다면)예를 들면 1 다음 줄엔 1 1(1이 1개), 그 다음 줄은 1 2(1이 2개), 그 다음줄은 1 1 2 1">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>1부터 다음 줄에 앞줄의 숫자와 해당 숫자의 갯수 세며 반복하기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-03-05T10:50:03+09:00">2019년 3월 5일</time>
+  </dd>
+</dl>
+
+  <dl class="updatedTime">
+    <dt>updated</dt>
+    <dd>
+      <time datetime="2020-08-22T17:12:38+09:00" class="updated">2020년 8월 22일</time>
+    </dd>
+  </dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/etc/">etc</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>지하철에서 학생(인걸로 추정되는) 둘이 하는 이야기를 우연히 듣다가 흥미롭기도 하고 구현 방법이 선뜻 떠오르지 않아 시간을 내어 시도해봤다.</p>
+<p>문제(?) 내용은 1부터 시작하여 다음줄에는 앞줄에 숫자의 갯수를 표현하는 것이다. (내가 이해한게 맞다면)<br>예를 들면 1 다음 줄엔 1 1(1이 1개), 그 다음 줄은 1 2(1이 2개), 그 다음줄은 1 1 2 1 (1이 1개, 2개 1개)처럼 전 줄에 숫자를 세어주는 것이다.</p>
+<p>자바스크립트로 구현하는건 아닌 것 같았지만 제일 편한게 스크립트니까…</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">const numbering = {
+  arr: [1],
+  main() {
+    let prev = this.arr[0];
+    let count = 0;
+    const result = [];
+
+    this.arr.forEach(function(n) {
+      if (n === prev) {
+        count++;
+      } else {
+        result.push(prev);
+        result.push(count);
+        prev = n;
+        count = 1;
+      }
+    });
+
+    result.push(prev);
+    result.push(count);
+
+    this.arr = result;
+  },
+  func(targetId, limitNumber) {
+    this.output.push(this.arr.join(&#39; &#39;) + &#39;&lt;br&gt;&#39;);
+
+    for (var i = 0; i &lt; limitNumber - 1; i++) {
+      this.main();
+      this.output.push(this.arr.join(&#39; &#39;) + &#39;&lt;br&gt;&#39;);
+    }
+
+    document.getElementById(targetId).innerHTML = this.output.join(&#39; &#39;);
+  },
+  output: []
+};
+
+numbering.func(&#39;container&#39;, 10);
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;div id=&quot;container&quot;&gt;&lt;&#x2F;div&gt;
+</code></pre>
+<p>근데 이렇게 반복문(for)으로 반복문(forEach)를 돌리는 방식을 취하니 성능적으로 매우 부담스럽다. 회사 아이맥(i7 3.6Ghz/32GB)에 크롬 기준으로 반복 횟수 55를 넘어서면 결과 표현이 매우 늦어짐.<br>영리하게는 어떻게 처리할 수 있을지 궁금하다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/02/13/legacy-npm-audit-fix/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>Node.js 8.x.xLTS에서 10.15.1LTS 대응</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/03/11/entity-code-dash-ios-safari-problem/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>iOS Safari에서 entity code로 dash 표현시</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/03/05/javascript-before-numbering/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

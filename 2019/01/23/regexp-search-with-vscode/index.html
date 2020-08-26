@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>VSCode에서 정규식 검색으로 같은 패턴 일괄 바꾸기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/01/23/regexp-search-with-vscode/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="업데이트 - 서브라임 텍스트에서도 된다. 역시 서브라임을 버릴 수가 없어… ㅠ  주 에디터는 서브라임 텍스트인데 일부 기능을 위해 최근 대세인 VSCode를 사용한다. VSCode로 넘어가려고 몇번을 시도해봤는데 서브라임에 너무 손에 익어서 뭔가 꼭 불편하고, 플러그인을 통해서 해결을 하고 나면 다른 불편함이 또 생겨서 서브라임으로 안되는 상황에서만 사용">
+<meta name="keywords" content="javascript,정규식,Editor,VSCode,SublimeText">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VSCode에서 정규식 검색으로 같은 패턴 일괄 바꾸기">
+<meta property="og:url" content="https://note.toice.net/2019/01/23/regexp-search-with-vscode/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="업데이트 - 서브라임 텍스트에서도 된다. 역시 서브라임을 버릴 수가 없어… ㅠ  주 에디터는 서브라임 텍스트인데 일부 기능을 위해 최근 대세인 VSCode를 사용한다. VSCode로 넘어가려고 몇번을 시도해봤는데 서브라임에 너무 손에 익어서 뭔가 꼭 불편하고, 플러그인을 통해서 해결을 하고 나면 다른 불편함이 또 생겨서 서브라임으로 안되는 상황에서만 사용">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2019-04-05T02:00:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VSCode에서 정규식 검색으로 같은 패턴 일괄 바꾸기">
+<meta name="twitter:description" content="업데이트 - 서브라임 텍스트에서도 된다. 역시 서브라임을 버릴 수가 없어… ㅠ  주 에디터는 서브라임 텍스트인데 일부 기능을 위해 최근 대세인 VSCode를 사용한다. VSCode로 넘어가려고 몇번을 시도해봤는데 서브라임에 너무 손에 익어서 뭔가 꼭 불편하고, 플러그인을 통해서 해결을 하고 나면 다른 불편함이 또 생겨서 서브라임으로 안되는 상황에서만 사용">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>VSCode에서 정규식 검색으로 같은 패턴 일괄 바꾸기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-01-23T11:45:00+09:00">2019년 1월 23일</time>
+  </dd>
+</dl>
+
+  <dl class="updatedTime">
+    <dt>updated</dt>
+    <dd>
+      <time datetime="2019-04-05T11:00:36+09:00" class="updated">2019년 4월 5일</time>
+    </dd>
+  </dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/Editor/">Editor</a><a class="tag-link" href="/tags/SublimeText/">SublimeText</a><a class="tag-link" href="/tags/VSCode/">VSCode</a><a class="tag-link" href="/tags/javascript/">javascript</a><a class="tag-link" href="/tags/정규식/">정규식</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><blockquote>
+<p>업데이트 - 서브라임 텍스트에서도 된다. 역시 서브라임을 버릴 수가 없어… ㅠ</p>
+</blockquote>
+<p>주 에디터는 서브라임 텍스트인데 일부 기능을 위해 최근 대세인 VSCode를 사용한다. VSCode로 넘어가려고 몇번을 시도해봤는데 서브라임에 너무 손에 익어서 뭔가 꼭 불편하고, 플러그인을 통해서 해결을 하고 나면 다른 불편함이 또 생겨서 서브라임으로 안되는 상황에서만 사용중이다.</p>
+<p>여튼 최근 Sass 컬러 코드 연산에서 디프리케이션된 내용을 일괄적으로 수정해야될 내용이 있었다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">a.example {
+    &amp;:active {
+        background: #fff - 10%;
+    }
+}
+</code></pre>
+<p>이런식으로 표현한 부분인데 컬러코드에 연산을 넣는 것이 팀에서 사용중인 UI프레임워크에서 디프리케이션 되면서 일괄적으로 바꿔줘야했고 서브라임을 주로 써서 몰랐는데 팀장님이 알려주셔서 VSCode에서는 정규식으로 검출해내고 일괄 바꿀 수 있는게 가능했다. 단축키는 <code>commmand + shift + h</code></p>
+<p>팀장님이 제시해주셨던 정규식은</p>
+<ul>
+<li>Search : <code>:\s(\#.+)\s(\-)?\+?\s(\d+)%?;$</code></li>
+<li>Replace : <code>: adjust-color($1, $red: $2$3, $green: $2$3, $blue: $2$3);</code></li>
+</ul>
+<p>그런데 나중에 확인해보니 컬러값을 변수에 담아 쓴 경우도 있었다.</p>
+<ul>
+<li>Search : <code>:\s((\#|\$).+)\s(\-)?\+?\s(\d+)%?;$</code></li>
+</ul>
+<p>그래서 위처럼 수정했는데… <code>$n: $i + 1;</code> 이런 것도 함께 검출되는 문제가 있었고, 이건 딱히 해결 방법을 찾지 못해 컬러값의 변수를 한글자만 썼을리 없다는 불완전한 가정하에</p>
+<ul>
+<li>Search : <code>:\s((\#|\$)..+)\s(\-)?\+?\s(\d+)%?;$</code></li>
+</ul>
+<p>로 검출 결과를 확인하고 바꾸는건 일일이 확인하면서 처리 ㅠ_ㅠ</p>
+<p>참고로 위처럼 할 경우 교체내용은</p>
+<ul>
+<li>Replace : <code>: adjust-color($1, $red: $3$4, $green: $3$4, $blue: $3$4);</code></li>
+</ul>
+<hr>
+<p>위는 사실 몇주 지난 일로 기록하지 않으려다 쓸일이 생긴 김에 쓴거고, 팀내 구 프레임워크를 신규 프레임워크로 변경해야될 일이 생기면서 관련하여 필터 사용방식이 일부 변경된 사항이 있어서 또 일괄적으로 변경해야되는 사항이 생겼다. 이게 자꾸 쓸일이 생기니 기록하는게 좋겠다 싶었다.</p>
+<p>이번 내용은 예를 들면,</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;span class=&quot;sale&quot;&gt;
+  &lt;em&gt;&lt;%=: p.price.sale | numberWithComma %&gt;&lt;&#x2F;em&gt;
+  &lt;span class=&quot;currency&quot;&gt;원&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;
+</code></pre>
+<p>가격의 세자리수 콤마를 numberWithComma 라고 정의하여 쓰면서 저런식으로 표현했어야 하는데 새 프레임워크에서는</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;span class=&quot;sale&quot;&gt;
+  &lt;em&gt;&lt;%= $.withCommas(p.price.sale) %&gt;&lt;&#x2F;em&gt;
+  &lt;span class=&quot;currency&quot;&gt;원&lt;&#x2F;span&gt;
+&lt;&#x2F;span&gt;
+</code></pre>
+<p>처럼 바꿔야했다.</p>
+<p>그래서 정규식 사용하여 검색</p>
+<ul>
+<li>Search : <code>(&lt;%-?=?)(:)\s(.+)\s(\| numberWithComma %&gt;)</code></li>
+<li>Replace : <code>$1 $.withCommas($3) %&gt;</code></li>
+</ul>
+<p>정규식 쓸일이 많지 않으니 작정하고 공부해도 매번 까먹는데 이렇게 라도 최대한 써먹으려고 하고, 썼으면 기록해야겠다고 생각이 든다. 항상 모르겠는 정규식…. 급한데로 쓴거라 세련되지 않은 느낌인데 문제가 있거나 더 세련된 방법으로 바꿔 쓸 수 있으면 업데이트 예정.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/01/08/check-ports-server-outside/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>외부에서 서버 포트가 열려있는지 확인</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/01/23/ios10-display-flex-column/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>iOS 10점대에서 flex-direction: column 사용시 주의사항</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/01/23/regexp-search-with-vscode/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

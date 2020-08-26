@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>HTML5 테이블 속성에 summary 사용할까 말까 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/08/12/table-summary-obsolete/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="table 에서 습관적으로 넣던 summary 속성은 이미 퇴화된 속성이라 validator 체크해보면 잘못된 사용으로 표시된다. 문제는 웹접근성 체크를 해보면 summary가 없는 사유로 점수는 안깎이지만 또 경고가 나온다.  HTML5 규격에서 summary 속성이 사라지게 된 배경으로summary 속성을 사용한 개발자 자신은 보조기술을 이용하지 않는">
+<meta name="keywords" content="HTML5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML5 테이블 속성에 summary 사용할까 말까">
+<meta property="og:url" content="https://note.toice.net/2019/08/12/table-summary-obsolete/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="table 에서 습관적으로 넣던 summary 속성은 이미 퇴화된 속성이라 validator 체크해보면 잘못된 사용으로 표시된다. 문제는 웹접근성 체크를 해보면 summary가 없는 사유로 점수는 안깎이지만 또 경고가 나온다.  HTML5 규격에서 summary 속성이 사라지게 된 배경으로summary 속성을 사용한 개발자 자신은 보조기술을 이용하지 않는">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML5 테이블 속성에 summary 사용할까 말까">
+<meta name="twitter:description" content="table 에서 습관적으로 넣던 summary 속성은 이미 퇴화된 속성이라 validator 체크해보면 잘못된 사용으로 표시된다. 문제는 웹접근성 체크를 해보면 summary가 없는 사유로 점수는 안깎이지만 또 경고가 나온다.  HTML5 규격에서 summary 속성이 사라지게 된 배경으로summary 속성을 사용한 개발자 자신은 보조기술을 이용하지 않는">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>HTML5 테이블 속성에 summary 사용할까 말까</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-08-12T09:37:44+09:00">2019년 8월 12일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/HTML5/">HTML5</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p><code>table</code> 에서 습관적으로 넣던 <code>summary</code> 속성은 이미 퇴화된 속성이라 validator 체크해보면 잘못된 사용으로 표시된다. 문제는 웹접근성 체크를 해보면 <code>summary</code>가 없는 사유로 점수는 안깎이지만 또 경고가 나온다.</p>
+<blockquote>
+<p>HTML5 규격에서 summary 속성이 사라지게 된 배경으로<br>summary 속성을 사용한 개발자 자신은 보조기술을 이용하지 않는 이상 테스트를 할 수 없고, 시각장애인 이외 현실적으로 그 내용을 이해하는 사람이 거의 없다는 점과 summary 속성을 잘 사용하는 개발자들조차 종종 잘못 사용되어 시각장애인에게 불편을 준다는 점 등이 있다고 하네요.</p>
+<p>예를 들어, summary 속성에 모든 사람에게 유용할 정보를 넣는다거나 테이블 밖에서 제공되는 정보와 중복된 것을 사용하는 등의 이슈가 있습니다.</p>
+<p>이러한 이유로 W3C에서는 모든사람이 유용한 정보를 얻을 수 있도록 summary 속성으로 제공할 내용을 caption에 포함하거나, table 요소 이전에 화면에 출력되도록 하는 방식으로 제공하는 권장하고 있습니다.</p>
+</blockquote>
+<p>출처 : <a href="https://www.wah.or.kr:444/Participation/consultingView.asp?seq=9692&amp;page=7&amp;cType=&amp;FindTxt=&amp;flag=2&amp;FindCol=0" target="_blank" rel="noopener">html5 table 속성 중 summary 질문 입니다.</a></p>
+<p><code>summary</code>와 <code>caption</code>을 그동안 거의 비슷한 내용으로 알아서 넣어줬었는데 위 글에 큰 도움을 얻어 난 더이상 <code>summary</code>는 쓰지 않기로 결정했다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/08/08/android-studio-setting/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>안드로이드 스튜디오 초기 세팅 기록</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/09/10/control-text-underline-width-with-css3/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>CSS3 큰 글자에 얇은 밑줄 긋기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/08/12/table-summary-obsolete/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

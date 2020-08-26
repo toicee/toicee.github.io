@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>자바스크립트 MouseMove로 이미지 움직일 때 깜빡임 대응하기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/07/08/how-to-mousemove-image-javascript/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="프로모션에서 마우스 커서를 대신해 이미지로 움직일 수 있도록 처리한 영역이 있었다. 대략 이런식   &amp;lt;div class=&amp;quot;eventArea&amp;quot;&amp;gt;   &amp;lt;div class=&amp;quot;eventImage&amp;quot;&amp;gt;     ... 이벤트 배경 이미지 영역 ...   &amp;lt;&amp;#x2F;div&amp;gt;   &amp;lt;i class=&amp;">
+<meta name="keywords" content="CSS,Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="자바스크립트 MouseMove로 이미지 움직일 때 깜빡임 대응하기">
+<meta property="og:url" content="https://note.toice.net/2019/07/08/how-to-mousemove-image-javascript/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="프로모션에서 마우스 커서를 대신해 이미지로 움직일 수 있도록 처리한 영역이 있었다. 대략 이런식   &amp;lt;div class=&amp;quot;eventArea&amp;quot;&amp;gt;   &amp;lt;div class=&amp;quot;eventImage&amp;quot;&amp;gt;     ... 이벤트 배경 이미지 영역 ...   &amp;lt;&amp;#x2F;div&amp;gt;   &amp;lt;i class=&amp;">
+<meta property="og:locale" content="KO">
+<meta property="og:image" content="https://note.toice.net/images/2019/07/08/before.gif">
+<meta property="og:image" content="https://note.toice.net/images/2019/07/08/after.gif">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="자바스크립트 MouseMove로 이미지 움직일 때 깜빡임 대응하기">
+<meta name="twitter:description" content="프로모션에서 마우스 커서를 대신해 이미지로 움직일 수 있도록 처리한 영역이 있었다. 대략 이런식   &amp;lt;div class=&amp;quot;eventArea&amp;quot;&amp;gt;   &amp;lt;div class=&amp;quot;eventImage&amp;quot;&amp;gt;     ... 이벤트 배경 이미지 영역 ...   &amp;lt;&amp;#x2F;div&amp;gt;   &amp;lt;i class=&amp;">
+<meta name="twitter:image" content="https://note.toice.net/images/2019/07/08/before.gif">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>자바스크립트 MouseMove로 이미지 움직일 때 깜빡임 대응하기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-07-08T13:47:09+09:00">2019년 7월 8일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/Javascript/">Javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>프로모션에서 마우스 커서를 대신해 이미지로 움직일 수 있도록 처리한 영역이 있었다.</p>
+<p>대략 이런식</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;div class=&quot;eventArea&quot;&gt;
+  &lt;div class=&quot;eventImage&quot;&gt;
+    ... 이벤트 배경 이미지 영역 ...
+  &lt;&#x2F;div&gt;
+  &lt;i class=&quot;cursor&quot;&gt;&lt;&#x2F;i&gt;
+&lt;&#x2F;div&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.eventArea {
+  position: relative;
+  cursor: none;
+
+  .cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: none;
+    ...
+  }
+}
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">...
+var moveEvent = function(e) {
+  $cursor.style.top = e.offsetY - $cursor.offsetHeight &#x2F; 2 + &#39;px&#39;;
+  $cursor.style.left = e.offsetX - $cursor.offsetWidth &#x2F; 2 + &#39;px&#39;;
+};
+
+$eventArea.addEventListener(&#39;mousemove&#39;, hammerEvent.move);
+...
+</code></pre>
+<p>요렇게만 하면 움직일때마다 엄청난 깜빡임을 마주하게 된다.</p>
+<p><img src="/images/2019/07/08/before.gif" alt="이전"></p>
+<p>콘솔에 top과 left 값을 찍어보면 0 이하로 값이 변하는걸 확인할 수 있는데 이벤트 영역(<code>.eventArea</code>)에서 마우스가 움직이는 이벤트가 발생할 때 커서의 위치에 이미지가 올라가도록 처리를 한 것인데 마우스를 움직일 때마다 순간적으로 이 커서 대체 이미지 위로 마우스 커서가 올라가서 이벤트 영역을 순간적으로 벗어나 위치가 바뀌는 현상으로 커서 CSS에 <code>pointer-events: none</code>으로 커서 대체 이미지를 무시하도록 처리하면 이 현상이 생기지 않는다. 하지만 IE 10이하를 고려하면 다른 해결 방법이 필요한 상황.</p>
+<p>스크립트 단에서 해결할 수 있는 방법이 있지 않을까 고민했는데 훨씬 더 간단한 해결 방법이 있었다.  <code>pointer-events: none</code>의 역할대로 대체 커서 이미지가 움직이긴 하돼 영향을 미치지 않도록 그 위를 가려주면 된다.</p>
+<h3 id="최종"><a href="#최종" class="headerlink" title="최종"></a>최종</h3>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;div class=&quot;eventArea&quot;&gt;
+  &lt;div class=&quot;eventImage&quot;&gt;
+    ... 이벤트 배경 이미지 영역 ...
+  &lt;&#x2F;div&gt;
+  &lt;i class=&quot;cursor&quot;&gt;&lt;&#x2F;i&gt;
+  &lt;i class=&quot;wall&quot;&gt;&lt;&#x2F;i&gt;
+&lt;&#x2F;div&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.eventArea {
+  position: relative;
+  cursor: none;
+
+  .cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: none;
+    ...
+  }
+
+  .wall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+</code></pre>
+<p>JS는 동일.</p>
+<p><img src="/images/2019/07/08/after.gif" alt="결과"></p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/07/04/using-jqueryui-from-ie8-to-mobileweb/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>IE8부터 모바일웹까지 고려하여 jQuery UI 사용하기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/07/16/using-image-sprite-vw-unit-android/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>vw 단위로 이미지 스프라이트 사용시 안드로이드에서 조금씩 어긋나는 버그</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/07/08/how-to-mousemove-image-javascript/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

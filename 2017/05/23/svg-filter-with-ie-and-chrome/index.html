@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>SVG를 이용한 Blur, IE와 Chrome 동시 적용하기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2017/05/23/svg-filter-with-ie-and-chrome/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="IE까지 고려해야되서 참조한 코드를 코딩스타일에 맞게 일부 수정하여 적용했는데 어떻게 하면 IE에서 Blur가 되지 않고 어떻게 하면 크롬에서 Blur가 되지 않아 체크해봄.   &amp;lt;div class=&amp;quot;blurImage&amp;quot;&amp;gt;   &amp;lt;svg&amp;gt;     &amp;lt;image x=&amp;quot;0&amp;quot; y=&amp;quot;0&amp;quot;">
+<meta name="keywords" content="chrome,HTML,CSS,IE,svg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVG를 이용한 Blur, IE와 Chrome 동시 적용하기">
+<meta property="og:url" content="https://note.toice.net/2017/05/23/svg-filter-with-ie-and-chrome/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="IE까지 고려해야되서 참조한 코드를 코딩스타일에 맞게 일부 수정하여 적용했는데 어떻게 하면 IE에서 Blur가 되지 않고 어떻게 하면 크롬에서 Blur가 되지 않아 체크해봄.   &amp;lt;div class=&amp;quot;blurImage&amp;quot;&amp;gt;   &amp;lt;svg&amp;gt;     &amp;lt;image x=&amp;quot;0&amp;quot; y=&amp;quot;0&amp;quot;">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVG를 이용한 Blur, IE와 Chrome 동시 적용하기">
+<meta name="twitter:description" content="IE까지 고려해야되서 참조한 코드를 코딩스타일에 맞게 일부 수정하여 적용했는데 어떻게 하면 IE에서 Blur가 되지 않고 어떻게 하면 크롬에서 Blur가 되지 않아 체크해봄.   &amp;lt;div class=&amp;quot;blurImage&amp;quot;&amp;gt;   &amp;lt;svg&amp;gt;     &amp;lt;image x=&amp;quot;0&amp;quot; y=&amp;quot;0&amp;quot;">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>SVG를 이용한 Blur, IE와 Chrome 동시 적용하기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2017-05-23T16:29:00+09:00">2017년 5월 23일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/HTML/">HTML</a><a class="tag-link" href="/tags/IE/">IE</a><a class="tag-link" href="/tags/chrome/">chrome</a><a class="tag-link" href="/tags/svg/">svg</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>IE까지 고려해야되서 <a href="https://jsfiddle.net/jamygolden/yUG5U/2/" target="_blank" rel="noopener">참조</a>한 코드를 코딩스타일에 맞게 일부 수정하여 적용했는데 어떻게 하면 IE에서 Blur가 되지 않고 어떻게 하면 크롬에서 Blur가 되지 않아 체크해봄.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;div class=&quot;blurImage&quot;&gt;
+  &lt;svg&gt;
+    &lt;image x=&quot;0&quot; y=&quot;0&quot; id=&quot;blurImage&lt;%= i %&gt;&lt;%= j %&gt;&quot; width=&quot;781&quot; height=&quot;430&quot; xlink:href=&quot;&lt;%= b.image %&gt;&quot; &#x2F;&gt;
+    &lt;filter id=&quot;blurEffect&lt;%= i %&gt;&lt;%= j %&gt;&quot;&gt;
+      &lt;fegaussianblur stddeviation=&quot;2&quot; &#x2F;&gt;
+    &lt;&#x2F;filter&gt;
+  &lt;&#x2F;svg&gt; 
+&lt;&#x2F;div&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.blurImage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 45px;
+    overflow: hidden;
+
+    svg {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 781px;
+        height: 430px;
+
+        @for $i from 0 through 9 {
+            @for $j from 0 through 9 {
+                #blurImage#{$i}#{$j} {
+                    filter: url(&quot;#blurEffect#{$i}#{$j}&quot;);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>SVG에서</p>
+<p>IE : x, y, width, height 속성이 없으면 IE에서 실행 안됨.<br>Chrome : <code>/</code> 닫는 슬래쉬가 없으면 크롬에서 실행 안됨.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2017/05/17/gitlab-master-merged-reset/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>GitLab Master 브랜치 머지 후 되돌리기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2017/06/23/using-transition-cubic-bezier/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>CSS3 cubic-bezier 를 이용한 transition 효과</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2017/05/23/svg-filter-with-ie-and-chrome/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

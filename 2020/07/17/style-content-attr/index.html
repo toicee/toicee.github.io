@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>CSS Content에 attr, url 넣기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/07/17/style-content-attr/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="CSS의 content는 도무지 쓸모 없는 요소라고 생각했는데 아래와 같이도 쓸 수 있었다.   &amp;lt;span data-number=&amp;quot;1&amp;quot;&amp;gt;1&amp;lt;&amp;#x2F;span&amp;gt;    &amp;amp;::before {   content: url(imgurl); }  &amp;amp;::after {   content: attr(data-number">
+<meta name="keywords" content="CSS,코드리뷰">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS Content에 attr, url 넣기">
+<meta property="og:url" content="https://note.toice.net/2020/07/17/style-content-attr/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="CSS의 content는 도무지 쓸모 없는 요소라고 생각했는데 아래와 같이도 쓸 수 있었다.   &amp;lt;span data-number=&amp;quot;1&amp;quot;&amp;gt;1&amp;lt;&amp;#x2F;span&amp;gt;    &amp;amp;::before {   content: url(imgurl); }  &amp;amp;::after {   content: attr(data-number">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-08-22T07:36:21.251Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS Content에 attr, url 넣기">
+<meta name="twitter:description" content="CSS의 content는 도무지 쓸모 없는 요소라고 생각했는데 아래와 같이도 쓸 수 있었다.   &amp;lt;span data-number=&amp;quot;1&amp;quot;&amp;gt;1&amp;lt;&amp;#x2F;span&amp;gt;    &amp;amp;::before {   content: url(imgurl); }  &amp;amp;::after {   content: attr(data-number">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>CSS Content에 attr, url 넣기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-07-17T17:48:47+09:00">2020년 7월 17일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/코드리뷰/">코드리뷰</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>CSS의 <code>content</code>는 도무지 쓸모 없는 요소라고 생각했는데 아래와 같이도 쓸 수 있었다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;span data-number=&quot;1&quot;&gt;1&lt;&#x2F;span&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">&amp;::before {
+  content: url(imgurl);
+}
+
+&amp;::after {
+  content: attr(data-number);
+}
+</code></pre>
+<p>보통 <code>content</code> 값을 넣을래도 그렇게 넣는 경우는 웹접근성에 위배되는 경우가 대다수기 때문에 실제로는 <code>::before</code>, <code>::after</code>를 쓸 때 반드시 따라가는 요소정도로만 쓰거나 그나마 기능적으로 쓸만한게 <code>counter</code>로 쓰는거였는데 이렇게도 쓸 수 있다는걸 11년차만에 알게 됐다. 그래서 기록.</p>
+<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/CSS/attr</a></li>
+</ul>
+<h4 id="잡담"><a href="#잡담" class="headerlink" title="잡담"></a>잡담</h4><p>요즘 회사 새 프로젝트의 UI개발 부분 리드를 하고 있는데, 팀에 코드 리뷰 문화가 안잡혀 있어 내가 리더란 핑계로 이 프로젝트만큼은 코드 리뷰를 시도하고 있는데 같이 하는 동료들이 아무래도 부담이 가는지 사실상 내 일방적인 코드리뷰(코드스멜에 가깝긴한데)가 되고 있어서 의견만 전달하다 리뷰하던 코드에서 나도 하나 배웠다!</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/06/26/border-radius-for-iframe-at-mobile/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>모바일에서 유튜브, 구글지도 아이프레임 모서리 둥굴게(border-radius) 적용하기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/07/22/input-disabled-cannot-onchange-ie/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>IE에서 비활성 input에 onChange 이벤트 미작동 문제</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/07/17/style-content-attr/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

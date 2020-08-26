@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>안드로이드 크롬에서 iScroll 버벅이는 현상 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2017/04/25/android-chrome-iscroll-not-working-suddenly/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="안드로이드 크롬 iScroll 버벅이는 현상안드로이드 크롬에서 iScroll을 사용한 영역의 스크롤이 잘 되다가 어느날 갑자기 버벅이는 문제가 발생하여 찾아보니 크롬과 관련된 버그였다. 참조 URL : iScroll and Chrome 55 PointerEvents 관련 버그로 &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;사이에    &amp;lt;script&amp;g">
+<meta name="keywords" content="javascript,mobile,android,chrome,iScroll">
+<meta property="og:type" content="article">
+<meta property="og:title" content="안드로이드 크롬에서 iScroll 버벅이는 현상">
+<meta property="og:url" content="https://note.toice.net/2017/04/25/android-chrome-iScroll-not-working-suddenly/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="안드로이드 크롬 iScroll 버벅이는 현상안드로이드 크롬에서 iScroll을 사용한 영역의 스크롤이 잘 되다가 어느날 갑자기 버벅이는 문제가 발생하여 찾아보니 크롬과 관련된 버그였다. 참조 URL : iScroll and Chrome 55 PointerEvents 관련 버그로 &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;사이에    &amp;lt;script&amp;g">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="안드로이드 크롬에서 iScroll 버벅이는 현상">
+<meta name="twitter:description" content="안드로이드 크롬 iScroll 버벅이는 현상안드로이드 크롬에서 iScroll을 사용한 영역의 스크롤이 잘 되다가 어느날 갑자기 버벅이는 문제가 발생하여 찾아보니 크롬과 관련된 버그였다. 참조 URL : iScroll and Chrome 55 PointerEvents 관련 버그로 &amp;lt;head&amp;gt;&amp;lt;/head&amp;gt;사이에    &amp;lt;script&amp;g">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>안드로이드 크롬에서 iScroll 버벅이는 현상</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2017-04-25T17:11:00+09:00">2017년 4월 25일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/android/">android</a><a class="tag-link" href="/tags/chrome/">chrome</a><a class="tag-link" href="/tags/iScroll/">iScroll</a><a class="tag-link" href="/tags/javascript/">javascript</a><a class="tag-link" href="/tags/mobile/">mobile</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><h1 id="안드로이드-크롬-iScroll-버벅이는-현상"><a href="#안드로이드-크롬-iScroll-버벅이는-현상" class="headerlink" title="안드로이드 크롬 iScroll 버벅이는 현상"></a>안드로이드 크롬 iScroll 버벅이는 현상</h1><p>안드로이드 크롬에서 iScroll을 사용한 영역의 스크롤이 잘 되다가 어느날 갑자기 버벅이는 문제가 발생하여 찾아보니 크롬과 관련된 버그였다.</p>
+<p>참조 URL : <a href="https://github.com/cubiq/iscroll/issues/1100#issuecomment-266672759" target="_blank" rel="noopener">iScroll and Chrome 55</a></p>
+<p><code>PointerEvents</code> 관련 버그로 <code>&lt;head&gt;&lt;/head&gt;</code>사이에 </p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;script&gt;window.PointerEvent = undefined&lt;&#x2F;script&gt;
+</code></pre>
+<p>를 넣는 것으로도 해결이 가능하지만 iScroll 옵션에 <code>disablePointer: true</code>를 넣는 것만으로도 해결이 가능하다.</p>
+<p>쓰레드를 보면,</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">{
+  disablePointer: true, &#x2F;&#x2F; important to disable the pointer events that causes the issues
+  disableTouch: false, &#x2F;&#x2F; false if you want the slider to be usable with touch devices
+  disableMouse: false &#x2F;&#x2F; false if you want the slider to be usable with a mouse (desktop)
+}
+</code></pre>
+<p>와 같이 <code>disableTouch</code>와 <code>disableMouse</code>도 함께 사용하라는 내용도 있는데 각각 터치와 마우스 클릭까지 설정하는 부분으로 필요에 따라 사용하면 됨.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager singlePager">
+      
+      
+        <a href="/2017/04/28/osx-git-check-password-again/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>맥에서 소스트리 사용시 Git 비밀번호를 재차 묻는 현상</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2017/04/25/android-chrome-iScroll-not-working-suddenly/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

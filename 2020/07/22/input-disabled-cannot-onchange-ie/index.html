@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>IE에서 비활성 input에 onChange 이벤트 미작동 문제 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/07/22/input-disabled-cannot-onchange-ie/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="왜 문제냐면 이 문제는 IE에서만 발생하기 때문이다. IE에서 안되는 케이스 button   &amp;lt;input type=&amp;quot;text&amp;quot; class=&amp;quot;testInput&amp;quot; value=&amp;quot;0&amp;quot;&amp;gt; &amp;lt;button type=&amp;quot;button&amp;quot; class=&amp;quot;testBtn&amp;quot;&amp;gt;">
+<meta name="keywords" content="javascript,IE,form">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IE에서 비활성 input에 onChange 이벤트 미작동 문제">
+<meta property="og:url" content="https://note.toice.net/2020/07/22/input-disabled-cannot-onchange-ie/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="왜 문제냐면 이 문제는 IE에서만 발생하기 때문이다. IE에서 안되는 케이스 button   &amp;lt;input type=&amp;quot;text&amp;quot; class=&amp;quot;testInput&amp;quot; value=&amp;quot;0&amp;quot;&amp;gt; &amp;lt;button type=&amp;quot;button&amp;quot; class=&amp;quot;testBtn&amp;quot;&amp;gt;">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-08-22T07:35:03.344Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IE에서 비활성 input에 onChange 이벤트 미작동 문제">
+<meta name="twitter:description" content="왜 문제냐면 이 문제는 IE에서만 발생하기 때문이다. IE에서 안되는 케이스 button   &amp;lt;input type=&amp;quot;text&amp;quot; class=&amp;quot;testInput&amp;quot; value=&amp;quot;0&amp;quot;&amp;gt; &amp;lt;button type=&amp;quot;button&amp;quot; class=&amp;quot;testBtn&amp;quot;&amp;gt;">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>IE에서 비활성 input에 onChange 이벤트 미작동 문제</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-07-22T12:54:03+09:00">2020년 7월 22일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/IE/">IE</a><a class="tag-link" href="/tags/form/">form</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>왜 문제냐면 이 문제는 IE에서만 발생하기 때문이다.</p>
+<h5 id="IE에서-안되는-케이스"><a href="#IE에서-안되는-케이스" class="headerlink" title="IE에서 안되는 케이스"></a>IE에서 안되는 케이스</h5><p><input type="text" class="testInput" value="0" disabled> <button type="button" class="testBtn">button</button></p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;input type=&quot;text&quot; class=&quot;testInput&quot; value=&quot;0&quot;&gt;
+&lt;button type=&quot;button&quot; class=&quot;testBtn&quot;&gt;button&lt;&#x2F;button&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">const testInput = document.querySelector(&#39;.testInput&#39;);
+const testBtn = document.querySelector(&#39;.testBtn&#39;);
+
+testInput.addEventListener(&#39;change&#39;, function() {
+  testBtn.innerText = &#39;button &#39; + this.value;
+});
+
+testBtn.addEventListener(&#39;click&#39;, () =&gt; {
+  testInput.value++;
+
+  const event = document.createEvent(&#39;HTMLEvents&#39;);
+  event.initEvent(&#39;change&#39;, true, false);
+  testInput.dispatchEvent(event);
+});
+</code></pre>
+<p>코드대로라면 버튼을 누르면 인풋에 숫자가 올라가고 인풋에 숫자가 올라가면 버튼에도 숫자가 올라가야한다.</p>
+<p>이 경우가 IE에서<strong>만</strong> 안되는데 이게 이렇게 간단한 예제로, 결과를 놓고 봐서 쉽게 받아들일 수 있지 꽤 복잡한 구성에서 IE에서만 정상적인 값 계산이 안되서, 걸려있는 이벤트를 다 체크하고 의심하며 이유가 뭔지 찾는데 한참 시간을 들였다.</p>
+<h5 id="IE에서-되는-케이스"><a href="#IE에서-되는-케이스" class="headerlink" title="IE에서 되는 케이스"></a>IE에서 되는 케이스</h5><p><input type="text" class="testInput2" value="0" disabled> <button type="button" class="testBtn2">button</button></p>
+<p>확인해본 결과 원인은 <code>input</code> 상태가 <code>disabled</code>이기 때문이라 다른 방법을 취해야한다.<br>방법에는 여러가지가 있을 것 같다. <code>disabled</code> 제거하고 대신에 클릭이나 포커스를 막아서 사용할 수 없게 하던지…<br>이 업무에선 굳이 비활성 안해도 되는 부분이라 비활성 자체를 해제해버렸는데 만약 비활성을 유지해야한다면 <code>disabled</code>를 풀고 트리거 후에 <code>disabled</code>를 다시 추가하는 형태로 바꿔도 딱히 문제는 없어보인다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">testBtn.addEventListener(&#39;click&#39;, () =&gt; {
+  testInput.value++;
+
+  const event = document.createEvent(&#39;HTMLEvents&#39;);
+  event.initEvent(&#39;change&#39;, true, false);
+
+  testInput.disabled = false;
+  testInput.dispatchEvent(event);
+  testInput.disabled = true;
+});
+</code></pre>
+<script>
+const testInput = document.querySelector('.testInput');
+const testBtn = document.querySelector('.testBtn');
+
+testInput.addEventListener('change', function() {
+  testBtn.innerText = 'button ' + this.value;
+});
+
+testBtn.addEventListener('click', () => {
+  testInput.value++;
+
+  const event = document.createEvent('HTMLEvents');
+  event.initEvent('change', true, false);
+
+  testInput2.disabled = false;
+  testInput.dispatchEvent(event);
+  testInput2.disabled = true;
+});
+
+const testInput2 = document.querySelector('.testInput2');
+const testBtn2 = document.querySelector('.testBtn2');
+
+testInput2.addEventListener('change', function() {
+  testBtn2.innerText = 'button ' + this.value;
+});
+
+testBtn2.addEventListener('click', () => {
+  testInput2.value++;
+
+  const event = document.createEvent('HTMLEvents');
+  event.initEvent('change', true, false);
+
+  testInput2.disabled = false;
+  testInput2.dispatchEvent(event);
+  testInput2.disabled = true;
+});
+</script>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/07/17/style-content-attr/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>CSS Content에 attr, url 넣기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/07/28/nodemon-restart-command-rs/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>nodemon 재시작 명령어 rs</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/07/22/input-disabled-cannot-onchange-ie/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

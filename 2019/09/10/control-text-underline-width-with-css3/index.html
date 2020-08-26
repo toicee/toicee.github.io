@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>CSS3 큰 글자에 얇은 밑줄 긋기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/09/10/control-text-underline-width-with-css3/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="정상적인 방법으로 밑줄을 그으면 폰트 크기가 큰 경우에는 거기에 맞게 두께가 자동으로 두꺼워진다. 이 두꺼운 밑줄은 대다수의 디자이너들이 좋아하지 않는 것 같은데 그래서 보통은 요청이 오면 정상적인 텍스트 꾸미기보다 border-bottom을 이용하여 라인을 그어주는 편이다. 그런데 이번 문제는 여러줄이라 border-bottom으로 하면 박스 하단에만 그">
+<meta name="keywords" content="CSS3,SCSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 큰 글자에 얇은 밑줄 긋기">
+<meta property="og:url" content="https://note.toice.net/2019/09/10/control-text-underline-width-with-css3/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="정상적인 방법으로 밑줄을 그으면 폰트 크기가 큰 경우에는 거기에 맞게 두께가 자동으로 두꺼워진다. 이 두꺼운 밑줄은 대다수의 디자이너들이 좋아하지 않는 것 같은데 그래서 보통은 요청이 오면 정상적인 텍스트 꾸미기보다 border-bottom을 이용하여 라인을 그어주는 편이다. 그런데 이번 문제는 여러줄이라 border-bottom으로 하면 박스 하단에만 그">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-08-20T21:48:06.326Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3 큰 글자에 얇은 밑줄 긋기">
+<meta name="twitter:description" content="정상적인 방법으로 밑줄을 그으면 폰트 크기가 큰 경우에는 거기에 맞게 두께가 자동으로 두꺼워진다. 이 두꺼운 밑줄은 대다수의 디자이너들이 좋아하지 않는 것 같은데 그래서 보통은 요청이 오면 정상적인 텍스트 꾸미기보다 border-bottom을 이용하여 라인을 그어주는 편이다. 그런데 이번 문제는 여러줄이라 border-bottom으로 하면 박스 하단에만 그">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>CSS3 큰 글자에 얇은 밑줄 긋기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-09-10T16:20:25+09:00">2019년 9월 10일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS3/">CSS3</a><a class="tag-link" href="/tags/SCSS/">SCSS</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>정상적인 방법으로 밑줄을 그으면 폰트 크기가 큰 경우에는 거기에 맞게 두께가 자동으로 두꺼워진다. 이 두꺼운 밑줄은 대다수의 디자이너들이 좋아하지 않는 것 같은데 그래서 보통은 요청이 오면 정상적인 텍스트 꾸미기보다 <code>border-bottom</code>을 이용하여 라인을 그어주는 편이다.</p>
+<p>그런데 이번 문제는 여러줄이라 <code>border-bottom</code>으로 하면 박스 하단에만 그어지니 안됐고 무엇보다 내가 보기에도 두꺼워진 언더라인이 보기가 싫어서 한참 고민했다. (왠지 CSS3 요소중에 언더라인 굵기를 지정하는게 있을 법한데 없더라)</p>
+<p>고민 끝에 해결됐다. 고민은 길었는데 해결하고나니 너무 간단하다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-SCSS">@mixin customUnderline($lineOffsetY, $lineSize: 1px, $lineColor: #000) {
+    background-image: linear-gradient(transparent $lineOffsetY - 1, $lineColor $lineSize);
+    background-size: auto $lineOffsetY;
+}
+
+p {
+    font-size: 20px;
+    line-height: 40px;
+
+    span {
+        @include customUnderline(36px);
+    }
+}
+</code></pre>
+<p>각 줄마다 텍스트 길이에 맞게 백그라운드 라인이 끊어지게 하기 위해서 인라인 요소를 자식으로 쓸 수 밖에 없는데 덕분에 하고자하는 줄간격과 그리는 라인간격이 일치하지 않을 수 있다(즉 <code>line-height</code>값과 <code>$lineOffsetY</code> 값이 일치하지 않을 수 있다, 블록요소라면 일치해도 된다).<br>폰트 종류마다 줄간격이 다르니 어떻게 자동으로 해볼 수가 없었는데 폰트 크기가 변한다면 폰트 크기와 연계해서 <code>$lineOffsetY</code> 값을 수정하면서 맞출 수 밖에 없다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/08/12/table-summary-obsolete/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>HTML5 테이블 속성에 summary 사용할까 말까</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/09/25/chrome-76-77-render-error/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>크롬 76, 77 객체 크기 변화 랜더링 오류</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/09/10/control-text-underline-width-with-css3/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

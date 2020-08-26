@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>nodemon 재시작 명령어 rs - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/07/28/nodemon-restart-command-rs/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="nodemon으로 구동되는 프레임워크 환경에서 작업하면서 당연하게도 서버가 중단되는 오류가 자주 발생하게 되고 서버 재시작이 되는 app.js나 json을 열고 있는 경우에는 일부러 저장을 하거나 json이 없는 작업이면 그때마다 취소하고 새로 켰는데 동료 자리에 갔다가 터미널에서 rs를 입력해서 간단히 재시작 하는걸 보게 됐다. 와 이런 신세계가 이걸 이">
+<meta name="keywords" content="node.js,nodemon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodemon 재시작 명령어 rs">
+<meta property="og:url" content="https://note.toice.net/2020/07/28/nodemon-restart-command-rs/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="nodemon으로 구동되는 프레임워크 환경에서 작업하면서 당연하게도 서버가 중단되는 오류가 자주 발생하게 되고 서버 재시작이 되는 app.js나 json을 열고 있는 경우에는 일부러 저장을 하거나 json이 없는 작업이면 그때마다 취소하고 새로 켰는데 동료 자리에 갔다가 터미널에서 rs를 입력해서 간단히 재시작 하는걸 보게 됐다. 와 이런 신세계가 이걸 이">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-08-26T02:11:52.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodemon 재시작 명령어 rs">
+<meta name="twitter:description" content="nodemon으로 구동되는 프레임워크 환경에서 작업하면서 당연하게도 서버가 중단되는 오류가 자주 발생하게 되고 서버 재시작이 되는 app.js나 json을 열고 있는 경우에는 일부러 저장을 하거나 json이 없는 작업이면 그때마다 취소하고 새로 켰는데 동료 자리에 갔다가 터미널에서 rs를 입력해서 간단히 재시작 하는걸 보게 됐다. 와 이런 신세계가 이걸 이">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>nodemon 재시작 명령어 rs</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-07-28T20:57:36+09:00">2020년 7월 28일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/node-js/">node.js</a><a class="tag-link" href="/tags/nodemon/">nodemon</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p><code>nodemon</code>으로 구동되는 프레임워크 환경에서 작업하면서 당연하게도 서버가 중단되는 오류가 자주 발생하게 되고 서버 재시작이 되는 <code>app.js</code>나 <code>json</code>을 열고 있는 경우에는 일부러 저장을 하거나 <code>json</code>이 없는 작업이면 그때마다 취소하고 새로 켰는데 동료 자리에 갔다가 터미널에서 <code>rs</code>를 입력해서 간단히 재시작 하는걸 보게 됐다.</p>
+<p>와 이런 신세계가 이걸 이제 알았네 하면서 블로그에 적어야지 했는데…</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-shell">[nodemon] 2.0.1
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching dir(s): *.*
+[nodemon] watching extensions: js,json
+[nodemon] starting `node app.js`
+</code></pre>
+<p>…시작할 때 친절히 무려 버전 표기 다음으로 알려주고 있었다.</p>
+<blockquote>
+<p>[nodemon] to restart at any time, enter <code>rs</code></p>
+</blockquote>
+<p>영어가 모국어였으면 봤을려나.. (…)</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager singlePager">
+      
+        <a href="/2020/07/22/input-disabled-cannot-onchange-ie/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>IE에서 비활성 input에 onChange 이벤트 미작동 문제</dd>
+          </dl>
+        </a>
+      
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/07/28/nodemon-restart-command-rs/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

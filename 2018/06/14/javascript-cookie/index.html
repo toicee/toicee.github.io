@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Javascript 쿠키 사용하기, 오늘 날짜에만 다시 안보이게 하기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/06/14/javascript-cookie/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="회사내 역할상 쿠키 쓸일이 거의 없고 그나마도 편리한 익숙한 스토리지를 쓰다보니 기회가 잘 없던차에 때 되면 알아서 제거해야되는 이슈상 오랜만에 쿠키를 사용했고 기록해둔다.   function popDeduction() {   var $wrapper = $(&amp;#39;.popLayer&amp;#39;);   var $closeBtn = $wrapper.find(&amp;#">
+<meta name="keywords" content="javascript,cookie">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript 쿠키 사용하기, 오늘 날짜에만 다시 안보이게 하기">
+<meta property="og:url" content="https://note.toice.net/2018/06/14/javascript-cookie/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="회사내 역할상 쿠키 쓸일이 거의 없고 그나마도 편리한 익숙한 스토리지를 쓰다보니 기회가 잘 없던차에 때 되면 알아서 제거해야되는 이슈상 오랜만에 쿠키를 사용했고 기록해둔다.   function popDeduction() {   var $wrapper = $(&amp;#39;.popLayer&amp;#39;);   var $closeBtn = $wrapper.find(&amp;#">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2018-11-28T05:30:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript 쿠키 사용하기, 오늘 날짜에만 다시 안보이게 하기">
+<meta name="twitter:description" content="회사내 역할상 쿠키 쓸일이 거의 없고 그나마도 편리한 익숙한 스토리지를 쓰다보니 기회가 잘 없던차에 때 되면 알아서 제거해야되는 이슈상 오랜만에 쿠키를 사용했고 기록해둔다.   function popDeduction() {   var $wrapper = $(&amp;#39;.popLayer&amp;#39;);   var $closeBtn = $wrapper.find(&amp;#">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>Javascript 쿠키 사용하기, 오늘 날짜에만 다시 안보이게 하기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-06-14T18:43:00+09:00">2018년 6월 14일</time>
+  </dd>
+</dl>
+
+  <dl class="updatedTime">
+    <dt>updated</dt>
+    <dd>
+      <time datetime="2018-11-28T14:30:00+09:00" class="updated">2018년 11월 28일</time>
+    </dd>
+  </dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/cookie/">cookie</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>회사내 역할상 쿠키 쓸일이 거의 없고 그나마도 <del>편리한</del> 익숙한 스토리지를 쓰다보니 기회가 잘 없던차에 때 되면 알아서 제거해야되는 이슈상 오랜만에 쿠키를 사용했고 기록해둔다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">function popDeduction() {
+  var $wrapper = $(&#39;.popLayer&#39;);
+  var $closeBtn = $wrapper.find(&#39;.close&#39;);
+  var $noTodayBtn = $wrapper.find(&#39;.notToday&#39;);
+
+  $closeBtn.on(&#39;click&#39;, function(e) {
+    e.preventDefault();
+    $wrapper.removeClass(&#39;visible&#39;);
+  });
+
+  $noTodayBtn.on(&#39;click&#39;, function(e) {
+    e.preventDefault();
+
+    var today = new Date();
+    var expireTime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 17, 18, 0);
+    document.cookie = &#39;popTaxHidden=true;expires=&#39; + expireTime.toUTCString() + &#39;;path=&#x2F;&#39;;
+
+    $closeBtn.trigger(&#39;click&#39;);
+  });
+
+  $(function() {
+    if (!~document.cookie.indexOf(&#39;popTaxHidden&#39;)) {
+      $wrapper.addClass(&#39;visible&#39;);
+    }
+  });
+}
+
+popDeduction();
+</code></pre>
+<p>보통은 24시간뒤 expire 되도록 처리하지만 딱 오늘 날짜만 보이지 않도록 처리해봤다.<br>기획에서 24시간인지, 딱 오늘인지 명확한 구분없이 전달했길래 이러나 저러나 상관없는거 같아서 해보고 싶은 방향대로…<br>(11월 업데이트 - 어차피 이제 안쓰는 코든데 운영되는 동안 별말 없었다.. 역시 이러나 저러나 상관없는거였지)</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/06/11/countdown-timer-js/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>카운트다운 타이머 스크립트</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/06/20/iscroll-inside-iscroll/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>iScroll 5에서 아이스크롤 안에 아이스크롤 넣기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/06/14/javascript-cookie/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

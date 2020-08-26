@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>뒤로가기에서 스크롤 위치는 저장하지 않기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/06/29/history-restore-scroll/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="안드로이드 때문에 내부 팝업을 pushstate같은 처리로 히스토리와 연계해서 운영중인 페이지가 있는데, 몇개의 내부 팝업을 더 열어두는 형태로 기획/디자인 되어 애초에 만들때 계획에 없던 팝업이 열려있는 채로 이중 삼중 내부팝업을 열면서 history.back()일때 열렸던 스크롤 위치로 돌아가지 않도록 하는 작업이 필요하게 됐다. 사실 이런게 조절이 되">
+<meta name="keywords" content="javascript,mobile,android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="뒤로가기에서 스크롤 위치는 저장하지 않기">
+<meta property="og:url" content="https://note.toice.net/2018/06/29/history-restore-scroll/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="안드로이드 때문에 내부 팝업을 pushstate같은 처리로 히스토리와 연계해서 운영중인 페이지가 있는데, 몇개의 내부 팝업을 더 열어두는 형태로 기획/디자인 되어 애초에 만들때 계획에 없던 팝업이 열려있는 채로 이중 삼중 내부팝업을 열면서 history.back()일때 열렸던 스크롤 위치로 돌아가지 않도록 하는 작업이 필요하게 됐다. 사실 이런게 조절이 되">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="뒤로가기에서 스크롤 위치는 저장하지 않기">
+<meta name="twitter:description" content="안드로이드 때문에 내부 팝업을 pushstate같은 처리로 히스토리와 연계해서 운영중인 페이지가 있는데, 몇개의 내부 팝업을 더 열어두는 형태로 기획/디자인 되어 애초에 만들때 계획에 없던 팝업이 열려있는 채로 이중 삼중 내부팝업을 열면서 history.back()일때 열렸던 스크롤 위치로 돌아가지 않도록 하는 작업이 필요하게 됐다. 사실 이런게 조절이 되">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>뒤로가기에서 스크롤 위치는 저장하지 않기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-06-29T15:32:00+09:00">2018년 6월 29일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/android/">android</a><a class="tag-link" href="/tags/javascript/">javascript</a><a class="tag-link" href="/tags/mobile/">mobile</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>안드로이드 때문에 내부 팝업을 <code>pushstate</code>같은 처리로 히스토리와 연계해서 운영중인 페이지가 있는데, 몇개의 내부 팝업을 더 열어두는 형태로 기획/디자인 되어 애초에 만들때 계획에 없던 팝업이 열려있는 채로 이중 삼중 내부팝업을 열면서 history.back()일때 열렸던 스크롤 위치로 돌아가지 않도록 하는 작업이 필요하게 됐다.</p>
+<p>사실 이런게 조절이 되는지 몰랐던 사항이라 아마 안될 것 같은데 시도는 해보겠다고 얘기했는데 알아보니 생각보다 매우 간단하다. history 멤버로 <code>scrollRestoration</code>이라는 항목이 있었음.</p>
+<p>설정</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">if (history.scrollRestoration) {
+  history.scrollRestoration = &#39;manual&#39;;
+}
+</code></pre>
+<p>해제</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">if (history.scrollRestoration === &#39;manual&#39;) {
+  history.scrollRestoration = &#39;auto&#39;;
+}
+</code></pre>
+<p><code>manual</code>과 <code>auto</code>이렇게 2가지 값 뿐임<br><code>manual</code>일때 스크롤 위치 기억안함, <code>auto</code>일때 함.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/06/20/iscroll-inside-iscroll/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>iScroll 5에서 아이스크롤 안에 아이스크롤 넣기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/07/06/jquery-get-border-width/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>IE에서 jQuery로 border width 가져오기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/06/29/history-restore-scroll/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

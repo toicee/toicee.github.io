@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>크롬에서 iScroll 터치 안되는 문제 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/08/16/chrome-iscroll-touch-action-not-working/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="iScroll이 사용된 영역에,  Unable to preventDefault inside passive event listener due to target being treated as passive.  라는 메시지와 함께 터치가 되지 않는 문제가 있었다. iScroll 사용시에는 CSS에서  html {     touch-action: manipulat">
+<meta name="keywords" content="javascript,chrome">
+<meta property="og:type" content="article">
+<meta property="og:title" content="크롬에서 iScroll 터치 안되는 문제">
+<meta property="og:url" content="https://note.toice.net/2018/08/16/chrome-iscroll-touch-action-not-working/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="iScroll이 사용된 영역에,  Unable to preventDefault inside passive event listener due to target being treated as passive.  라는 메시지와 함께 터치가 되지 않는 문제가 있었다. iScroll 사용시에는 CSS에서  html {     touch-action: manipulat">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="크롬에서 iScroll 터치 안되는 문제">
+<meta name="twitter:description" content="iScroll이 사용된 영역에,  Unable to preventDefault inside passive event listener due to target being treated as passive.  라는 메시지와 함께 터치가 되지 않는 문제가 있었다. iScroll 사용시에는 CSS에서  html {     touch-action: manipulat">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>크롬에서 iScroll 터치 안되는 문제</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-08-16T10:28:00+09:00">2018년 8월 16일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/chrome/">chrome</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>iScroll이 사용된 영역에,</p>
+<blockquote>
+<p>Unable to preventDefault inside passive event listener due to target being treated as passive.</p>
+</blockquote>
+<p>라는 메시지와 함께 터치가 되지 않는 문제가 있었다.</p>
+<p>iScroll 사용시에는 CSS에서<br>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-CSS">html {
+    touch-action: manipulation;
+}
+</code></pre></p>
+<p>를 반드시 넣기.</p>
+<blockquote>
+<p>touch-action: manipulation<br>두 번 탭 동작을 비활성화합니다. 이 경우 브라우저에 의한 클릭 지연이 방지됩니다. 스크롤과 핀치 줌을 브라우저에게 맡깁니다.</p>
+</blockquote>
+<p>역할은 이건데, 이 지연 방지가 iScroll 터치 오동작까지 막아주는 것으로 보임.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/08/13/regExp-html-blank-line/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>빈칸을 포함한 빈줄을 처리하기 위한 정규식</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/08/29/input-number-pattern/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>입력필드에서 숫자 키패드 부르기(모바일)</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/08/16/chrome-iscroll-touch-action-not-working/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

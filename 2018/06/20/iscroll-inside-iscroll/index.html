@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>iScroll 5에서 아이스크롤 안에 아이스크롤 넣기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/06/20/iscroll-inside-iscroll/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="iscroll4에 있던 onBeforeScrollStart가 iScroll 5에서 동작은 하지만 인자가 없음.한페이지에 둘다 넣으면 style.overflow.hidden였나? 오류 남.   자식 iscroll의 beforeScrollStart와 scrollEnd에서 부모 iscroll객체 enabled를 토글  삽질 중 크게 도움이 된 문구 from dc">
+<meta name="keywords" content="javascript,iScroll">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iScroll 5에서 아이스크롤 안에 아이스크롤 넣기">
+<meta property="og:url" content="https://note.toice.net/2018/06/20/iscroll-inside-iscroll/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="iscroll4에 있던 onBeforeScrollStart가 iScroll 5에서 동작은 하지만 인자가 없음.한페이지에 둘다 넣으면 style.overflow.hidden였나? 오류 남.   자식 iscroll의 beforeScrollStart와 scrollEnd에서 부모 iscroll객체 enabled를 토글  삽질 중 크게 도움이 된 문구 from dc">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iScroll 5에서 아이스크롤 안에 아이스크롤 넣기">
+<meta name="twitter:description" content="iscroll4에 있던 onBeforeScrollStart가 iScroll 5에서 동작은 하지만 인자가 없음.한페이지에 둘다 넣으면 style.overflow.hidden였나? 오류 남.   자식 iscroll의 beforeScrollStart와 scrollEnd에서 부모 iscroll객체 enabled를 토글  삽질 중 크게 도움이 된 문구 from dc">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>iScroll 5에서 아이스크롤 안에 아이스크롤 넣기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-06-20T09:43:00+09:00">2018년 6월 20일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/iScroll/">iScroll</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>iscroll4에 있던 <code>onBeforeScrollStart</code>가 iScroll 5에서 동작은 하지만 인자가 없음.<br>한페이지에 둘다 넣으면 style.overflow.hidden였나? 오류 남. </p>
+<blockquote>
+<p>자식 iscroll의 beforeScrollStart와 scrollEnd에서 부모 iscroll객체 enabled를 토글</p>
+</blockquote>
+<p>삽질 중 크게 도움이 된 문구 from dcinside 프로그래밍 갤러리 (라고만 써놓고 출처 링크를 기록해놓지 않았다ㅠ)<br>아무튼 그래서 해봤더니 매우 잘 됨</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;div class=&quot;test&quot;&gt;
+  &lt;div class=&quot;scroll1&quot; style=&quot;max-height: 500px; overflow: hidden&quot;&gt;
+    &lt;ul&gt;
+      &lt;% for (var i = 0; i &lt; 100; i++) { %&gt;
+      &lt;li&gt;
+        &lt;a href=&quot;#&quot; onclick=&quot;alert(&#39;scroll1&#39;); return;&quot;&gt;scroll1&lt;&#x2F;a&gt;
+        &lt;% if (i === 10) { %&gt;
+          &lt;div class=&quot;scroll2&quot; style=&quot;max-height: 200px; overflow: hidden;&quot;&gt;
+            &lt;ul&gt;
+              &lt;% for (var j = 0; j &lt; 100; j++) { %&gt;
+              &lt;li style=&quot;color: #06c&quot;&gt;
+                &lt;a href=&quot;#&quot; onclick=&quot;alert(&#39;scroll2&#39;); return false;&quot;&gt;scroll2&lt;&#x2F;a&gt;
+              &lt;&#x2F;li&gt;
+              &lt;% }%&gt;
+            &lt;&#x2F;ul&gt;
+          &lt;&#x2F;div&gt;
+        &lt;% } %&gt;
+      &lt;&#x2F;li&gt;
+      &lt;% } %&gt;
+    &lt;&#x2F;ul&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">var iscrollOpts = {
+  scrollX: false,
+  mouseWheel: true,
+  scrollbars: false,
+  click: true
+};
+
+var scroll1 = new IScroll(&#39;.test .scroll1&#39;, iscrollOpts);
+var scroll2 = new IScroll(&#39;.test .scroll2&#39;, iscrollOpts);
+
+scroll2.on(&#39;beforeScrollStart&#39;, function(e) {
+  scroll1.disable();;
+
+});
+
+scroll2.on(&#39;scrollEnd&#39;, function(e) {
+  scroll1.enable();
+});
+</code></pre>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/06/14/javascript-cookie/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>Javascript 쿠키 사용하기, 오늘 날짜에만 다시 안보이게 하기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/06/29/history-restore-scroll/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>뒤로가기에서 스크롤 위치는 저장하지 않기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/06/20/iscroll-inside-iscroll/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

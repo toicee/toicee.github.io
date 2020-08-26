@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>모바일에서 유튜브, 구글지도 아이프레임 모서리 둥굴게(border-radius) 적용하기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/06/26/border-radius-for-iframe-at-mobile/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="디자인상 페이지내 모든 오브젝트에 모서리 둥굴게 처리가 필요했고 유튜브랑 구글지도를 보통 iframe으로 넣다보니 프레임 자체에 모서리 둥굴게 처리하면 이것 또한 문제 없이 되지 않을까 싶었는데 데스크톱에서는 문제가 없었으나 모바일에서는 둥글어지지 않는 문제가 있었다. 다행히 쉽게 구글링 되었는데   .video {     position: relative">
+<meta name="keywords" content="CSS,youtube,iframe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="모바일에서 유튜브, 구글지도 아이프레임 모서리 둥굴게(border-radius) 적용하기">
+<meta property="og:url" content="https://note.toice.net/2020/06/26/border-radius-for-iframe-at-mobile/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="디자인상 페이지내 모든 오브젝트에 모서리 둥굴게 처리가 필요했고 유튜브랑 구글지도를 보통 iframe으로 넣다보니 프레임 자체에 모서리 둥굴게 처리하면 이것 또한 문제 없이 되지 않을까 싶었는데 데스크톱에서는 문제가 없었으나 모바일에서는 둥글어지지 않는 문제가 있었다. 다행히 쉽게 구글링 되었는데   .video {     position: relative">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-08-20T22:14:14.723Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="모바일에서 유튜브, 구글지도 아이프레임 모서리 둥굴게(border-radius) 적용하기">
+<meta name="twitter:description" content="디자인상 페이지내 모든 오브젝트에 모서리 둥굴게 처리가 필요했고 유튜브랑 구글지도를 보통 iframe으로 넣다보니 프레임 자체에 모서리 둥굴게 처리하면 이것 또한 문제 없이 되지 않을까 싶었는데 데스크톱에서는 문제가 없었으나 모바일에서는 둥글어지지 않는 문제가 있었다. 다행히 쉽게 구글링 되었는데   .video {     position: relative">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>모바일에서 유튜브, 구글지도 아이프레임 모서리 둥굴게(border-radius) 적용하기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-06-26T13:42:22+09:00">2020년 6월 26일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/iframe/">iframe</a><a class="tag-link" href="/tags/youtube/">youtube</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>디자인상 페이지내 모든 오브젝트에 모서리 둥굴게 처리가 필요했고 유튜브랑 구글지도를 보통 <code>iframe</code>으로 넣다보니 프레임 자체에 모서리 둥굴게 처리하면 이것 또한 문제 없이 되지 않을까 싶었는데 데스크톱에서는 문제가 없었으나 모바일에서는 둥글어지지 않는 문제가 있었다. 다행히 쉽게 구글링 되었는데</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-SCSS">.video {
+    position: relative;
+    padding-top: percentage(9 &#x2F; 16);
+    border-radius: 1rem;
+    overflow: hidden;
+    mask-image: radial-gradient(#fff, #000);
+}
+</code></pre>
+<p>와 같이 <code>mask-image</code>를 사용하는걸로 구현이 가능했다. IE에서는 안되지만 어차피 모바일에 적용하는 목적이라 상관없다.</p>
+<h4 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h4><ul>
+<li><a href="https://stackoverflow.com/questions/45425044/rounded-corners-for-an-iframe-not-working-in-safari" target="_blank" rel="noopener">https://stackoverflow.com/questions/45425044/rounded-corners-for-an-iframe-not-working-in-safari</a></li>
+<li><a href="https://shlee1353.github.io/2019/07/15/css-clip-mask/" target="_blank" rel="noopener">https://shlee1353.github.io/2019/07/15/css-clip-mask/</a></li>
+</ul>
+<h4 id="잡담"><a href="#잡담" class="headerlink" title="잡담"></a>잡담</h4><p>나랑 경력이 비슷한 동일직군의 사람은 공감할텐데<del>내 노력이 부족했을 수도 있긴한데</del> CSS3를 공부하던 시점에 실 업무에서는 CSS3를 사용할 수 없었기 때문에(모바일도 아이폰3, 옴니아 시절이라 모바일에서도 안되는게 많았다) 공부했어도 잊어버리거나 이 경우처럼 아예 생소한 경우도 있는 것 같다. 마치 알고리즘 문제를 신입 개발자가 훨씬 잘 푸는 것처럼 CSS3도 결국 신입UI개발자가 더 잘하는(해야되는) 항목이 아닐지.. 어쨋거나 구브라우저가 많이 없어지고 사실상의 꼼수로 해결하기 위해 삽질하던 시절이 거의 지나간 것 같아 좋은 작업환경이 된 것 같다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/06/19/google-map-place-opening-hours-open-now-to-isOpen-func/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>구글 지도 Places opening_hours.open_now 대신 isOpen() 함수 쓰기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/07/17/style-content-attr/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>CSS Content에 attr, url 넣기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/06/26/border-radius-for-iframe-at-mobile/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

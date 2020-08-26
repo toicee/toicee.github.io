@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>Node.js 8.x.xLTS에서 10.15.1LTS 대응 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/02/13/legacy-npm-audit-fix/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="팀에서 사용하는 서버의 Node.js 버전이 10점대로 올라가면서 예전부터 사용하고 각각의 사유가 있어 업데이트 하지 못한 일종의 레거시(레거시가 되다니 ㅠㅠ) 프로젝트들이 오류를 내뱉으며 정상 구동이 되지 않았다.가장 큰 문제는 Gulp를 통해 SCSS빌드가 되지 않는 문제였고 gulpfile.js만이라도 팀에서 지속적으로 관리되는 코어와 동일하게 맞추고">
+<meta name="keywords" content="javascript,node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js 8.x.xLTS에서 10.15.1LTS 대응">
+<meta property="og:url" content="https://note.toice.net/2019/02/13/legacy-npm-audit-fix/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="팀에서 사용하는 서버의 Node.js 버전이 10점대로 올라가면서 예전부터 사용하고 각각의 사유가 있어 업데이트 하지 못한 일종의 레거시(레거시가 되다니 ㅠㅠ) 프로젝트들이 오류를 내뱉으며 정상 구동이 되지 않았다.가장 큰 문제는 Gulp를 통해 SCSS빌드가 되지 않는 문제였고 gulpfile.js만이라도 팀에서 지속적으로 관리되는 코어와 동일하게 맞추고">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.569Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js 8.x.xLTS에서 10.15.1LTS 대응">
+<meta name="twitter:description" content="팀에서 사용하는 서버의 Node.js 버전이 10점대로 올라가면서 예전부터 사용하고 각각의 사유가 있어 업데이트 하지 못한 일종의 레거시(레거시가 되다니 ㅠㅠ) 프로젝트들이 오류를 내뱉으며 정상 구동이 되지 않았다.가장 큰 문제는 Gulp를 통해 SCSS빌드가 되지 않는 문제였고 gulpfile.js만이라도 팀에서 지속적으로 관리되는 코어와 동일하게 맞추고">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>Node.js 8.x.xLTS에서 10.15.1LTS 대응</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-02-13T15:14:33+09:00">2019년 2월 13일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/javascript/">javascript</a><a class="tag-link" href="/tags/node-js/">node.js</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>팀에서 사용하는 서버의 Node.js 버전이 10점대로 올라가면서 예전부터 사용하고 각각의 사유가 있어 업데이트 하지 못한 일종의 레거시(레거시가 되다니 ㅠㅠ) 프로젝트들이 오류를 내뱉으며 정상 구동이 되지 않았다.<br>가장 큰 문제는 Gulp를 통해 SCSS빌드가 되지 않는 문제였고 gulpfile.js만이라도 팀에서 지속적으로 관리되는 코어와 동일하게 맞추고, 코어는 HTML, CSS, JS를 다 린트하고 빌드하지만 기존 레거시 프로젝트는 CSS만 빌드하고 자바스크립트는 린트만 하게 되어 있어 오히려 간소해졌다.</p>
+<p>그리고나서 빌드는 성공하는데 깃랩의 파이프라인이 계속 실패 떠서 확인해보니 보안 취약점이라고 나오는 부분들이 잔뜩..</p>
+<p>일단 <code>npm audit</code>을 확인하여 취약하다고 표시된 사항들을 모두 업데이트 해줬다. (<code>package-lock.json</code>의 역할을 잘 몰랐는데 이때 업데이트가 되더라!)</p>
+<p>문제는 시키는대로 했더니 실 사용에 문제가 생긴 프로젝트도 있었다.</p>
+<h3 id="Express-3-x-x-gt-Express-4-x-x"><a href="#Express-3-x-x-gt-Express-4-x-x" class="headerlink" title="Express 3.x.x -&gt; Express 4.x.x"></a>Express 3.x.x -&gt; Express 4.x.x</h3><p>가장 오래된 프로젝트에서 가장 큰 문제가 발생했는데 Express 업데이트로 인한 사항이었고 오류 내역을 보니 <code>app.router</code>를 사용한 부분이 문제가 되었는데 이 부분을 주석처리해봤더니 허무하게 바로 해결되버렸다.<br>당시엔 큰 관심을 두지 않았지만 <code>Express</code> 3점대에서 4점대로 올리는 문제가 가볍지 않다고 하였던걸로 기억이 되서 이상하다 판단이 들어 조금 더 찾아보니 <code>app.router</code>는 4점대부터는 굳이 지정해주지 않는다고 되어 있다. 혹시 몰라 여러 방면으로 테스트 해봤지만 다행히 해당 프로젝트에도 큰 문제가 발생하지 않아 이렇게 마무리. (<a href="https://github.com/expressjs/express/wiki/Migrating-from-3.x-to-4.x#approutes" target="_blank" rel="noopener">참고글</a>)</p>
+<h3 id="UA-Parser"><a href="#UA-Parser" class="headerlink" title="UA-Parser"></a>UA-Parser</h3><p>UA-Parser 디펜던시는 4년째 관리되지 않고 있고, 기존 프로젝트에 UA-Parser 사용 목적이 꼭 필요한 사항이 아니라서 관련 사항들 제거해버렸다. (최신 코어엔 없는 들어가있지도 않은 역할)</p>
+<h3 id="Jade"><a href="#Jade" class="headerlink" title="Jade"></a>Jade</h3><p>Jade 디펜던시에서 사용중인 uglify.js가 문제되어 pug로 바꿔주었는데 pug와 Jade가 정말 완전히 동일한 것인지 디펜던시와 세팅 바꾸고 확장자만 바꾸는 것으로 작업이 끝났다. (조금 더 엄격한지 애초에 잘못 작업된 문법에만 오류를 뱉음..)<br>근데 gitlab에서 히스토리 관리 문제와 취약점이 low 레벨이어서 서버내 빌드에 문제가 없는 점을 들어 pug로 교체하는 것은 보류하기로 결정되어 다시 돌렸다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/01/31/clien-jirum-crawling-python/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>파이썬으로 클리앙 알뜰구매 크롤링 하(려해보)기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/03/05/javascript-before-numbering/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>1부터 다음 줄에 앞줄의 숫자와 해당 숫자의 갯수 세며 반복하기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/02/13/legacy-npm-audit-fix/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

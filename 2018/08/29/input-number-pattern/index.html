@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>입력필드에서 숫자 키패드 부르기(모바일) - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/08/29/input-number-pattern/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="INPUT에서 숫자 패드를 부르기   &amp;lt;input type=&amp;quot;text&amp;quot; pattern=&amp;quot;\d*&amp;quot;&amp;gt;    &amp;lt;input type=&amp;quot;text&amp;quot; pattern=&amp;quot;[0-9]*&amp;quot;&amp;gt;  새삼스럽게 이 글을 쓰는 이유는 그동안 주구장창 [0-9]*를 썼었는데.. \d* 쓸 생각을">
+<meta name="keywords" content="javascript,mobile,정규식">
+<meta property="og:type" content="article">
+<meta property="og:title" content="입력필드에서 숫자 키패드 부르기(모바일)">
+<meta property="og:url" content="https://note.toice.net/2018/08/29/input-number-pattern/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="INPUT에서 숫자 패드를 부르기   &amp;lt;input type=&amp;quot;text&amp;quot; pattern=&amp;quot;\d*&amp;quot;&amp;gt;    &amp;lt;input type=&amp;quot;text&amp;quot; pattern=&amp;quot;[0-9]*&amp;quot;&amp;gt;  새삼스럽게 이 글을 쓰는 이유는 그동안 주구장창 [0-9]*를 썼었는데.. \d* 쓸 생각을">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="입력필드에서 숫자 키패드 부르기(모바일)">
+<meta name="twitter:description" content="INPUT에서 숫자 패드를 부르기   &amp;lt;input type=&amp;quot;text&amp;quot; pattern=&amp;quot;\d*&amp;quot;&amp;gt;    &amp;lt;input type=&amp;quot;text&amp;quot; pattern=&amp;quot;[0-9]*&amp;quot;&amp;gt;  새삼스럽게 이 글을 쓰는 이유는 그동안 주구장창 [0-9]*를 썼었는데.. \d* 쓸 생각을">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>입력필드에서 숫자 키패드 부르기(모바일)</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-08-29T13:19:00+09:00">2018년 8월 29일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/javascript/">javascript</a><a class="tag-link" href="/tags/mobile/">mobile</a><a class="tag-link" href="/tags/정규식/">정규식</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p><code>INPUT</code>에서 숫자 패드를 부르기</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;input type=&quot;text&quot; pattern=&quot;\d*&quot;&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;input type=&quot;text&quot; pattern=&quot;[0-9]*&quot;&gt;
+</code></pre>
+<p>새삼스럽게 이 글을 쓰는 이유는 그동안 주구장창 <code>[0-9]*</code>를 썼었는데.. <code>\d*</code> 쓸 생각을 왜 못했을까 하는 생각에…<br>정규식 좀 계속 관심 갖으려 노력..</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/08/16/chrome-iscroll-touch-action-not-working/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>크롬에서 iScroll 터치 안되는 문제</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/10/04/mobile-inspector-weinre/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>모바일 디버깅(개발자 도구) - weinre</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/08/29/input-number-pattern/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

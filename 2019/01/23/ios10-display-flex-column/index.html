@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>iOS 10점대에서 flex-direction: column 사용시 주의사항 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/01/23/ios10-display-flex-column/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="제목을 어떻게 해야될지 모르겠다.요약이 안되는데 장황하게 이야기하면 flex 사용시 방향을 열(column)로 했을 때 iOS 10버전대에서 해당 영역이 통으로 보이지 않을 수 있다. flex-wrap: wrap을 사용시에도 문제가 되는 상황이 있을진 모르겠지만 나 같은 경우는 일단 행과 열의 방향을 바꾸는 flex-direction: column을 사용해">
+<meta name="keywords" content="CSS,iOS,bug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 10점대에서 flex-direction: column 사용시 주의사항">
+<meta property="og:url" content="https://note.toice.net/2019/01/23/ios10-display-flex-column/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="제목을 어떻게 해야될지 모르겠다.요약이 안되는데 장황하게 이야기하면 flex 사용시 방향을 열(column)로 했을 때 iOS 10버전대에서 해당 영역이 통으로 보이지 않을 수 있다. flex-wrap: wrap을 사용시에도 문제가 되는 상황이 있을진 모르겠지만 나 같은 경우는 일단 행과 열의 방향을 바꾸는 flex-direction: column을 사용해">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 10점대에서 flex-direction: column 사용시 주의사항">
+<meta name="twitter:description" content="제목을 어떻게 해야될지 모르겠다.요약이 안되는데 장황하게 이야기하면 flex 사용시 방향을 열(column)로 했을 때 iOS 10버전대에서 해당 영역이 통으로 보이지 않을 수 있다. flex-wrap: wrap을 사용시에도 문제가 되는 상황이 있을진 모르겠지만 나 같은 경우는 일단 행과 열의 방향을 바꾸는 flex-direction: column을 사용해">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>iOS 10점대에서 flex-direction: column 사용시 주의사항</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-01-23T14:15:00+09:00">2019년 1월 23일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/bug/">bug</a><a class="tag-link" href="/tags/iOS/">iOS</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>제목을 어떻게 해야될지 모르겠다.<br>요약이 안되는데 장황하게 이야기하면 flex 사용시 방향을 열(column)로 했을 때 iOS 10버전대에서 해당 영역이 통으로 보이지 않을 수 있다.</p>
+<p><code>flex-wrap: wrap</code>을 사용시에도 문제가 되는 상황이 있을진 모르겠지만 나 같은 경우는 일단 행과 열의 방향을 바꾸는 <code>flex-direction: column</code>을 사용해서 문제가 된 사항인데,</p>
+<p>결과적으로 <a href="https://bugs.webkit.org/show_bug.cgi?id=136041" target="_blank" rel="noopener">알려진 버그</a>였는데 iOS 10점대에서 <code>display: flex</code>사용시 <code>min-width</code>이 정상 작동하지 않는다. <code>flex-basis</code>로 조절해야된다는 내용인데..</p>
+<p>이렇게 버그탓으로 마무리 지을 수 있을 줄 알았는데 확실한 해결법을 알았으니 우선 조치를 취했고 후 관련 정리를 하고자 조금 더 알아보니 내 잘못도 없다고 볼 수 없었다. 형태를 대충 요약하면…</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-html">&lt;div class=&quot;wrapper&quot;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    자유영역
+  &lt;&#x2F;div&gt;
+  &lt;div class=&quot;footer&quot;&gt;
+    고정영역
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.wrapper {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    max-height: 95%;
+    max-width: 63rem;
+
+    .content {
+        flex: 1;
+        overflow: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .footer {
+        height: 9rem;
+    }
+}
+</code></pre>
+<p>이런식으로 <code>content</code> 영역이 유연하게 높이가 변동되도록 처리하면서…</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.wrapper {
+    ...
+    .content {
+        flex: auto;
+    }
+    ...
+}
+</code></pre>
+<p><code>flex-basis</code> 값이 <code>auto</code>여야 하는데 <code>flex</code>에 <code>1</code>을 넣는 바람에 <code>flex-basis</code>값에 <code>0</code>이 들어가게 되었고,<br>iOS 10점대에서 아예 공간이 안잡히는 문제 발생했다. <code>flex-direction</code>이 <code>column</code>이 아니었으면 안보이는 문제까지 생기진 않았을테니 흔하게 겪는 일은 아닌 것 같다. 문제는 iOS 11이상과 안드로이드에서는 <code>flex-basis</code>가 <code>0</code>으로 잡혀도 문제가 없다.</p>
+<p><code>flex-basis</code>가 <code>0</code>일때 꼭 아무런 영역도 잡히지 않아야 되는것은 아니니 버그반 내잘못반 정도로 정리하면 될까.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/01/23/regexp-search-with-vscode/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>VSCode에서 정규식 검색으로 같은 패턴 일괄 바꾸기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/01/31/clien-jirum-crawling-python/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>파이썬으로 클리앙 알뜰구매 크롤링 하(려해보)기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/01/23/ios10-display-flex-column/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

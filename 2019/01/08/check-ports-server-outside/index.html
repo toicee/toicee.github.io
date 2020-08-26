@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>외부에서 서버 포트가 열려있는지 확인 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/01/08/check-ports-server-outside/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="ssh: connect to host [#SECRET#] port 22: Connection refused  팀 깃랩서버에 푸쉬했는데 파이프라인이 돌지 않아 문제 확인을 위해 터미널로 접속했더니 위처럼 단칼에 접속이 안되서,푸쉬와 동시에 서버가 죽었나 했는데 다른 포트의 깃랩 사이트 자체는 또 열려서 포트체크를 해볼 필요가 생겼다.그런데 왠지 당연히(">
+<meta name="keywords" content="ssh,server,port">
+<meta property="og:type" content="article">
+<meta property="og:title" content="외부에서 서버 포트가 열려있는지 확인">
+<meta property="og:url" content="https://note.toice.net/2019/01/08/check-ports-server-outside/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="ssh: connect to host [#SECRET#] port 22: Connection refused  팀 깃랩서버에 푸쉬했는데 파이프라인이 돌지 않아 문제 확인을 위해 터미널로 접속했더니 위처럼 단칼에 접속이 안되서,푸쉬와 동시에 서버가 죽었나 했는데 다른 포트의 깃랩 사이트 자체는 또 열려서 포트체크를 해볼 필요가 생겼다.그런데 왠지 당연히(">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.568Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="외부에서 서버 포트가 열려있는지 확인">
+<meta name="twitter:description" content="ssh: connect to host [#SECRET#] port 22: Connection refused  팀 깃랩서버에 푸쉬했는데 파이프라인이 돌지 않아 문제 확인을 위해 터미널로 접속했더니 위처럼 단칼에 접속이 안되서,푸쉬와 동시에 서버가 죽었나 했는데 다른 포트의 깃랩 사이트 자체는 또 열려서 포트체크를 해볼 필요가 생겼다.그런데 왠지 당연히(">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>외부에서 서버 포트가 열려있는지 확인</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-01-08T10:12:00+09:00">2019년 1월 8일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/port/">port</a><a class="tag-link" href="/tags/server/">server</a><a class="tag-link" href="/tags/ssh/">ssh</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle">
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-shell"> ssh: connect to host [#SECRET#] port 22: Connection refused
+</code></pre>
+<p>팀 깃랩서버에 푸쉬했는데 파이프라인이 돌지 않아 문제 확인을 위해 터미널로 접속했더니 위처럼 단칼에 접속이 안되서,<br>푸쉬와 동시에 서버가 죽었나 했는데 다른 포트의 깃랩 사이트 자체는 또 열려서 포트체크를 해볼 필요가 생겼다.<br>그런데 왠지 당연히(?) 서버의 열려있는 포트를 외부에서 확인할 수 없을 줄 알았는데 좀 알아보니 가능함.</p>
+<h4 id="특정포트-확인하기"><a href="#특정포트-확인하기" class="headerlink" title="특정포트 확인하기"></a>특정포트 확인하기</h4>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-shell">nc 도메인(IP) -z 22
+</code></pre>
+<p>그런데 이렇게 하면 열려있는 포트는 메시지가 오지만 안열려있는 포트는 아무 메시지도 없어서, 명령어가 잘못된건가 오해를 하게 된다.</p>
+<h4 id="포트-범위를-지정하여-확인하기"><a href="#포트-범위를-지정하여-확인하기" class="headerlink" title="포트 범위를 지정하여 확인하기"></a>포트 범위를 지정하여 확인하기</h4>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-shell">nc 도메인(IP) -z 1-10000
+</code></pre>
+<p>아예 이렇게 열려있는 포트 전체를 체크해보는게 겸사겸사 좋은듯.</p>
+<p>(근데 정작 이 문제는 22포트가 안되니 서버 밖에선 해결할 길이 없었다…)</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/12/20/protect-double-execution/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>자바스크립트로 이중 클릭, 이중 터치 실행방지</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/01/23/regexp-search-with-vscode/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>VSCode에서 정규식 검색으로 같은 패턴 일괄 바꾸기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/01/08/check-ports-server-outside/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

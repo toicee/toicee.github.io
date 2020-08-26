@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>내부 팝업을 띄운채로 팝업과 Body 각각의 부분만 스크롤하기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/05/24/body-modal-each-scroll/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="스크롤 가능한 레이어 팝업 스크롤시 바디 스크롤 막기가 내부 팝업의 스크롤만 가능하면 되는 비교적 가벼운 문제였다면 이번에 생긴 요청사항은 내부 팝업의 스크롤이 바디 스크롤에 영향을 주면 안되지만 각각을 스크롤하면 스크롤이 되야 하는 지난번에 했던 바디 스크롤 자체를 스크롤 할게 없도록 만드는 방식을 쓸 수 없는 상황이었다.  결론부터 이야기하면 iScro">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="내부 팝업을 띄운채로 팝업과 Body 각각의 부분만 스크롤하기">
+<meta property="og:url" content="https://note.toice.net/2018/05/24/body-modal-each-scroll/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="스크롤 가능한 레이어 팝업 스크롤시 바디 스크롤 막기가 내부 팝업의 스크롤만 가능하면 되는 비교적 가벼운 문제였다면 이번에 생긴 요청사항은 내부 팝업의 스크롤이 바디 스크롤에 영향을 주면 안되지만 각각을 스크롤하면 스크롤이 되야 하는 지난번에 했던 바디 스크롤 자체를 스크롤 할게 없도록 만드는 방식을 쓸 수 없는 상황이었다.  결론부터 이야기하면 iScro">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="내부 팝업을 띄운채로 팝업과 Body 각각의 부분만 스크롤하기">
+<meta name="twitter:description" content="스크롤 가능한 레이어 팝업 스크롤시 바디 스크롤 막기가 내부 팝업의 스크롤만 가능하면 되는 비교적 가벼운 문제였다면 이번에 생긴 요청사항은 내부 팝업의 스크롤이 바디 스크롤에 영향을 주면 안되지만 각각을 스크롤하면 스크롤이 되야 하는 지난번에 했던 바디 스크롤 자체를 스크롤 할게 없도록 만드는 방식을 쓸 수 없는 상황이었다.  결론부터 이야기하면 iScro">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>내부 팝업을 띄운채로 팝업과 Body 각각의 부분만 스크롤하기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-05-24T21:08:25+09:00">2018년 5월 24일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p><a href="/2018/01/15/2018-01-15-layer-popup-with-body-scroll-disable/">스크롤 가능한 레이어 팝업 스크롤시 바디 스크롤 막기</a>가 내부 팝업의 스크롤만 가능하면 되는 비교적 가벼운 문제였다면 이번에 생긴 요청사항은 내부 팝업의 스크롤이 바디 스크롤에 영향을 주면 안되지만 각각을 스크롤하면 스크롤이 되야 하는 지난번에 했던 바디 스크롤 자체를 스크롤 할게 없도록 만드는 방식을 쓸 수 없는 상황이었다.</p>
+<blockquote>
+<p>결론부터 이야기하면 iScroll 플러그인 썼다.</p>
+</blockquote>
+<p>아래 방법은 레이어를 넘어 아래에 있는 바디 영역이 움직이는 상황이 이미 레이어 내부 스크롤이 제일 아래로 내려가 있는데 아래로 무브하거나 이미 제일 위에 있는데 위 방향으로 무브할 때 바디 스크롤이 움직인다는 것을 확인하여 이미 맨위거나, 맨 아래면 터치무브가 해당 방향으로 발생하면 실행되지 않도록 하면 될거라고 생각하고 작성했다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">$.fn.disableOverScroll = function(options) {
+  var defaults = {
+    gap: 0,
+    excludeEl: false &#x2F;&#x2F; selector
+  };
+
+  var opts = $.extend({}, defaults, options);
+  var touchY;
+  var pass = 0;
+
+  $(this).on({
+    touchstart: function(e) {
+      touchY = e.originalEvent.touches[0].screenY;
+
+      if (opts.excludeEl) {
+        pass = $(e.target).closest(opts.excludeEl).length;
+      }
+    },
+    touchmove: function(e) {
+      if (pass) {
+        return;
+      }
+
+      var $this = $(this);
+
+      var $metas = {
+        h: $this.height(),
+        t: $this.prop(&#39;scrollTop&#39;),
+        s: $this.prop(&#39;scrollHeight&#39;)
+      };
+
+      var $pos = {
+        top: $metas.t === 0,
+        btm: $metas.s === $metas.h + $metas.t + opts.gap
+      };
+
+      var directionTop = touchY - e.originalEvent.touches[0].screenY &lt; 0;
+
+      var disableScroll = function() {
+        if (pass) {
+          pass = 0;
+          return;
+        }
+
+        $(doc).off(&#39;touchmove&#39;);
+        $(doc).on(&#39;touchmove&#39;, function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+        });
+
+        setTimeout(function() {
+          $(doc).off(&#39;touchmove&#39;);
+        }, 0);
+      };
+
+      if ($pos.top &amp;&amp; directionTop) {
+        disableScroll();
+      } else if ($pos.btm &amp;&amp; !directionTop) {
+        disableScroll();
+      } else {
+        $(doc).off(&#39;touchmove&#39;);
+      }
+    },
+    touchend: function() {
+      $(doc).off(&#39;touchmove&#39;);
+    }
+  });
+};
+
+$(&#39;.layerBody&#39;).disableOverScroll({
+  gap: 30
+});
+</code></pre>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.layerBody {
+  position: relative;
+  height: calc(100% - #{$headerHeight});
+  padding-bottom: 3rem;
+  overflow: auto;
+  border-top: .2rem solid #333;
+  box-shadow: 0 -.5rem .5rem rgba(0, 0, 0, .1);
+  background-color: #fff;
+}
+</code></pre>
+<p>이렇게 해보니 안드로이드에서 안되는걸 알게 됨.. 그렇다면 안드로이드에서만 가림막을 세워보자고 쉽게 생각함.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">$.fn.disableOverScroll = function(options) {
+  var defaults = {
+    gap: 0,
+    excludeEl: false &#x2F;&#x2F; selector ex: &#39;.selector&#39;
+  };
+
+  var opts = $.extend({}, defaults, options);
+  var touchY;
+  var pass = 0;
+
+  var $blocker = $(&#39;#blocker&#39;);
+
+  var move = 0;
+  var $pos;
+  var directionTop;
+
+  var isAndroid = function() {
+    var win32 = &#x2F;Win32&#x2F;.test(navigator.platform);
+    var iOS = &#x2F;iPhone|iPad|iPod&#x2F;.test(navigator.platform);
+
+    var isAndroid = win32 || iOS ? false : true;
+
+    return isAndroid;
+  };
+
+  $blocker.on({
+    touchstart: function(e) {
+      touchY = e.originalEvent.touches[0].screenY;
+      move = 0;
+    },
+    touchmove: function(e) {
+      e.preventDefault();
+      directionTop = touchY - e.originalEvent.touches[0].screenY &lt; 0;
+      move = 0;
+      if ($pos.top &amp;&amp; directionTop) {
+        move = 1;
+      } else if ($pos.btm &amp;&amp; !directionTop) {
+        move = 1;
+      }
+    },
+    touchend: function() {
+      if (!move) {
+        $(this).removeClass(&#39;on&#39;);
+      }
+      move = 0;
+    }
+  });
+
+  $(this).on({
+    touchstart: function(e) {
+      touchY = e.originalEvent.touches[0].screenY;
+
+      if (opts.excludeEl) {
+        pass = $(e.target).closest(opts.excludeEl).length;
+      }
+    },
+    touchmove: function(e) {
+      if (pass) {
+        return;
+      }
+
+      var $this = $(this);
+
+      var $metas = {
+        h: $this.height(),
+        t: $this.prop(&#39;scrollTop&#39;),
+        s: $this.prop(&#39;scrollHeight&#39;)
+      };
+
+      $pos = {
+        top: $metas.t === 0,
+        btm: $metas.s === $metas.h + $metas.t + opts.gap
+      };
+
+      directionTop = touchY - e.originalEvent.touches[0].screenY &lt; 0;
+
+      var disableScroll = function() {
+        if (pass) {
+          pass = 0;
+          return;
+        }
+
+        $(doc).off(&#39;touchmove&#39;);
+        $(doc).on(&#39;touchmove&#39;, function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+        });
+
+        setTimeout(function() {
+          $(doc).off(&#39;touchmove&#39;);
+        }, 0);
+
+        if (isAndroid()) {
+          $blocker.addClass(&#39;on&#39;);
+        }
+      };
+
+      if ($pos.top &amp;&amp; directionTop) {
+        disableScroll();
+      } else if ($pos.btm &amp;&amp; !directionTop) {
+        disableScroll();
+      } else {
+        $(doc).off(&#39;touchmove&#39;);
+        if (isAndroid()) {
+          $blocker.removeClass(&#39;on&#39;);
+        }
+      }
+    },
+    touchend: function() {
+      $(doc).off(&#39;touchmove&#39;);
+    }
+  });
+}
+</code></pre>
+<p>그렇게 되는 것 같았지만 하필 보고 있던 테스트 아이폰이 iOS 10버전이었고 내 폰(iOS 11.4)으로 우연히 한번 보다가 안되는걸로 확인되어 부랴부랴 다른 아이폰으로 확인해보니 iOS 11.3(추정) 이상부턴 이게 아예 통하지 않는다는걸 알게 됐다.. 어떻게 보면 이렇게 급하게 들어간 코드는 후에 꼭 문제가 생겨서 어쩌면 다행일지도 모르겠다.</p>
+<p>결국은 이렇게 바디, 레이어 각각 따로 스크롤이 가능해야되는 이슈에는 모바일인 경우 iScroll을 쓸 수 밖에 없는건가… iScroll을 최대한 안쓰려고 용썼던거라 하는 수 없이 iScroll 플러그인을 사용하여 전달했다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/05/03/script-shuffle/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>자바스크립트 배열 랜덤 구성하기 - 생각의 흐름</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/06/11/countdown-timer-js/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>카운트다운 타이머 스크립트</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/05/24/body-modal-each-scroll/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

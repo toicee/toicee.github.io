@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>iOS 배경 고정하는 방법 background-attachment: fixed 대체 방법 고민 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2017/09/12/try-mobile-background-attachment-fixed/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="iOS에서 배경 고정하는 방법에 대한 고민 후 결론 background-attachment: fixed 사용  .bg {     background: url(&amp;quot;#{$imgPath}&amp;#x2F;bg.png&amp;quot;) no-repeat;     background-attachment: fixed;     ... }  이 방법이 정상적인 방법이지만 현재">
+<meta name="keywords" content="javascript,CSS,mobil,iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 배경 고정하는 방법 background-attachment: fixed 대체 방법 고민">
+<meta property="og:url" content="https://note.toice.net/2017/09/12/try-mobile-background-attachment-fixed/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="iOS에서 배경 고정하는 방법에 대한 고민 후 결론 background-attachment: fixed 사용  .bg {     background: url(&amp;quot;#{$imgPath}&amp;#x2F;bg.png&amp;quot;) no-repeat;     background-attachment: fixed;     ... }  이 방법이 정상적인 방법이지만 현재">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.566Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 배경 고정하는 방법 background-attachment: fixed 대체 방법 고민">
+<meta name="twitter:description" content="iOS에서 배경 고정하는 방법에 대한 고민 후 결론 background-attachment: fixed 사용  .bg {     background: url(&amp;quot;#{$imgPath}&amp;#x2F;bg.png&amp;quot;) no-repeat;     background-attachment: fixed;     ... }  이 방법이 정상적인 방법이지만 현재">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>iOS 배경 고정하는 방법 background-attachment: fixed 대체 방법 고민</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2017-09-12T16:11:00+09:00">2017년 9월 12일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/iOS/">iOS</a><a class="tag-link" href="/tags/javascript/">javascript</a><a class="tag-link" href="/tags/mobil/">mobil</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>iOS에서 배경 고정하는 방법에 대한 고민 후 결론</p>
+<h3 id="background-attachment-fixed-사용"><a href="#background-attachment-fixed-사용" class="headerlink" title="background-attachment: fixed 사용"></a>background-attachment: fixed 사용</h3>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-css">.bg {
+    background: url(&quot;#{$imgPath}&#x2F;bg.png&quot;) no-repeat;
+    background-attachment: fixed;
+    ...
+}
+</code></pre>
+<p>이 방법이 정상적인 방법이지만 현재 확인되는 바로는 iOS11에서도 Safari와 Chrome에서는 지원하지 않음.</p>
+<h3 id="배경고정용-엘리먼트-사용"><a href="#배경고정용-엘리먼트-사용" class="headerlink" title="배경고정용 엘리먼트 사용"></a>배경고정용 엘리먼트 사용</h3><p>차선책으로 움직일 엘리먼트를 하나 만들고 그 엘리먼트를 스크립트로 직접 움직이는 방법</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">  $.fn.bgMove = function() {
+    var $this = $(this);
+
+    if (!$this.length) {
+      return;
+    }
+
+    var bgEl = $this.find(&#39;.moveBG&#39;);
+    var $headerMenu = $(&#39;.pageHeader&#39;);
+
+    var scrollEvent = function() {
+      var $win = $(this);
+
+      var metas = {
+        wt: $win.scrollTop(),
+        wh: $win.innerHeight(),
+        tt: $this.offset().top,
+        th: $this.height()
+      };
+
+      if (metas.wt + metas.wh &gt; metas.tt || metas.wt &lt; metas.tt + metas.th) {
+        var moveScroll = metas.wt - metas.tt + $headerMenu.height();
+        moveScroll = Math.abs(moveScroll) &gt; metas.wh ? metas.wh : moveScroll;
+
+        bgEl
+          .css(&#39;height&#39;, metas.wh)
+          .velocity({
+            translateY: moveScroll
+          }, 0);
+      }
+    };
+
+    $(win).on(&#39;scroll&#39;, scrollEvent);
+  };
+
+  $(&#39;.moveBG&#39;).bgMove();
+</code></pre>
+<p>높이는 jQuery CSS로 지정했지만 직접적으로 움직이는 부분에서 속도면에서 나은 <a href="http://velocityjs.org/" target="_blank" rel="noopener">Velocity.js</a>를 사용.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2017/06/23/using-transition-cubic-bezier/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>CSS3 cubic-bezier 를 이용한 transition 효과</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2017/09/13/iOS-double-touch-zoom/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>iOS 두번 탭 확대 방지</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2017/09/12/try-mobile-background-attachment-fixed/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

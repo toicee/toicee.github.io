@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>윈도우 크롬 셀렉트박스 스타일(CSS) 옵션까지 상속 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/03/23/form-select-option-style-in-windows/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="운좋게 크롬만 고려하면 되는 작업이 있었는데 요청사항 중에 셀렉트박스에 특정 값이 선택되면 셀렉트박스 텍스트 컬러를 변경해달라는 줄 알고 작업한 내용이 있었다. 그런데 알고보니 셀렉트박스를 눌러 보이는 옵션 목록에까지 특정 옵션 값에만 컬러를 변경해달라는 요청이었어서, 그건 별도의 드롭다운 UI로 가져가야한다고 디자인부터 필요하다고 거절 의사를 전달했다.">
+<meta name="keywords" content="chrome,CSS,form,select">
+<meta property="og:type" content="article">
+<meta property="og:title" content="윈도우 크롬 셀렉트박스 스타일(CSS) 옵션까지 상속">
+<meta property="og:url" content="https://note.toice.net/2020/03/23/form-select-option-style-in-windows/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="운좋게 크롬만 고려하면 되는 작업이 있었는데 요청사항 중에 셀렉트박스에 특정 값이 선택되면 셀렉트박스 텍스트 컬러를 변경해달라는 줄 알고 작업한 내용이 있었다. 그런데 알고보니 셀렉트박스를 눌러 보이는 옵션 목록에까지 특정 옵션 값에만 컬러를 변경해달라는 요청이었어서, 그건 별도의 드롭다운 UI로 가져가야한다고 디자인부터 필요하다고 거절 의사를 전달했다.">
+<meta property="og:locale" content="KO">
+<meta property="og:image" content="https://note.toice.net/images/2020/03/23/selectOptionColorMacOS.png">
+<meta property="og:image" content="https://note.toice.net/images/2020/03/23/formSelectColorWindows.png">
+<meta property="og:image" content="https://note.toice.net/images/2020/03/23/formOptionColorWindows.png">
+<meta property="og:updated_time" content="2020-08-22T07:39:05.847Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="윈도우 크롬 셀렉트박스 스타일(CSS) 옵션까지 상속">
+<meta name="twitter:description" content="운좋게 크롬만 고려하면 되는 작업이 있었는데 요청사항 중에 셀렉트박스에 특정 값이 선택되면 셀렉트박스 텍스트 컬러를 변경해달라는 줄 알고 작업한 내용이 있었다. 그런데 알고보니 셀렉트박스를 눌러 보이는 옵션 목록에까지 특정 옵션 값에만 컬러를 변경해달라는 요청이었어서, 그건 별도의 드롭다운 UI로 가져가야한다고 디자인부터 필요하다고 거절 의사를 전달했다.">
+<meta name="twitter:image" content="https://note.toice.net/images/2020/03/23/selectOptionColorMacOS.png">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>윈도우 크롬 셀렉트박스 스타일(CSS) 옵션까지 상속</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-03-23T16:19:12+09:00">2020년 3월 23일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/chrome/">chrome</a><a class="tag-link" href="/tags/form/">form</a><a class="tag-link" href="/tags/select/">select</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>운좋게 크롬만 고려하면 되는 작업이 있었는데 요청사항 중에 셀렉트박스에 특정 값이 선택되면 셀렉트박스 텍스트 컬러를 변경해달라는 줄 알고 작업한 내용이 있었다. 그런데 알고보니 셀렉트박스를 눌러 보이는 옵션 목록에까지 특정 옵션 값에만 컬러를 변경해달라는 요청이었어서, 그건 별도의 드롭다운 UI로 가져가야한다고 디자인부터 필요하다고 거절 의사를 전달했다.</p>
+<p>디자인 리소스를 별로 들이지 않는 페이지라 그렇게 넘어갈 줄 알았는데 또 연락이 와서 다시 한번 확인 요청이 와 기본적인 폼요소에서는 스타일링이 불가능하다고 재전달했는데 전화로 기획자가 컬러가 들어간게 보인다고 하여 아무래도 서로 커뮤니케이션 문제가 있는게 아닐까 싶었다.</p>
+<p>결국 자리에서 만나 확인해보니 커뮤니케이션 오류는 아니었고 같은 크롬이어도 운영체제별 차이가 있었다. 폼요소 모양이 다른 건 알고 있었지만 CSS의 영향까지 다를거라고는 생각 못했다.</p>
+<p><img src="/images/2020/03/23/selectOptionColorMacOS.png" alt="macOS - Chrome에서 셀렉트, 옵션에 컬러넣기"></p>
+<p>맥 크롬에서는 이렇게 셀렉트박스 옵션에 전혀 스타일링을 할 수가 없는데…</p>
+<p><img src="/images/2020/03/23/formSelectColorWindows.png" alt="Windows7 - Chrome에서 셀렉트 컬러넣기"></p>
+<p><img src="/images/2020/03/23/formOptionColorWindows.png" alt="Windows7 - Chrome에서 셀렉트 옵션 컬러넣기"></p>
+<p>윈도우 크롬에서는 특정 값일 때 셀렉트에 넣은 컬러가 옵션에까지 상속되어 똑같이 컬러가 적용된 것처럼 보이는 현상이 있었다. 그래서 기획자가 컬러가 들어간게 보이는데 왜 불가능하다고 하냐는 이야기였던거다.</p>
+<p>되돌아보면 폼요소를 쓰니까 브라우저 상관없이 윈도우도 체크했어야 하는데 생각이 짧았다.</p>
+<p>결국 이 작업은 모바일까지 고려해야 하고 모바일에서도 옵션에 스타일링 되지 않기 때문에 결국 이 부분은 디자인 전달받아 드롭다운UI로 만들어 넣을 수 밖에 없었다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/02/14/my-new-mbp16-2019/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>10년만에 맥북 교체, 새 맥북 프로 16인치</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/06/14/algorithm-test/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>알고리즘 테스트 - 정해진 숫자 조합으로 나올 수 있는 소수 찾기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/03/23/form-select-option-style-in-windows/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

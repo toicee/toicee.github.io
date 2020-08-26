@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>카운트다운 타이머 스크립트 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2018/06/11/countdown-timer-js/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="초안코드보기  $.fn.countdown = function(seconds, repeatSeconds, callback) {   var $el = $(this);    var $timeEl = {     m: $el.find(&amp;#39;.minutes&amp;#39;),     s: $el.find(&amp;#39;.seconds&amp;#39;)   };    var times">
+<meta name="keywords" content="javascript,review">
+<meta property="og:type" content="article">
+<meta property="og:title" content="카운트다운 타이머 스크립트">
+<meta property="og:url" content="https://note.toice.net/2018/06/11/countdown-timer-js/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="초안코드보기  $.fn.countdown = function(seconds, repeatSeconds, callback) {   var $el = $(this);    var $timeEl = {     m: $el.find(&amp;#39;.minutes&amp;#39;),     s: $el.find(&amp;#39;.seconds&amp;#39;)   };    var times">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2019-12-31T06:33:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="카운트다운 타이머 스크립트">
+<meta name="twitter:description" content="초안코드보기  $.fn.countdown = function(seconds, repeatSeconds, callback) {   var $el = $(this);    var $timeEl = {     m: $el.find(&amp;#39;.minutes&amp;#39;),     s: $el.find(&amp;#39;.seconds&amp;#39;)   };    var times">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>카운트다운 타이머 스크립트</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2018-06-11T14:43:00+09:00">2018년 6월 11일</time>
+  </dd>
+</dl>
+
+  <dl class="updatedTime">
+    <dt>updated</dt>
+    <dd>
+      <time datetime="2019-12-31T15:33:21+09:00" class="updated">2019년 12월 31일</time>
+    </dd>
+  </dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/javascript/">javascript</a><a class="tag-link" href="/tags/review/">review</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><div class="moreless"><a href="#" class="morelessLauncher" data-expanded-text="초안코드보기">초안코드보기</a><div class="morelessContent"><br><br>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">$.fn.countdown = function(seconds, repeatSeconds, callback) {
+  var $el = $(this);
+
+  var $timeEl = {
+    m: $el.find(&#39;.minutes&#39;),
+    s: $el.find(&#39;.seconds&#39;)
+  };
+
+  var times = {
+    init: Number(seconds),
+    m: 0,
+    s: 0
+  };
+
+  var checkLetters = function(number) {
+    var str = number.toString();
+    var result = number &lt; 10 ? &#39;0&#39; + str : str;
+
+    return result;
+  };
+
+  var changeTime = function($target, a) {
+    $target.html(checkLetters(a));
+  };
+
+  var interval;
+
+  var countDown = function(discountSeconds) {
+    times.init = times.init - discountSeconds;
+    times.m = Math.floor((times.init % (60 * 60)) &#x2F; 60);
+    times.s = Math.floor((times.init % (60 * 60)) % 60);
+
+    changeTime($timeEl.m, times.m);
+    changeTime($timeEl.s, times.s);
+
+    if (times.init === 0) {
+      clearInterval(interval);
+
+      if (callback &amp;&amp; typeof(callback) === &#39;function&#39;) {
+        callback();
+      }
+    }
+  };
+
+  countDown(0);
+
+  interval = setInterval(function() {
+    countDown(repeatSeconds);
+  }, repeatSeconds * 1000);
+};
+
+$(&#39;.countdown .timer&#39;).countdown(180, 1, function() {
+  console.log(&#39;timoeout!&#39;);
+});
+</code></pre><br><br></div></div>
+
+<p>레이어로 전환하며 보이고 안보이고에 따른 시작, 멈춤 처리 추가</p>
+<div class="moreless"><a href="#" class="morelessLauncher" data-expanded-text="두번째코드보기">두번째코드보기</a><div class="morelessContent"><br><br>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">$.fn.countdown = function(seconds, repeatSeconds, callback) {
+  var $el = $(this);
+
+  if (!$el.length) {
+    return;
+  }
+
+  var $timeEl = {
+    m: $el.find(&#39;.minutes&#39;),
+    s: $el.find(&#39;.seconds&#39;)
+  };
+
+  var times = {
+    init: Number(seconds),
+    m: 0,
+    s: 0
+  };
+
+  var checkLetters = function(number) {
+    var str = number.toString();
+    var result = number &lt; 10 ? &#39;0&#39; + str : str;
+
+    return result;
+  };
+
+  var changeTime = function($target, a) {
+    $target.html(checkLetters(a));
+  };
+
+  var interval;
+
+  var countDown = function(discountSeconds) {
+    times.init = times.init - discountSeconds;
+    times.m = Math.floor((times.init % (60 * 60)) &#x2F; 60);
+    times.s = Math.floor((times.init % (60 * 60)) % 60);
+
+    changeTime($timeEl.m, times.m);
+    changeTime($timeEl.s, times.s);
+
+    if (times.init === 0) {
+      clearInterval(interval);
+
+      if (callback &amp;&amp; typeof(callback) === &#39;function&#39;) {
+        callback();
+      }
+    }
+
+    var $isVisible = $el.closest(&#39;.visible&#39;).length;
+
+    if (!$isVisible) {
+      clearInterval(interval);
+    }
+  };
+
+  countDown(0);
+
+  interval = setInterval(function() {
+    countDown(repeatSeconds);
+  }, repeatSeconds * 1000);
+};
+
+$(&#39;.btnSelector&#39;).on(&#39;click&#39;, function(e) {
+  e.preventDefault();
+  $(&#39;.toggleContents&#39;).addClass(&#39;visible&#39;);
+  $(&#39;.countdown .timer&#39;).countdown(180, 1, function() {
+    console.log(&#39;time out!&#39;);
+  });
+});
+</code></pre><br><br></div></div>
+
+<p>보통 나는 예전에 작업한 코드가 있어도 공부할겸, 시간이 지나면 여기저기서 보고 들은게 생기니 이전보다 더 영리한 코드가 나올지도 모른다는 기대감에 이전거를 조금도 참고하지 않고 새로 만든다. 이번에도 새로 만들면서 이전 코드랑 비교를 해보려고 했는데 카운트다운 쓴적이 너무 오래되서 이전에 어디에서 사용했는지 작성했던 코드를 못찾겠어서… 이참에 범용으로 쓸만한건 기록해두기로 했다.</p>
+<h1 id="2019-12-31"><a href="#2019-12-31" class="headerlink" title="2019.12.31"></a>2019.12.31</h1>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">function Timer() {
+  var timer = this;
+
+  timer.init = 600;
+  timer.interval = null;
+  timer.$viewEl = $(&#39;.countdownTimer&#39;);
+  timer.$m = timer.$viewEl.find(&#39;.minutes&#39;);
+  timer.$s = timer.$viewEl.find(&#39;.seconds&#39;);
+  timer.$dataEl = $(&#39;input[name=&quot;timerInit&quot;]&#39;)[0];
+  timer.data = Number(timer.$dataEl.value) || timer.init;
+  timer.m = 0;
+  timer.s = 0;
+
+  timer.toDoubled = function(number) {
+    return number &lt; 10 ? &#39;0&#39; + number : number;
+  };
+
+  timer.calc = function(data) {
+    timer.m = Math.floor((data % (60 * 60)) &#x2F; 60);
+    timer.s = timer.toDoubled(Math.floor((data % (60 * 60)) % 60));
+  };
+
+  timer.view = function() {
+    timer.$dataEl.value = timer.data;
+    timer.$m.text(timer.m);
+    timer.$s.text(timer.s);
+  };
+
+  timer.pause = function() {
+    clearInterval(timer.interval);
+  };
+
+  timer.countdown = function() {
+    if (timer.data &lt;= 0) {
+      timer.pause();
+      return;
+    }
+
+    timer.data--;
+    timer.calc(timer.data);
+    timer.view();
+  };
+
+  timer.stop = function() {
+    timer.pause();
+    timer.data = timer.init;
+    timer.calc(timer.data);
+    timer.view();
+  };
+
+  timer.start = function() {
+    timer.interval = setInterval(timer.countdown, 1000);
+  };
+}
+
+var countdown = new Timer();
+countdown.start();
+</code></pre>
+<p>정말 오랜만에 타이머 쓸일이 있었다. 일단 바쁘니 기록만 남겨둠..</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2018/05/24/body-modal-each-scroll/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>내부 팝업을 띄운채로 팝업과 Body 각각의 부분만 스크롤하기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2018/06/14/javascript-cookie/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>Javascript 쿠키 사용하기, 오늘 날짜에만 다시 안보이게 하기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2018/06/11/countdown-timer-js/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>구글 지도 Places opening_hours.open_now 대신 isOpen() 함수 쓰기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/06/19/google-map-place-opening-hours-open-now-to-isopen-func/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="구글 지도 API에서 장소정보중에 open_now라고 해당 스팟이 영업중인지 확인하는 데이터가 있었는데 디프리케이티드 되어 2020년 11월부터는 중단된다는 메시지가 콘솔에 나타났다.  js?key=APIKEY&amp;amp;libraries=places&amp;amp;callback=UIPrototypeMap:57 open_now is deprecated as of N">
+<meta name="keywords" content="Javascript,API,Google Map,Google Places">
+<meta property="og:type" content="article">
+<meta property="og:title" content="구글 지도 Places opening_hours.open_now 대신 isOpen() 함수 쓰기">
+<meta property="og:url" content="https://note.toice.net/2020/06/19/google-map-place-opening-hours-open-now-to-isOpen-func/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="구글 지도 API에서 장소정보중에 open_now라고 해당 스팟이 영업중인지 확인하는 데이터가 있었는데 디프리케이티드 되어 2020년 11월부터는 중단된다는 메시지가 콘솔에 나타났다.  js?key=APIKEY&amp;amp;libraries=places&amp;amp;callback=UIPrototypeMap:57 open_now is deprecated as of N">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-08-26T02:22:36.127Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="구글 지도 Places opening_hours.open_now 대신 isOpen() 함수 쓰기">
+<meta name="twitter:description" content="구글 지도 API에서 장소정보중에 open_now라고 해당 스팟이 영업중인지 확인하는 데이터가 있었는데 디프리케이티드 되어 2020년 11월부터는 중단된다는 메시지가 콘솔에 나타났다.  js?key=APIKEY&amp;amp;libraries=places&amp;amp;callback=UIPrototypeMap:57 open_now is deprecated as of N">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>구글 지도 Places opening_hours.open_now 대신 isOpen() 함수 쓰기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-06-19T18:04:34+09:00">2020년 6월 19일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/API/">API</a><a class="tag-link" href="/tags/Google-Map/">Google Map</a><a class="tag-link" href="/tags/Google-Places/">Google Places</a><a class="tag-link" href="/tags/Javascript/">Javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>구글 지도 API에서 장소정보중에 <code>open_now</code>라고 해당 스팟이 영업중인지 확인하는 데이터가 있었는데 디프리케이티드 되어 2020년 11월부터는 중단된다는 메시지가 콘솔에 나타났다.</p>
+<blockquote>
+<p>js?key=<strong>APIKEY</strong>&amp;libraries=places&amp;callback=UIPrototypeMap:57 open_now is deprecated as of November 2019 and will be turned off in November 2020. Use the isOpen() function from a PlacesService.getDetails() result instead. See <a href="https://goo.gle/js-open-now" target="_blank" rel="noopener">https://goo.gle/js-open-now</a></p>
+</blockquote>
+<p>쓰는 방식이 좀 달라서 시간 작업 소요가 좀 있던터라 기록을 남겨둔다.</p>
+<p><code>PlaceResult</code>가 받아온 오브젝트라면 <code>PlaceResult.opening_hours.open_now</code>만으로도 Boolean 타입으로 값을 받아올 수 있어서 영업중인지 아닌지 영업정보가 없는지를 바로 판별할 수가 있었는데 콘솔창에 안내되어 있는 것만 얼핏보고 <code>PlaceResult.opening_hours.isOpen()</code>과 같이 해서는 모두 <code>undefined</code> 값만 받아보게 된다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">new google.maps.places.PlacesService(attrContainer).getDetails({
+  placeId: &#39;...&#39;,
+  fields: [&#39;opening_hours&#39;,&#39;utc_offset_minutes&#39;],
+  }, function (place, status) {
+    if (status !== &#39;OK&#39;) return; &#x2F;&#x2F; something went wrong
+    const isOpenAtTime = place.opening_hours.isOpen(new Date(&#39;December 17, 2020 03:24:00&#39;));
+    if (isOpenAtTime) {
+        &#x2F;&#x2F; We know it&#39;s open.
+    }
+
+    const isOpenNow = place.opening_hours.isOpen();
+    if (isOpenNow) {
+        &#x2F;&#x2F; We know it&#39;s open.
+    }
+});
+</code></pre>
+<p>출처 : <a href="https://developers.google.com/maps/documentation/javascript/place_field_js_migration" target="_blank" rel="noopener">https://developers.google.com/maps/documentation/javascript/place_field_js_migration</a></p>
+<p>위 예제가 더 정확한데 저렇게 별도로 영업시간 체크를 해줘야한다. 게다가 비동기로 결과를 받기 때문에 체크하는 방식을 변경해줄 수 밖에 없었다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">&#x2F;&#x2F; service는 다른 곳에서 new google.maps.places.PlacesService(attrContainer) 선언함
+function placeIsOpen(id) {
+  if (!service) {
+    return undefined;
+  }
+
+  service.getDetails({
+    placeId: id,
+    fields: [&#39;opening_hours&#39;, &#39;utc_offset_minutes&#39;]
+  }, function(place, status) {
+    if (status !== &#39;OK&#39;) {
+      return undefined;
+    }
+
+    return place.opening_hours.isOpen();
+  });
+
+  return undefined;
+}
+</code></pre>
+<p>같이 만들어놓고 바로바로 <code>open_now</code> 쓰던 것처럼 넣었더니 한번에 넣는 값이 8개가 넘으면 <code>OVER QUERY LIMIT</code> 오류를 뱉고, 어차피 비동기로 처리되기 때문에 제 시점에 영업 여부를 넣을 수가 없었다.</p>
+<p>그래서 ① 담아 놓고 넣거나, ②. 8개 이하로 끊어서 넣거나, ③ 필요할 시점에 넣어야 했는데 다행히 스팟 정보는 스와이퍼 형태로 제공하는 화면이어서 활성화된 스팟 지점인 경우에만 영업 여부 체크하여 넣는 것으로 변경했다.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/06/14/algorithm-test/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>알고리즘 테스트 - 정해진 숫자 조합으로 나올 수 있는 소수 찾기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/06/26/border-radius-for-iframe-at-mobile/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>모바일에서 유튜브, 구글지도 아이프레임 모서리 둥굴게(border-radius) 적용하기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/06/19/google-map-place-opening-hours-open-now-to-isOpen-func/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>파이썬으로 클리앙 알뜰구매 크롤링 하(려해보)기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/01/31/clien-jirum-crawling-python/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="코드 열어보기 (잘못된 코드라 닫아둠)  # -*- coding: UTf-8 -*-  import requests from bs4 import BeautifulSoup from slacker import Slacker import telegram import os import schedule import time import datetime  DEV_MOD">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="파이썬으로 클리앙 알뜰구매 크롤링 하(려해보)기">
+<meta property="og:url" content="https://note.toice.net/2019/01/31/clien-jirum-crawling-python/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="코드 열어보기 (잘못된 코드라 닫아둠)  # -*- coding: UTf-8 -*-  import requests from bs4 import BeautifulSoup from slacker import Slacker import telegram import os import schedule import time import datetime  DEV_MOD">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2019-02-01T07:24:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="파이썬으로 클리앙 알뜰구매 크롤링 하(려해보)기">
+<meta name="twitter:description" content="코드 열어보기 (잘못된 코드라 닫아둠)  # -*- coding: UTf-8 -*-  import requests from bs4 import BeautifulSoup from slacker import Slacker import telegram import os import schedule import time import datetime  DEV_MOD">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>파이썬으로 클리앙 알뜰구매 크롤링 하(려해보)기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-01-31T14:34:02+09:00">2019년 1월 31일</time>
+  </dd>
+</dl>
+
+  <dl class="updatedTime">
+    <dt>updated</dt>
+    <dd>
+      <time datetime="2019-02-01T16:24:19+09:00" class="updated">2019년 2월 1일</time>
+    </dd>
+  </dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/etc/">etc</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/python/">python</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><div class="moreless"><a href="#" class="morelessLauncher" data-expanded-text="코드 열어보기 (잘못된 코드라 닫아둠)" data-collapsed-text="닫아두기">코드 열어보기 (잘못된 코드라 닫아둠)</a><div class="morelessContent"><br><br>
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-python"># -*- coding: UTf-8 -*-
+
+import requests
+from bs4 import BeautifulSoup
+from slacker import Slacker
+import telegram
+import os
+import schedule
+import time
+import datetime
+
+DEV_MODE = False
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+targetURL = &#39;https:&#x2F;&#x2F;www.clien.net&#x2F;service&#x2F;group&#x2F;community&#39; if DEV_MODE else &#39;https:&#x2F;&#x2F;www.clien.net&#x2F;service&#x2F;board&#x2F;jirum&#39;
+
+slackToken = &#39;--SLACK TOKEN--&#39;
+slack = Slacker(slackToken)
+slackChannel = &#39;#test&#39;
+
+bot = telegram.Bot(token=&#39;--TELEGRAM TOKEN--&#39;)
+chat_id = bot.getUpdates()[-1].message.chat.id
+
+def msgSlack(msg):
+    slack.chat.post_message(slackChannel, msg)
+    print(&#39;Success - send to Slack&#39;)
+
+def msgTelegram(msg):
+    bot.sendMessage(chat_id=chat_id, text=msg)
+    print(&#39;Success - send to Telegram&#39;)
+
+def sendMsg(msg):
+    msgSlack(msg)
+    msgTelegram(msg)
+
+def main():
+    req = requests.get(targetURL)
+    req.encoding = &#39;utf-8&#39;
+
+    html = req.text
+    soup = BeautifulSoup(html, &#39;html.parser&#39;)
+    posts = soup.select(&#39;.symph_row .timestamp&#39; if DEV_MODE else &#39;.contents_jirum .timestamp&#39;)
+    postMeta = soup.select(&#39;.symph_row .list_subject&#39; if DEV_MODE else &#39;.contents_jirum .list_subject&#39;)
+    latest = posts[0].text
+
+    with open(os.path.join(BASE_DIR, &#39;latest.txt&#39;), &#39;r&#39;) as f_read:
+        before = f_read.readline()
+        f_read.close()
+        if before != latest:
+            i = 0
+            while before != posts[i].text:
+                beforeTime = datetime.datetime.strptime(before, &quot;%Y-%m-%d %H:%M:%S&quot;) if before != &#39;&#39; else False
+                postTime = datetime.datetime.strptime(posts[i].text, &quot;%Y-%m-%d %H:%M:%S&quot;)
+                if beforeTime != False and beforeTime &gt; postTime:
+                    print(&#39;마지막 글이 삭제된 것으로 추정&#39;)
+                    break
+                subject = postMeta[i].select(&#39;.subject_fixed&#39;)[0].text if DEV_MODE else postMeta[i].select(&#39;a&#39;)[0].text
+                link = postMeta[i].get(&#39;href&#39;) if DEV_MODE else postMeta[i].select(&#39;a&#39;)[0].get(&#39;href&#39;)
+                sendMsg(subject +&#39; https:&#x2F;&#x2F;clien.net&#39;+ link)
+                i = i + 1
+                if i &gt; 10:
+                    print(&#39;새 글이 10건 이상 발생&#39;)
+                    sendMsg(&#39;등 10건 이상으로 마지막 기록된 글이 삭제됐을 가능성이 높습니다. 직접 방문을 권합니다. &#39; + targetURL)
+                    break
+            with open(os.path.join(BASE_DIR, &#39;latest.txt&#39;), &#39;w+&#39;) as f_write:
+                f_write.write(latest)
+                f_write.close()
+        else:
+            print(&#39;No update but I\&#39;m working...&#39;)
+
+main()
+schedule.every().seconds.do(main)
+while 1:
+    schedule.run_pending()
+    time.sleep(60 if DEV_MODE else 600)
+</code></pre><br><br></div></div>
+
+<p>이렇게 사용하는 것이 정상이라고 보기는 어렵다고 판단되어 익숙한 node.js 형태로 바꿨다. request 디펜던시 하나로 세상 편안!! 제대로된 코드라 볼 수 없지만 파이썬은 잘 안쓰니까 혹시 나중에 필요할까 싶어 기록 차원으로 남겨둠..</p>
+<h3 id="참고했던-URL"><a href="#참고했던-URL" class="headerlink" title="참고했던 URL"></a>참고했던 URL</h3><ul>
+<li><a href="https://beomi.github.io/gb-crawling/posts/2017-04-20-HowToMakeWebCrawler-Notice-with-Telegram.html" target="_blank" rel="noopener">https://beomi.github.io/gb-crawling/posts/2017-04-20-HowToMakeWebCrawler-Notice-with-Telegram.html</a></li>
+<li><a href="https://corikachu.github.io/articles/python/python-slack-bot-slacker" target="_blank" rel="noopener">https://corikachu.github.io/articles/python/python-slack-bot-slacker</a></li>
+</ul>
+<h3 id="참고하려던-URL"><a href="#참고하려던-URL" class="headerlink" title="참고하려던 URL"></a>참고하려던 URL</h3><ul>
+<li><a href="https://cjh5414.github.io/heroku-python" target="_blank" rel="noopener">https://cjh5414.github.io/heroku-python</a></li>
+</ul>
+<hr>
+<h3 id="추가"><a href="#추가" class="headerlink" title="추가"></a>추가</h3><p>지금은 node.js로 만들어놓은 것도 더이상 사용하지 않고 남이 잘 만들어놓은 텔레그램봇 그냥 쓰고 있다.</p>
+<style>.morelessContent > br {display: none}</style>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/01/23/ios10-display-flex-column/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>iOS 10점대에서 flex-direction: column 사용시 주의사항</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/02/13/legacy-npm-audit-fix/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>Node.js 8.x.xLTS에서 10.15.1LTS 대응</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/01/31/clien-jirum-crawling-python/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

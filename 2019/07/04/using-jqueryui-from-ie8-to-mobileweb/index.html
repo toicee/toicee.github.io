@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>IE8부터 모바일웹까지 고려하여 jQuery UI 사용하기 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/07/04/using-jqueryui-from-ie8-to-mobileweb/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="드래그앤 드랍을 써야하는데 하나의 마크업으로 IE8부터 모바일웹까지 모두 고려해야하는 요구사항이 있어서 선택의 여지 없이 jQuery UI를 사용하게 됐다. jQuery도 IE 하위버전까지 다 지원하려면 1점대 버전을 사용해야 하듯이 jQuery UI도 버전이 오르다보니 IE8부터 모바일까지 다 맞추려면 낮은 버전을 선택해야 했고 jQuery UI만으로 모">
+<meta name="keywords" content="mobile,IE,jQuery,Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IE8부터 모바일웹까지 고려하여 jQuery UI 사용하기">
+<meta property="og:url" content="https://note.toice.net/2019/07/04/using-jqueryui-from-ie8-to-mobileweb/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="드래그앤 드랍을 써야하는데 하나의 마크업으로 IE8부터 모바일웹까지 모두 고려해야하는 요구사항이 있어서 선택의 여지 없이 jQuery UI를 사용하게 됐다. jQuery도 IE 하위버전까지 다 지원하려면 1점대 버전을 사용해야 하듯이 jQuery UI도 버전이 오르다보니 IE8부터 모바일까지 다 맞추려면 낮은 버전을 선택해야 했고 jQuery UI만으로 모">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IE8부터 모바일웹까지 고려하여 jQuery UI 사용하기">
+<meta name="twitter:description" content="드래그앤 드랍을 써야하는데 하나의 마크업으로 IE8부터 모바일웹까지 모두 고려해야하는 요구사항이 있어서 선택의 여지 없이 jQuery UI를 사용하게 됐다. jQuery도 IE 하위버전까지 다 지원하려면 1점대 버전을 사용해야 하듯이 jQuery UI도 버전이 오르다보니 IE8부터 모바일까지 다 맞추려면 낮은 버전을 선택해야 했고 jQuery UI만으로 모">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>IE8부터 모바일웹까지 고려하여 jQuery UI 사용하기</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-07-04T14:55:09+09:00">2019년 7월 4일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/IE/">IE</a><a class="tag-link" href="/tags/Javascript/">Javascript</a><a class="tag-link" href="/tags/jQuery/">jQuery</a><a class="tag-link" href="/tags/mobile/">mobile</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>드래그앤 드랍을 써야하는데 하나의 마크업으로 IE8부터 모바일웹까지 모두 고려해야하는 요구사항이 있어서 선택의 여지 없이 jQuery UI를 사용하게 됐다.</p>
+<p>jQuery도 IE 하위버전까지 다 지원하려면 1점대 버전을 사용해야 하듯이 jQuery UI도 버전이 오르다보니 IE8부터 모바일까지 다 맞추려면 낮은 버전을 선택해야 했고 jQuery UI만으로 모바일까지 당연히 대응이 될 것이라고 예상했는데 예상 외로 모바일까지 적용하려면 추가 플러그인이 필요했다.</p>
+<h4 id="필요한-jQuery-라이브러리와-플러그인-버전"><a href="#필요한-jQuery-라이브러리와-플러그인-버전" class="headerlink" title="필요한 jQuery 라이브러리와 플러그인 버전"></a>필요한 jQuery 라이브러리와 플러그인 버전</h4><ul>
+<li><a href="https://code.jquery.com/jquery-1.7.2.min.js" target="_blank" rel="noopener">jQuery 1.7.2 이하</a></li>
+<li><a href="https://code.jquery.com/ui/1.8.21/jquery-ui.min.js" target="_blank" rel="noopener">jQuery UI 1.8.21 이하</a></li>
+<li><a href="http://touchpunch.furf.com/" target="_blank" rel="noopener">jQuery UI Touch Punch</a> : 모바일에도 동일하게  적용하기 위한 플러그인 (사용버전은 0.2.3 이지만 상관없을듯)</li>
+</ul>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/05/29/virtual-dom-last-child-bug-on-safari/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>Safari에서 Virtual DOM :last-child 스타일 버그</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/07/08/how-to-mousemove-image-javascript/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>자바스크립트 MouseMove로 이미지 움직일 때 깜빡임 대응하기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/07/04/using-jqueryui-from-ie8-to-mobileweb/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>

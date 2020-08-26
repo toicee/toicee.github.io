@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>vw 단위로 이미지 스프라이트 사용시 안드로이드에서 조금씩 어긋나는 버그 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2019/07/16/using-image-sprite-vw-unit-android/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
+  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <meta name="description" content="vw 단위로 작업하는데 이미지 스프라이트 방식을 사용한 부분에서 데스크톱 웹, iOS 웹 다 문제 없는데 유독 안드로이드 (갤럭시S7, S8….) 에서만 이미지 위치가 어긋나는 현상이 있었다.  코드에서 딱히 문제를 찾기 어려웠다. 너무 일반적이었는데…   @function sz($val) {     @return $val &amp;#x2F; 750 * 100vw">
+<meta name="keywords" content="android,CSS,bug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vw 단위로 이미지 스프라이트 사용시 안드로이드에서 조금씩 어긋나는 버그">
+<meta property="og:url" content="https://note.toice.net/2019/07/16/using-image-sprite-vw-unit-android/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="vw 단위로 작업하는데 이미지 스프라이트 방식을 사용한 부분에서 데스크톱 웹, iOS 웹 다 문제 없는데 유독 안드로이드 (갤럭시S7, S8….) 에서만 이미지 위치가 어긋나는 현상이 있었다.  코드에서 딱히 문제를 찾기 어려웠다. 너무 일반적이었는데…   @function sz($val) {     @return $val &amp;#x2F; 750 * 100vw">
+<meta property="og:locale" content="KO">
+<meta property="og:image" content="https://note.toice.net/images/2019/07/16/screenshot1.png">
+<meta property="og:image" content="https://note.toice.net/images/2019/07/16/screenshot2.png">
+<meta property="og:image" content="https://note.toice.net/images/2019/07/16/screenshot3.png">
+<meta property="og:updated_time" content="2020-02-17T09:51:54.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vw 단위로 이미지 스프라이트 사용시 안드로이드에서 조금씩 어긋나는 버그">
+<meta name="twitter:description" content="vw 단위로 작업하는데 이미지 스프라이트 방식을 사용한 부분에서 데스크톱 웹, iOS 웹 다 문제 없는데 유독 안드로이드 (갤럭시S7, S8….) 에서만 이미지 위치가 어긋나는 현상이 있었다.  코드에서 딱히 문제를 찾기 어려웠다. 너무 일반적이었는데…   @function sz($val) {     @return $val &amp;#x2F; 750 * 100vw">
+<meta name="twitter:image" content="https://note.toice.net/images/2019/07/16/screenshot1.png">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>vw 단위로 이미지 스프라이트 사용시 안드로이드에서 조금씩 어긋나는 버그</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2019-07-16T17:34:33+09:00">2019년 7월 16일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/android/">android</a><a class="tag-link" href="/tags/bug/">bug</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p><code>vw</code> 단위로 작업하는데 이미지 스프라이트 방식을 사용한 부분에서 데스크톱 웹, iOS 웹 다 문제 없는데 유독 안드로이드 (갤럭시S7, S8….) 에서만 이미지 위치가 어긋나는 현상이 있었다.</p>
+<p><img src="/images/2019/07/16/screenshot1.png" alt="문제의 현상"></p>
+<p>코드에서 딱히 문제를 찾기 어려웠다. 너무 일반적이었는데…</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">@function sz($val) {
+    @return $val &#x2F; 750 * 100vw; &#x2F;&#x2F; 디자인이 아이폰 (375) 기준으로 작업되기 때문에 vw를 이렇게 변환
+}
+
+&#x2F;&#x2F; 생략
+
+.timeNum {
+    display: inline-block;
+    width: sz(36);
+    height: sz(75);
+    background: url(&quot;#{$imgPath}&#x2F;txt_timeNumber.png&quot;) no-repeat 0 sz(-55);
+    background-size: 100% auto;
+    overflow: hidden;
+    vertical-align: top;
+    font-size: 0;
+
+    + .timeNum {
+        margin-left: sz(3);
+    }
+
+    @for $i from 1 through 9 {
+        &amp;.time#{$i} {
+            background-position: 0 sz($i * -95 - 55);
+        }
+    }
+}
+</code></pre>
+<p>일단 텍스트와 연계된 작업에서 흔히 발생하는 <code>vertical-align</code> 차이가 문제일거라고 예상하고 정확하게 확인하기 위해 이미지 범위를 표시해본다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.timeNum {
+    &#x2F;&#x2F; 생략
+    background: #fff url(&quot;#{$imgPath}&#x2F;txt_timeNumber.png&quot;) no-repeat 0 sz(-55);
+    &#x2F;&#x2F; 생략
+}
+</code></pre>
+<p><img src="/images/2019/07/16/screenshot2.png" alt="이미지 범위를 확인해보자"></p>
+<p>그랬더니 이미지 수직 정렬에 문제가 있을 줄 알았는데 그게 아니라 이미지 스프라이트 과정에서 차이가 발생했다는 걸 알게 됐다.</p>
+<p>문제는 다른 디바이스에서는 문제가 발생하지 않기 때문에 백그라운드 위치값을 수정할 수는 없고 다른 해결 방법을 찾아야했다. 백그라운드로 이미지로 사용한 이미지 자체도 36px이고 저 <code>.timeNum</code>에 넓이도 36px이기 때문에 큰 기대는 하지 않고 백그라운드 사이즈 값도 vw 단위로 수정해봤다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-scss">.timeNum {
+    &#x2F;&#x2F; 생략
+    background-size: sz(36) auto;
+    &#x2F;&#x2F; 생략
+}
+</code></pre>
+<p><img src="/images/2019/07/16/screenshot3.png" alt="정상 노출"></p>
+<p>그랬더니 위처럼 다른 디바이스와 동일하게 정상적으로 노출됐다.</p>
+<p>결론은 이미지 스프라이트 사용할 때 이미지 크기도 변하게 하기 위해서 <code>background-size</code> 값을 함께 넣어주는 경우 안드로이드를 고려하여 퍼센테이지가 아니라 정확한 <code>vw</code> 수치를 넣어줘야함.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2019/07/08/how-to-mousemove-image-javascript/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>자바스크립트 MouseMove로 이미지 움직일 때 깜빡임 대응하기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2019/07/23/typescript-global-variables-declared-elsewhere/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>타입스크립트, 다른 곳에서 선언된 전역변수 처리</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2019/07/16/using-image-sprite-vw-unit-android/';
+  </script>
+  <script src="/js/note.js?v0.3.5"></script>
+</body>
+</html>
