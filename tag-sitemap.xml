@@ -171,14 +171,14 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/tags/Android-Studio/</loc>
+        <loc>https://note.toice.net/tags/typescript/</loc>
         <lastmod>2020-02-17T09:51:54.570Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://note.toice.net/tags/typescript/</loc>
+        <loc>https://note.toice.net/tags/Android-Studio/</loc>
         <lastmod>2020-02-17T09:51:54.570Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -276,13 +276,6 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/tags/FastClick/</loc>
-        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://note.toice.net/tags/mobil/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -290,14 +283,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/tags/svg/</loc>
-        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://note.toice.net/tags/HTML/</loc>
+        <loc>https://note.toice.net/tags/FastClick/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -319,6 +305,20 @@
 
     <url>
         <loc>https://note.toice.net/tags/Mac/</loc>
+        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/tags/svg/</loc>
+        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/tags/HTML/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

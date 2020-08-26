@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
   <link rel="canonical" href="https://note.toice.net/2019/05/29/virtual-dom-last-child-bug-on-safari/">
-  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.5">
-  <link rel="stylesheet" href="/css/style.css?v0.3.5">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.6">
+  <link rel="stylesheet" href="/css/style.css?v0.3.6">
   <meta name="description" content="Vue.js로 만들어진 페이지에서 아이폰에서만 테두리가 잘못 나온다고 전달을 받았다.확인해보니 맥 Safari에서도 재현이 되는데 li:last-child에 지정해놓은 스타일이 마지막이 아닌 마지막 바로 위에 있는 li에도 적용되고 있었다. 조금 더 관찰해보니 다음과 같은 특징이 있었다.   여러번 테스트해본 결과 해당 영역에 새로운 DOM이 추가되는 변화">
 <meta name="keywords" content="CSS,Virtual DOM,Safari,Bug,Vue.js">
 <meta property="og:type" content="article">
@@ -295,10 +295,10 @@ ul {
       &copy toice
     </div>
   </div>
-  <script src="/lib/prismjs/prism.js?v0.3.5"></script>
+  <script src="/lib/prismjs/prism.js?v0.3.6"></script>
   <script>
     var disqus_url = 'https://note.toice.net/2019/05/29/virtual-dom-last-child-bug-on-safari/';
   </script>
-  <script src="/js/note.js?v0.3.5"></script>
+  <script src="/js/note.js?v0.3.6"></script>
 </body>
 </html>
