@@ -276,13 +276,6 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/tags/mobil/</loc>
-        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://note.toice.net/tags/FastClick/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -298,6 +291,13 @@
 
     <url>
         <loc>https://note.toice.net/tags/HTML/</loc>
+        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/tags/mobil/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

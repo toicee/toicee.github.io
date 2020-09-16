@@ -272,7 +272,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/04/28/osx-git-check-password-again/</loc>
+        <loc>https://note.toice.net/2017/04/25/android-chrome-iScroll-not-working-suddenly/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -280,7 +280,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/04/25/android-chrome-iScroll-not-working-suddenly/</loc>
+        <loc>https://note.toice.net/2017/04/28/osx-git-check-password-again/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -296,14 +296,6 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/05/23/svg-filter-with-ie-and-chrome/</loc>
-        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://note.toice.net/2017/06/23/using-transition-cubic-bezier/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -312,7 +304,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/09/13/iOS-double-touch-zoom/</loc>
+        <loc>https://note.toice.net/2017/09/12/try-mobile-background-attachment-fixed/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -320,7 +312,15 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/09/12/try-mobile-background-attachment-fixed/</loc>
+        <loc>https://note.toice.net/2017/05/23/svg-filter-with-ie-and-chrome/</loc>
+        <lastmod>2020-02-17T09:51:54.566Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2017/09/13/iOS-double-touch-zoom/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
