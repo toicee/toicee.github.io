@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>iOS 디바이스에서 window.open 새창열기가 되지 않을 때 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2021/02/07/window-open-not-working-on-ios/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.7">
+  <link rel="stylesheet" href="/css/style.css?v0.3.7">
+  <meta name="description" content="iOS 디바이스에서 window.open(url); 사용시 정상 작동하지 않는 케이스가 있다. 단순히 새창을 여는게 아니라 클릭한 후 어떤 과정을 거친 후 (API에서 데이터를 가지고 온다던지) 새창을 열 때인데, 이 경우 location.href은 정상적으로 사용 가능하므로 가능하다면 iOS인 경우 예외 케이스로 새창이 아니라 페이지 이동 처리하거나 다른">
+<meta name="keywords" content="javascript,iOS,Safari">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 디바이스에서 window.open 새창열기가 되지 않을 때">
+<meta property="og:url" content="https://note.toice.net/2021/02/07/window-open-not-working-on-ios/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="iOS 디바이스에서 window.open(url); 사용시 정상 작동하지 않는 케이스가 있다. 단순히 새창을 여는게 아니라 클릭한 후 어떤 과정을 거친 후 (API에서 데이터를 가지고 온다던지) 새창을 열 때인데, 이 경우 location.href은 정상적으로 사용 가능하므로 가능하다면 iOS인 경우 예외 케이스로 새창이 아니라 페이지 이동 처리하거나 다른">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2021-03-05T23:07:19.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 디바이스에서 window.open 새창열기가 되지 않을 때">
+<meta name="twitter:description" content="iOS 디바이스에서 window.open(url); 사용시 정상 작동하지 않는 케이스가 있다. 단순히 새창을 여는게 아니라 클릭한 후 어떤 과정을 거친 후 (API에서 데이터를 가지고 온다던지) 새창을 열 때인데, 이 경우 location.href은 정상적으로 사용 가능하므로 가능하다면 iOS인 경우 예외 케이스로 새창이 아니라 페이지 이동 처리하거나 다른">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>iOS 디바이스에서 window.open 새창열기가 되지 않을 때</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2021-02-07T15:30:34+09:00">2021년 2월 7일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/Safari/">Safari</a><a class="tag-link" href="/tags/iOS/">iOS</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>iOS 디바이스에서 <code>window.open(url);</code> 사용시 정상 작동하지 않는 케이스가 있다.</p>
+<p>단순히 새창을 여는게 아니라 클릭한 후 어떤 과정을 거친 후 (API에서 데이터를 가지고 온다던지) 새창을 열 때인데, 이 경우 <code>location.href</code>은 정상적으로 사용 가능하므로 가능하다면 iOS인 경우 예외 케이스로 새창이 아니라 페이지 이동 처리하거나 다른 방법으로 풀어야한다. OS상에서 막는걸 윈도우 오픈으로 어떻게 해보겠다고 용써봐야 답 안나온다.</p>
+<p>UI개발때도 프로토타입 만들면서 종종 겪었던 일인데 순수하게 UI 관련 코드만 있던 환경에서 원인을 찾는 것과 달리 영향을 끼치는 요소가 많은 개발환경에선 바로 의심해보지 못했다. 허우적대고 있는데 팀장님이 구해줌.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/12/04/vscode-prettier-not-working-on-windows/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>VSCode에서 Prettier가 작동하지 않을 때 (윈도우)</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2021/02/07/without-protocol-not-working-service/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>카카오톡 공유하기 이미지 미노출 될 때, 프로토콜 확인</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.7"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2021/02/07/window-open-not-working-on-ios/';
+  </script>
+  <script src="/js/note.js?v0.3.7"></script>
+</body>
+</html>

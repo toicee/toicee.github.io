@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>SPA용 CSS 작업시 주의할 사항 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/09/14/css-caution-on-spa/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.7">
+  <link rel="stylesheet" href="/css/style.css?v0.3.7">
+  <meta name="description" content="UI개발에서 프론트앤드개발로 전환되면서 마침 UI개발을 내가 한 프로젝트를 또 내가 리액트에서 작업하고 있는 경험을 하고 있는데 리액트를 실무로 접해보지 않고 구성한 레이아웃이 문제가 된 걸 발견했다.   .header + .contents {     padding-top: 5rem; }  대표적으로 이런건데, 이 프로젝트 헤더가 픽스드된 형태이다보니 나름">
+<meta name="keywords" content="CSS,SPA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SPA용 CSS 작업시 주의할 사항">
+<meta property="og:url" content="https://note.toice.net/2020/09/14/css-caution-on-spa/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="UI개발에서 프론트앤드개발로 전환되면서 마침 UI개발을 내가 한 프로젝트를 또 내가 리액트에서 작업하고 있는 경험을 하고 있는데 리액트를 실무로 접해보지 않고 구성한 레이아웃이 문제가 된 걸 발견했다.   .header + .contents {     padding-top: 5rem; }  대표적으로 이런건데, 이 프로젝트 헤더가 픽스드된 형태이다보니 나름">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2021-03-05T22:27:48.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SPA용 CSS 작업시 주의할 사항">
+<meta name="twitter:description" content="UI개발에서 프론트앤드개발로 전환되면서 마침 UI개발을 내가 한 프로젝트를 또 내가 리액트에서 작업하고 있는 경험을 하고 있는데 리액트를 실무로 접해보지 않고 구성한 레이아웃이 문제가 된 걸 발견했다.   .header + .contents {     padding-top: 5rem; }  대표적으로 이런건데, 이 프로젝트 헤더가 픽스드된 형태이다보니 나름">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>SPA용 CSS 작업시 주의할 사항</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-09-14T09:41:36+09:00">2020년 9월 14일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/CSS/">CSS</a><a class="tag-link" href="/tags/SPA/">SPA</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>UI개발에서 프론트앤드개발로 전환되면서 마침 UI개발을 내가 한 프로젝트를 또 내가 리액트에서 작업하고 있는 경험을 하고 있는데 리액트를 실무로 접해보지 않고 구성한 레이아웃이 문제가 된 걸 발견했다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-css">.header + .contents {
+    padding-top: 5rem;
+}
+</code></pre>
+<p>대표적으로 이런건데, 이 프로젝트 헤더가 픽스드된 형태이다보니 나름 UI개발 짬밥이 있다고 컨텐츠 영역에 여백은 픽스드된 헤더가 있을 때만 주게끔 해놓았는데 SPA에서는 페이지 변화시 페이지 전체 변경이 아니라 변경된 부분만 바뀌다보니 헤더가 있고 없고 하거나 헤더내에서 변화가 있는 경우 (지금 보면 당연히) <code>padding-top</code>이 있다 없다 하여 들썩 들썩 거리는 현상이 발생한다.</p>
+<p>나름 SPA에 대한 이해를 갖고(있다고 생각하고) 프론트앤드 개발에 대응을 해준다고 작업 했던 거였는데 무심코 습관적으로 했던 코드들이 SPA에선 문제가 되는 케이스였다.</p>
+<p>이런 사항들이 또 발생하면 이 포스트에 업데이트 할 예정.</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/09/10/load-google-map-multiple-times-on-spa/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>리액트에서 구글 맵 적용시 페이지 이동(리액트 라우트)</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/09/23/lodash-debounce/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>lodash debounce를 이용한 API 콜 제한하기</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.7"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/09/14/css-caution-on-spa/';
+  </script>
+  <script src="/js/note.js?v0.3.7"></script>
+</body>
+</html>

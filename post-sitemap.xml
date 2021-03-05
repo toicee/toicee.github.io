@@ -8,8 +8,88 @@
     </url>
 
     <url>
+        <loc>https://note.toice.net/2021/02/07/without-protocol-not-working-service/</loc>
+        <lastmod>2021-03-05T23:13:40.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2020/09/10/load-google-map-multiple-times-on-spa/</loc>
+        <lastmod>2021-03-05T23:07:52.751Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2020/10/14/intersection-observer-on-react/</loc>
+        <lastmod>2021-03-05T23:07:43.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2020/10/31/window-navigator-geolocation-react-router/</loc>
+        <lastmod>2021-03-05T23:07:38.617Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2021/02/07/window-open-not-working-on-ios/</loc>
+        <lastmod>2021-03-05T23:07:19.378Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2020/09/23/lodash-debounce/</loc>
+        <lastmod>2021-03-05T22:36:12.802Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2020/12/04/vscode-prettier-not-working-on-windows/</loc>
+        <lastmod>2021-03-05T22:32:27.437Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2020/09/14/css-caution-on-spa/</loc>
+        <lastmod>2021-03-05T22:27:48.422Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2020/07/28/nodemon-restart-command-rs/</loc>
+        <lastmod>2021-02-08T14:20:15.829Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2019/04/01/set-git-ignore-global/</loc>
+        <lastmod>2021-02-08T14:20:15.827Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://note.toice.net/2019/04/05/back-to-sublime-text3/</loc>
-        <lastmod>2020-09-09T13:44:00.428Z</lastmod>
+        <lastmod>2020-09-09T11:09:11.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -18,14 +98,6 @@
     <url>
         <loc>https://note.toice.net/2020/06/19/google-map-place-opening-hours-open-now-to-isOpen-func/</loc>
         <lastmod>2020-08-26T02:22:36.127Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://note.toice.net/2020/07/28/nodemon-restart-command-rs/</loc>
-        <lastmod>2020-08-26T02:11:52.785Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -112,14 +184,6 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2019/07/16/using-image-sprite-vw-unit-android/</loc>
-        <lastmod>2020-02-17T09:51:54.570Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://note.toice.net/2019/07/23/typescript-global-variables-declared-elsewhere/</loc>
         <lastmod>2020-02-17T09:51:54.570Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -129,6 +193,14 @@
 
     <url>
         <loc>https://note.toice.net/2019/08/08/android-studio-setting/</loc>
+        <lastmod>2020-02-17T09:51:54.570Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2019/07/16/using-image-sprite-vw-unit-android/</loc>
         <lastmod>2020-02-17T09:51:54.570Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -160,14 +232,6 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2019/04/01/set-git-ignore-global/</loc>
-        <lastmod>2020-02-17T09:51:54.569Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://note.toice.net/2019/04/08/javascript-without-jquery/</loc>
         <lastmod>2020-02-17T09:51:54.569Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -178,6 +242,14 @@
     <url>
         <loc>https://note.toice.net/2019/04/23/python_scss_convert_batch/</loc>
         <lastmod>2020-02-17T09:51:54.569Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://note.toice.net/2018/12/20/protect-double-execution/</loc>
+        <lastmod>2020-02-17T09:51:54.568Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -200,7 +272,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2018/12/20/protect-double-execution/</loc>
+        <loc>https://note.toice.net/2019/01/23/ios10-display-flex-column/</loc>
         <lastmod>2020-02-17T09:51:54.568Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -209,14 +281,6 @@
 
     <url>
         <loc>https://note.toice.net/2019/01/08/check-ports-server-outside/</loc>
-        <lastmod>2020-02-17T09:51:54.568Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://note.toice.net/2019/01/23/ios10-display-flex-column/</loc>
         <lastmod>2020-02-17T09:51:54.568Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -248,7 +312,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2018/07/06/jquery-get-border-width/</loc>
+        <loc>https://note.toice.net/2018/08/13/regExp-html-blank-line/</loc>
         <lastmod>2020-02-17T09:51:54.567Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -256,7 +320,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2018/08/13/regExp-html-blank-line/</loc>
+        <loc>https://note.toice.net/2018/07/06/jquery-get-border-width/</loc>
         <lastmod>2020-02-17T09:51:54.567Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -272,7 +336,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/04/25/android-chrome-iScroll-not-working-suddenly/</loc>
+        <loc>https://note.toice.net/2017/04/28/osx-git-check-password-again/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -280,7 +344,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/04/28/osx-git-check-password-again/</loc>
+        <loc>https://note.toice.net/2017/04/25/android-chrome-iScroll-not-working-suddenly/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -304,7 +368,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/09/12/try-mobile-background-attachment-fixed/</loc>
+        <loc>https://note.toice.net/2017/05/23/svg-filter-with-ie-and-chrome/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -312,7 +376,7 @@
     </url>
 
     <url>
-        <loc>https://note.toice.net/2017/05/23/svg-filter-with-ie-and-chrome/</loc>
+        <loc>https://note.toice.net/2017/09/12/try-mobile-background-attachment-fixed/</loc>
         <lastmod>2020-02-17T09:51:54.566Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

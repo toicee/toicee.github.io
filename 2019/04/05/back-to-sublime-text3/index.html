@@ -9,14 +9,14 @@
   <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.7">
   <link rel="stylesheet" href="/css/style.css?v0.3.7">
   <meta name="description" content="현재는 팀도 바뀌고 업무도 바뀌어서 VSCode를 메인으로 쓰고 있기 때문에 아래 글은 큰 의미가 없어서 닫아둠.그 사이 변해서 회사에서 1년전쯤 인텔리J를 구입하는 바람에 웹스톰이 아니라 인텔리J를 쓰게 됐고 VSCode를 리액트 공부용으로만 쓰다가 회사 업무로 리액트를 쓰게 되면서 자연스럽게 VSCode가 메인으로 바뀌었다. 역시 파악해보려고 잠깐 써보">
-<meta name="keywords" content="sublime,editor,VScode,webstorm">
+<meta name="keywords" content="sublime,editor,VScode,Webstorm,IntelliJ IDEA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="웹스톰, VSCode에서 다시 서브라임 텍스트3로...">
 <meta property="og:url" content="https://note.toice.net/2019/04/05/back-to-sublime-text3/index.html">
 <meta property="og:site_name" content="toice&#39;s note">
 <meta property="og:description" content="현재는 팀도 바뀌고 업무도 바뀌어서 VSCode를 메인으로 쓰고 있기 때문에 아래 글은 큰 의미가 없어서 닫아둠.그 사이 변해서 회사에서 1년전쯤 인텔리J를 구입하는 바람에 웹스톰이 아니라 인텔리J를 쓰게 됐고 VSCode를 리액트 공부용으로만 쓰다가 회사 업무로 리액트를 쓰게 되면서 자연스럽게 VSCode가 메인으로 바뀌었다. 역시 파악해보려고 잠깐 써보">
 <meta property="og:locale" content="KO">
-<meta property="og:updated_time" content="2020-09-09T13:44:00.428Z">
+<meta property="og:updated_time" content="2020-09-09T11:09:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="웹스톰, VSCode에서 다시 서브라임 텍스트3로...">
 <meta name="twitter:description" content="현재는 팀도 바뀌고 업무도 바뀌어서 VSCode를 메인으로 쓰고 있기 때문에 아래 글은 큰 의미가 없어서 닫아둠.그 사이 변해서 회사에서 1년전쯤 인텔리J를 구입하는 바람에 웹스톰이 아니라 인텔리J를 쓰게 됐고 VSCode를 리액트 공부용으로만 쓰다가 회사 업무로 리액트를 쓰게 되면서 자연스럽게 VSCode가 메인으로 바뀌었다. 역시 파악해보려고 잠깐 써보">
@@ -73,7 +73,7 @@
   <dl class="updatedTime">
     <dt>updated</dt>
     <dd>
-      <time datetime="2020-09-09T22:44:00+09:00" class="updated">2020년 9월 9일</time>
+      <time datetime="2020-09-09T20:09:11+09:00" class="updated">2020년 9월 9일</time>
     </dd>
   </dl>
 
@@ -92,7 +92,7 @@
           <dl class="tags">
             <dt>tags</dt>
             <dd>
-              <a class="tag-link" href="/tags/VScode/">VScode</a><a class="tag-link" href="/tags/editor/">editor</a><a class="tag-link" href="/tags/sublime/">sublime</a><a class="tag-link" href="/tags/webstorm/">webstorm</a>
+              <a class="tag-link" href="/tags/IntelliJ-IDEA/">IntelliJ IDEA</a><a class="tag-link" href="/tags/VScode/">VScode</a><a class="tag-link" href="/tags/Webstorm/">Webstorm</a><a class="tag-link" href="/tags/editor/">editor</a><a class="tag-link" href="/tags/sublime/">sublime</a>
             </dd>
           </dl>
         
@@ -100,7 +100,7 @@
     </div>
   </header>
   <article class="postArticle"><p>현재는 팀도 바뀌고 업무도 바뀌어서 <strong>VSCode를 메인</strong>으로 쓰고 있기 때문에 아래 글은 큰 의미가 없어서 닫아둠.<br>그 사이 변해서 회사에서 1년전쯤 인텔리J를 구입하는 바람에 웹스톰이 아니라 인텔리J를 쓰게 됐고 VSCode를 리액트 공부용으로만 쓰다가 회사 업무로 리액트를 쓰게 되면서 자연스럽게 VSCode가 메인으로 바뀌었다. 역시 파악해보려고 잠깐 써보는거랑 계속 써보는건 다르다. 이 글은 서브라임 텍스트3 사용 플러그인 기록용으로 남겨둠.</p>
-<div class="moreless"><a href="#" class="morelessLauncher" data-expanded-text="이전 글 열어보기">이전 글 열어보기</a><div class="morelessContent"><br>사실 제목은 잘못된게 테스트한거지 주 에디터를 바꾸지는 않았다.<br><br>우리팀 14명중에 2명이 서브라임텍스트3(이하 ST3), 12명이 VSCode를 쓰면서 나 포함 ST3 사용 2명은 보수적인 사람이 됐다. 기존에 불편없이 쓰고 있는데 유행이라고 바꿀 것은 아니라고 생각하는 것으로 실제 보수적일지도 모르지만 원래도 적응은 또 잘하는 타입이라 <del>이제 아닐지도</del> 남들이 좋다는 에디터의 장점을 모르고 서브라임만 좋다고 하는 걸까봐 시도해봤다.<br><br>VSCode는 VSCode 고유의 기능이 필요할 때만 사용했었고, 학생 신분도 겸하게 되면서 학생이면 Jetbrain의 제품을 무료로 사용할 수 있다는걸 알게 되면서 웹스톰으로 전환을 시도하면서 VSCode까지 다시 돌아보게 되었다. (학생 라이센스는 당연히 회사에서는 못쓰겠지만..)<br><br>다음은 지극히 개인적인 타 에디터의 혹하는 이유와 결국 안쓰게 된 이유.<br><br>## Visual Studio Code<br>### 장점<br>- <del>GitLens</del> - 제일 먼저 VSCode에만 있는 이 플러그인이 매우 부럽다. 각 줄마다 git log를 표시해준다. 업무에서 운영 건들은 어떤 이슈가 있었는지 파악이 필요한 경우가 잦은 편인데 굳이 찾아보지 않아도 줄마다 표시가 되니 매우 유용하다.<br>  <strong>업데이트 - 웹스톰에 <a href="https://plugins.jetbrains.com/plugin/7499-gittoolbox" target="_blank" rel="noopener">GitToolBox</a>, 서브라임에 <a href="https://github.com/jisaacks/GitGutter" target="_blank" rel="noopener">GitGutter</a> 로 가능함!!</strong><br>- <del>정규식 검색</del> - VSCode만 되는 줄 알았는데 서브라임 텍스트도 된다.<br><br>### 단점<br>- (macOS 기준) 서브라임 텍스트와 동일한 테마, 스키마, 폰트를 사용해도 뭔가 다르게 마음에 들지 않는다. (Ayu, Dracula..)<br>  - 컬러 스키마가 비슷하면서도 다르다.<br>  - 폰트 굵기가 조금 더 두껍게 느껴지며 <code>editor.fontWeight</code> 수치를 아무리 바꿔봐도 마음에 드는 굵기가 되지 않는다.<br>- 서브라임 대비 무겁다. 내 10년차 MBP에서 이 차이가 체감이 된다.<br><br>### 장점인데 필요 없음.<br>- 난 내장 터미널이 필요 없다. iTerm2를 좋아함. 성능 문제로 에디터에 터미널까지 돌리고 싶지 않다.<br>- git 기능 지원이 난 필요 없다. SourceTree를 좋아함.<br>  - git 충돌 발생시 표시 부분이 편리해보인다. 근데 난 직접 수정하는걸 신뢰한다..<br><br>## WebStorm<br>### 장점<br>- 코드 추적 - Go to declaration 매우 마음에 든다. JS, SCSS 등 프로젝트내에서 어디서 선언됐는지 찾기가 매우 편리하다. 이거 하나에 계속 적응해보고자 시도했다.<br>- 터미널과 별도로 프로젝트 실행시킬 수 있다. npm start 등의 메뉴와 gulp가 별도 메뉴로 존재<br>- 자동 인덴트 - 마크업, SCSS, Javascript 아무렇게나 복붙해도 잘 정리되어 들어간다.<br>- 컬러로 표시된 인덴트 깊이가 이쁘다. 대체적으로 이쁘면서도 잘 정돈된 느낌이 드는 외관.<br><br>### 단점<br>- Atom, VSCode, Sublime Text3가 거의 동일한 단축키를 쓰는데 반해 전혀 다른 단축키, 적응이 어렵다.<br>- 프로젝트 전환이 번거로움<br>- Split View가 단축키가 기본설정으로 없고 (내)목적과는 다르게 동일 파일이 하나 더 열리는 형태<br>- 자동 인덴트 - 장점이자 단점인데 마크업에 주로 사용하는 EJS의 인덴트가 마음에 들게 되지 않는다. 되야할 인덴트가 안되는 현상..<br>- 린트 오류, 경고표시가 (내)눈에 띄지 않는다.<br>- 서브라임 대비 무겁다.<br></div></div>
+<div class="moreless"><a href="#" class="morelessLauncher" data-expanded-text="이전 글 열어보기">이전 글 열어보기</a><div class="morelessContent"><br>사실 제목은 잘못된게 테스트한거지 주 에디터를 바꾸지는 않았다.<br><br>우리팀 14명중에 2명이 서브라임텍스트3(이하 ST3), 12명이 VSCode를 쓰면서 나 포함 ST3 사용 2명은 보수적인 사람이 됐다. 기존에 불편없이 쓰고 있는데 유행이라고 바꿀 것은 아니라고 생각하는 것으로 실제 보수적일지도 모르지만 원래도 적응은 또 잘하는 타입이라 <del>이제 아닐지도</del> 남들이 좋다는 에디터의 장점을 모르고 서브라임만 좋다고 하는 걸까봐 시도해봤다.<br><br>VSCode는 VSCode 고유의 기능이 필요할 때만 사용했었고, 학생 신분도 겸하게 되면서 학생이면 Jetbrain의 제품을 무료로 사용할 수 있다는걸 알게 되면서 웹스톰으로 전환을 시도하면서 VSCode까지 다시 돌아보게 되었다. (학생 라이센스는 당연히 회사에서는 못쓰겠지만..)<br><br>다음은 지극히 개인적인 타 에디터의 혹하는 이유와 결국 안쓰게 된 이유.<br><br><h2>Visual Studio Code</h2><br><h3>장점</h3><br>- <del>GitLens</del> - 제일 먼저 VSCode에만 있는 이 플러그인이 매우 부럽다. 각 줄마다 git log를 표시해준다. 업무에서 운영 건들은 어떤 이슈가 있었는지 파악이 필요한 경우가 잦은 편인데 굳이 찾아보지 않아도 줄마다 표시가 되니 매우 유용하다.<br>  <strong>업데이트 - 웹스톰에 <a href="https://plugins.jetbrains.com/plugin/7499-gittoolbox" target="_blank" rel="noopener">GitToolBox</a>, 서브라임에 <a href="https://github.com/jisaacks/GitGutter" target="_blank" rel="noopener">GitGutter</a> 로 가능함!!</strong><br>- <del>정규식 검색</del> - VSCode만 되는 줄 알았는데 서브라임 텍스트도 된다.<br><br><h3>단점</h3><br>- (macOS 기준) 서브라임 텍스트와 동일한 테마, 스키마, 폰트를 사용해도 뭔가 다르게 마음에 들지 않는다. (Ayu, Dracula..)<br>  - 컬러 스키마가 비슷하면서도 다르다.<br>  - 폰트 굵기가 조금 더 두껍게 느껴지며 <code>editor.fontWeight</code> 수치를 아무리 바꿔봐도 마음에 드는 굵기가 되지 않는다.<br>- 서브라임 대비 무겁다. 내 10년차 MBP에서 이 차이가 체감이 된다.<br><br><h3>장점인데 필요 없음.</h3><br>- 난 내장 터미널이 필요 없다. iTerm2를 좋아함. 성능 문제로 에디터에 터미널까지 돌리고 싶지 않다.<br>- git 기능 지원이 난 필요 없다. SourceTree를 좋아함.<br>  - git 충돌 발생시 표시 부분이 편리해보인다. 근데 난 직접 수정하는걸 신뢰한다..<br><br><h2>WebStorm</h2><br><h3>장점</h3><br>- 코드 추적 - Go to declaration 매우 마음에 든다. JS, SCSS 등 프로젝트내에서 어디서 선언됐는지 찾기가 매우 편리하다. 이거 하나에 계속 적응해보고자 시도했다.<br>- 터미널과 별도로 프로젝트 실행시킬 수 있다. npm start 등의 메뉴와 gulp가 별도 메뉴로 존재<br>- 자동 인덴트 - 마크업, SCSS, Javascript 아무렇게나 복붙해도 잘 정리되어 들어간다.<br>- 컬러로 표시된 인덴트 깊이가 이쁘다. 대체적으로 이쁘면서도 잘 정돈된 느낌이 드는 외관.<br><br><h3>단점</h3><br>- Atom, VSCode, Sublime Text3가 거의 동일한 단축키를 쓰는데 반해 전혀 다른 단축키, 적응이 어렵다.<br>- 프로젝트 전환이 번거로움<br>- Split View가 단축키가 기본설정으로 없고 (내)목적과는 다르게 동일 파일이 하나 더 열리는 형태<br>- 자동 인덴트 - 장점이자 단점인데 마크업에 주로 사용하는 EJS의 인덴트가 마음에 들게 되지 않는다. 되야할 인덴트가 안되는 현상..<br>- 린트 오류, 경고표시가 (내)눈에 띄지 않는다.<br>- 서브라임 대비 무겁다.<br></div></div>
 
 <hr>
 <h2 id="Sublime-Text-3-세팅-기록"><a href="#Sublime-Text-3-세팅-기록" class="headerlink" title="Sublime Text 3 세팅 기록"></a>Sublime Text 3 세팅 기록</h2><h3 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h3><ul>
@@ -155,7 +155,7 @@
   &quot;trim_trailing_white_space_on_save&quot;: true
 }
 </code></pre>
-<p>참고로 회사에서는 Dracula 테마/신텍스에다 넉넉한 줄간격으로 쓰고 집에서는 Ayu 테마/신텍스에 표준적인 줄간격을 쓴다.<br>폰트 사이즈는 일반적인 개발자보다 좀 크게 쓰는 편인듯… 글자가 시원시원하게 보이는 걸 좋아하는 편</p>
+<p>참고로 회사에서는 Dracula 테마/신텍스에다 넉넉한 줄간격으로 쓰고 집에서는 Ayu 테마/신텍스에 표준적인 줄간격을 쓴다.<br>폰트 사이즈는 일반적인 개발자보다 좀 크게 쓰는 편인듯… 글자가 시원시원하게 보이면 일도 잘 되는 느낌 -_-;</p>
 </article>
   <footer class="postFooter">
     <div class="commentSection">

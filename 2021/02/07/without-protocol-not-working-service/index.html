@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>카카오톡 공유하기 이미지 미노출 될 때, 프로토콜 확인 - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2021/02/07/without-protocol-not-working-service/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.7">
+  <link rel="stylesheet" href="/css/style.css?v0.3.7">
+  <meta name="description" content="몇년전부터 회사 이미지 서버가 SSL, 일반 프로토콜을 모두 지원하면서 이미지소스에 프로토콜은 생략해서 사용하고 있다.   http:&amp;#x2F;&amp;#x2F;uri, https:&amp;#x2F;&amp;#x2F;uri =&amp;gt; &amp;#x2F;&amp;#x2F;uri  난 또 UI개발 출신이니 CORS 발생시키지 않을려고 특히나 프로토콜 생략이 습관화 되어 있는데, 그러던 중에 공통">
+<meta name="keywords" content="API">
+<meta property="og:type" content="article">
+<meta property="og:title" content="카카오톡 공유하기 이미지 미노출 될 때, 프로토콜 확인">
+<meta property="og:url" content="https://note.toice.net/2021/02/07/without-protocol-not-working-service/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="몇년전부터 회사 이미지 서버가 SSL, 일반 프로토콜을 모두 지원하면서 이미지소스에 프로토콜은 생략해서 사용하고 있다.   http:&amp;#x2F;&amp;#x2F;uri, https:&amp;#x2F;&amp;#x2F;uri =&amp;gt; &amp;#x2F;&amp;#x2F;uri  난 또 UI개발 출신이니 CORS 발생시키지 않을려고 특히나 프로토콜 생략이 습관화 되어 있는데, 그러던 중에 공통">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2021-03-05T23:13:40.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="카카오톡 공유하기 이미지 미노출 될 때, 프로토콜 확인">
+<meta name="twitter:description" content="몇년전부터 회사 이미지 서버가 SSL, 일반 프로토콜을 모두 지원하면서 이미지소스에 프로토콜은 생략해서 사용하고 있다.   http:&amp;#x2F;&amp;#x2F;uri, https:&amp;#x2F;&amp;#x2F;uri =&amp;gt; &amp;#x2F;&amp;#x2F;uri  난 또 UI개발 출신이니 CORS 발생시키지 않을려고 특히나 프로토콜 생략이 습관화 되어 있는데, 그러던 중에 공통">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>카카오톡 공유하기 이미지 미노출 될 때, 프로토콜 확인</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2021-02-07T15:32:08+09:00">2021년 2월 7일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/API/">API</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>몇년전부터 회사 이미지 서버가 SSL, 일반 프로토콜을 모두 지원하면서 이미지소스에 프로토콜은 생략해서 사용하고 있다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-clike">http:&#x2F;&#x2F;uri, https:&#x2F;&#x2F;uri =&gt; &#x2F;&#x2F;uri
+</code></pre>
+<p>난 또 UI개발 출신이니 CORS 발생시키지 않을려고 특히나 프로토콜 생략이 습관화 되어 있는데, 그러던 중에 공통 모듈로 사용중인 카카오톡 공유가 내가 만든 이벤트에서만 카톡 공유시 이미지가 미노출되고 타이틀과 디스크립션만 노출되었다.<br>그런데 그냥 URL로 공유하면 이미지까지 잘 노출되는거보니 오픈그래프에 받아놓은 이미지 자체는 문제가 없어보였다. 그러다 혹시나해서 프로토콜을 추가해보니 정상 작동.</p>
+<p>빨리 찾았으니 다행이지, 괜한 삽질할뻔했다. -_-;</p>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager singlePager">
+      
+        <a href="/2021/02/07/window-open-not-working-on-ios/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>iOS 디바이스에서 window.open 새창열기가 되지 않을 때</dd>
+          </dl>
+        </a>
+      
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.7"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2021/02/07/without-protocol-not-working-service/';
+  </script>
+  <script src="/js/note.js?v0.3.7"></script>
+</body>
+</html>

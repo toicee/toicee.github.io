@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>리액트에서 Intersection Observer - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/10/14/intersection-observer-on-react/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.7">
+  <link rel="stylesheet" href="/css/style.css?v0.3.7">
+  <meta name="description" content="인터섹션 옵저버를 예전에 소개글을 보았을 때나 시도 해보고 처음 실무에서 사용했다. position: sticky로만 처리할 수 있으면 좋으련만 스티키가 되었을 때 특정 클래스도 추가해줘야되는 작업이었고SPA에서 윈도우 스크롤 이벤트로 처리하는게 좀 부담스럽게 느껴져 써보게 됐다. 중요한건 언마운트 오류를 발생시키지 않으려면 useEffect에서 리턴될때">
+<meta name="keywords" content="javascript,React.js,IntersectionObserver">
+<meta property="og:type" content="article">
+<meta property="og:title" content="리액트에서 Intersection Observer">
+<meta property="og:url" content="https://note.toice.net/2020/10/14/intersection-observer-on-react/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="인터섹션 옵저버를 예전에 소개글을 보았을 때나 시도 해보고 처음 실무에서 사용했다. position: sticky로만 처리할 수 있으면 좋으련만 스티키가 되었을 때 특정 클래스도 추가해줘야되는 작업이었고SPA에서 윈도우 스크롤 이벤트로 처리하는게 좀 부담스럽게 느껴져 써보게 됐다. 중요한건 언마운트 오류를 발생시키지 않으려면 useEffect에서 리턴될때">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2021-03-05T23:07:43.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="리액트에서 Intersection Observer">
+<meta name="twitter:description" content="인터섹션 옵저버를 예전에 소개글을 보았을 때나 시도 해보고 처음 실무에서 사용했다. position: sticky로만 처리할 수 있으면 좋으련만 스티키가 되었을 때 특정 클래스도 추가해줘야되는 작업이었고SPA에서 윈도우 스크롤 이벤트로 처리하는게 좀 부담스럽게 느껴져 써보게 됐다. 중요한건 언마운트 오류를 발생시키지 않으려면 useEffect에서 리턴될때">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>리액트에서 Intersection Observer</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-10-14T15:41:29+09:00">2020년 10월 14일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/IntersectionObserver/">IntersectionObserver</a><a class="tag-link" href="/tags/React-js/">React.js</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><p>인터섹션 옵저버를 예전에 소개글을 보았을 때나 시도 해보고 처음 실무에서 사용했다.</p>
+<p><code>position: sticky</code>로만 처리할 수 있으면 좋으련만 스티키가 되었을 때 특정 클래스도 추가해줘야되는 작업이었고<br>SPA에서 윈도우 스크롤 이벤트로 처리하는게 좀 부담스럽게 느껴져 써보게 됐다.</p>
+<p>중요한건 언마운트 오류를 발생시키지 않으려면 useEffect에서 리턴될때 끊어주는 작업이 필요하다. 일단 이렇게만 적어놓고 추후 이 글 재정리해야겠다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">const fixedElement = () =&gt; {
+  const header = document.querySelector(&#39;header.pageHeader&#39;);
+
+  if (!header) {
+    return;
+  }
+
+  const io = new IntersectionObserver((entries) =&gt; {
+    setFixed(!entries[0].isIntersecting);
+  });
+
+  io.observe(header);
+
+  return io;
+};
+
+useEffect(() =&gt; {
+  const fixedDOM = fixedElement();
+
+  return () =&gt; {
+    fixedDOM.disconnect();
+  };
+}, []);
+</code></pre>
+<h3 id="참고"><a href="#참고" class="headerlink" title="참고"></a>참고</h3><ul>
+<li><a href="https://codepen.io/hey-nick/pen/mLpmMV" target="_blank" rel="noopener">https://codepen.io/hey-nick/pen/mLpmMV</a></li>
+<li><a href="https://tech.lezhin.com/2017/07/13/intersectionobserver-overview" target="_blank" rel="noopener">https://tech.lezhin.com/2017/07/13/intersectionobserver-overview</a></li>
+</ul>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/09/23/lodash-debounce/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>lodash debounce를 이용한 API 콜 제한하기</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/10/31/window-navigator-geolocation-react-router/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>리액트 환경에서 현재 위치 좌표 받아지지 않을 때</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.7"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/10/14/intersection-observer-on-react/';
+  </script>
+  <script src="/js/note.js?v0.3.7"></script>
+</body>
+</html>

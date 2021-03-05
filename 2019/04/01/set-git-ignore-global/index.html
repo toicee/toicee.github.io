@@ -8,18 +8,18 @@
   <link rel="canonical" href="https://note.toice.net/2019/04/01/set-git-ignore-global/">
   <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.7">
   <link rel="stylesheet" href="/css/style.css?v0.3.7">
-  <meta name="description" content="macOS의 경우   nano ~&amp;#x2F;.gitignore_global  .gitignore의 글로벌 세팅이 가능한지 처음 알았다. 계속 쓸지 안쓸지 모를 웹스톰 때문에 회사 프로젝트 .gitignore에 .idea를 넣기 좀 뭐해서 고민이었는데 다행히 해결.">
+  <meta name="description" content="macOS의 경우   nano ~&amp;#x2F;.gitignore_global  .gitignore의 글로벌 세팅이 가능한지 처음 알았다. 계속 쓸지 안쓸지 모를 웹스톰 때문에 회사 프로젝트 .gitignore에 .idea를 넣기 좀 뭐해서 고민이었는데 다행히 해결.  윈도우 환경에서만 할 수 있는 레거시 작업이 정기적으로 생기고,재택 원격 붙는 것도 좀 애매">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="프로젝트 상관없이 글로벌 git ignore 설정하기">
 <meta property="og:url" content="https://note.toice.net/2019/04/01/set-git-ignore-global/index.html">
 <meta property="og:site_name" content="toice&#39;s note">
-<meta property="og:description" content="macOS의 경우   nano ~&amp;#x2F;.gitignore_global  .gitignore의 글로벌 세팅이 가능한지 처음 알았다. 계속 쓸지 안쓸지 모를 웹스톰 때문에 회사 프로젝트 .gitignore에 .idea를 넣기 좀 뭐해서 고민이었는데 다행히 해결.">
+<meta property="og:description" content="macOS의 경우   nano ~&amp;#x2F;.gitignore_global  .gitignore의 글로벌 세팅이 가능한지 처음 알았다. 계속 쓸지 안쓸지 모를 웹스톰 때문에 회사 프로젝트 .gitignore에 .idea를 넣기 좀 뭐해서 고민이었는데 다행히 해결.  윈도우 환경에서만 할 수 있는 레거시 작업이 정기적으로 생기고,재택 원격 붙는 것도 좀 애매">
 <meta property="og:locale" content="KO">
-<meta property="og:updated_time" content="2020-02-17T09:51:54.569Z">
+<meta property="og:updated_time" content="2021-02-08T14:20:15.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="프로젝트 상관없이 글로벌 git ignore 설정하기">
-<meta name="twitter:description" content="macOS의 경우   nano ~&amp;#x2F;.gitignore_global  .gitignore의 글로벌 세팅이 가능한지 처음 알았다. 계속 쓸지 안쓸지 모를 웹스톰 때문에 회사 프로젝트 .gitignore에 .idea를 넣기 좀 뭐해서 고민이었는데 다행히 해결.">
+<meta name="twitter:description" content="macOS의 경우   nano ~&amp;#x2F;.gitignore_global  .gitignore의 글로벌 세팅이 가능한지 처음 알았다. 계속 쓸지 안쓸지 모를 웹스톰 때문에 회사 프로젝트 .gitignore에 .idea를 넣기 좀 뭐해서 고민이었는데 다행히 해결.  윈도우 환경에서만 할 수 있는 레거시 작업이 정기적으로 생기고,재택 원격 붙는 것도 좀 애매">
 <meta name="twitter:creator" content="@toice">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
   <script>
@@ -70,6 +70,13 @@
   </dd>
 </dl>
 
+  <dl class="updatedTime">
+    <dt>updated</dt>
+    <dd>
+      <time datetime="2021-02-08T23:20:15+09:00" class="updated">2021년 2월 8일</time>
+    </dd>
+  </dl>
+
 
       <div class="postGroup">
         
@@ -99,6 +106,14 @@
 </code></pre>
 <p><code>.gitignore</code>의 글로벌 세팅이 가능한지 처음 알았다.</p>
 <p>계속 쓸지 안쓸지 모를 웹스톰 때문에 회사 프로젝트 <code>.gitignore</code>에 <code>.idea</code>를 넣기 좀 뭐해서 고민이었는데 다행히 해결.</p>
+<hr>
+<p>윈도우 환경에서만 할 수 있는 레거시 작업이 정기적으로 생기고,<br>재택 원격 붙는 것도 좀 애매하여 요즘은 윈도우 PC를 회사 메인 컴으로 쓰고 있는데 덕분에 윈도우에서도 글로벌 갓이그노어가 필요했다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-bash">git config --global core.excludesFile &quot;%USERPROFILE%\.gitignore&quot;
+</code></pre>
+<p>사실 진작에 세팅하고 기록하진 않았었는데 소스트리가 원채 불안정하다보니 그쪽 옵션을 뭐하나 바꾸었더니 글로벌 깃이그노어가 풀려 다시 필요해서 또 필요할까봐 메모해놓는다.</p>
+<p><a href="https://stackoverflow.com/questions/7335420/global-git-ignore" target="_blank" rel="noopener">https://stackoverflow.com/questions/7335420/global-git-ignore</a></p>
 </article>
   <footer class="postFooter">
     <div class="commentSection">

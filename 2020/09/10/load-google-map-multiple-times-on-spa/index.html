@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>리액트에서 구글 맵 적용시 페이지 이동(리액트 라우트) - toice&#39;s note</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="alternate" href="/atom.xml" title="toice&#39;s note" type="application/atom+xml">
+  <link rel="canonical" href="https://note.toice.net/2020/09/10/load-google-map-multiple-times-on-spa/">
+  <link rel="stylesheet" href="/lib/prismjs/prism.css?v0.3.7">
+  <link rel="stylesheet" href="/css/style.css?v0.3.7">
+  <meta name="description" content="SPA 환경에서 구글 맵이미 구글 맵을 한번 로드한 상태에서 리액트 라우트를 통해서 페이지 이동시 URL 변경은 있지만 실제로 이동은 하지 않은 상태인데 구글맵 스크립트를 또 불러서 문제가 생긴적이 있었다. 그리고 아래처럼 해결하려고 했었다.   const apiKey = &amp;#39;&amp;#39;; &amp;#x2F;&amp;#x2F; 제거  const removeScript">
+<meta name="keywords" content="javascript,React.js,GoogleMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="리액트에서 구글 맵 적용시 페이지 이동(리액트 라우트)">
+<meta property="og:url" content="https://note.toice.net/2020/09/10/load-google-map-multiple-times-on-spa/index.html">
+<meta property="og:site_name" content="toice&#39;s note">
+<meta property="og:description" content="SPA 환경에서 구글 맵이미 구글 맵을 한번 로드한 상태에서 리액트 라우트를 통해서 페이지 이동시 URL 변경은 있지만 실제로 이동은 하지 않은 상태인데 구글맵 스크립트를 또 불러서 문제가 생긴적이 있었다. 그리고 아래처럼 해결하려고 했었다.   const apiKey = &amp;#39;&amp;#39;; &amp;#x2F;&amp;#x2F; 제거  const removeScript">
+<meta property="og:locale" content="KO">
+<meta property="og:updated_time" content="2021-03-05T23:07:52.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="리액트에서 구글 맵 적용시 페이지 이동(리액트 라우트)">
+<meta name="twitter:description" content="SPA 환경에서 구글 맵이미 구글 맵을 한번 로드한 상태에서 리액트 라우트를 통해서 페이지 이동시 URL 변경은 있지만 실제로 이동은 하지 않은 상태인데 구글맵 스크립트를 또 불러서 문제가 생긴적이 있었다. 그리고 아래처럼 해결하려고 했었다.   const apiKey = &amp;#39;&amp;#39;; &amp;#x2F;&amp;#x2F; 제거  const removeScript">
+<meta name="twitter:creator" content="@toice">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30031521-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-30031521-2');
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="siteHeader">
+      <div class="siteInner">
+        <h1>
+          <a href="/">toice&#39;s note</a>
+        </h1>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="siteInner">
+        <p class="subtitle">내가 기억하려고 남기는 기록</p>
+        <nav class="siteNav">
+          <ul>
+            <li>
+              <a href="/archives">글 목록</a>
+            </li>
+            <li>
+              <a href="/atom.xml">RSS Feed</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="toggleWrap">
+          <button type="button" class="toggle">Nav Toggle</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      
+<main class="postContent">
+  <header class="postHeader">
+    <h1>리액트에서 구글 맵 적용시 페이지 이동(리액트 라우트)</h1>
+    <div class="postMeta">
+      
+<dl class="postTime">
+  <dt>created</dt>
+  <dd>
+    <time datetime="2020-09-10T15:43:29+09:00">2020년 9월 10일</time>
+  </dd>
+</dl>
+
+
+      <div class="postGroup">
+        
+  <dl class="categories">
+    <dt>category</dt>
+    <dd>
+      <a class="category-link" href="/categories/worklog/">worklog</a>
+    </dd>
+  </dl>
+
+
+        
+          <dl class="tags">
+            <dt>tags</dt>
+            <dd>
+              <a class="tag-link" href="/tags/GoogleMap/">GoogleMap</a><a class="tag-link" href="/tags/React-js/">React.js</a><a class="tag-link" href="/tags/javascript/">javascript</a>
+            </dd>
+          </dl>
+        
+      </div>
+    </div>
+  </header>
+  <article class="postArticle"><h2 id="SPA-환경에서-구글-맵"><a href="#SPA-환경에서-구글-맵" class="headerlink" title="SPA 환경에서 구글 맵"></a>SPA 환경에서 구글 맵</h2><p>이미 구글 맵을 한번 로드한 상태에서 리액트 라우트를 통해서 페이지 이동시 URL 변경은 있지만 실제로 이동은 하지 않은 상태인데 구글맵 스크립트를 또 불러서 문제가 생긴적이 있었다. 그리고 아래처럼 해결하려고 했었다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">const apiKey = &#39;&#39;; &#x2F;&#x2F; 제거
+
+const removeScript = () =&gt; {
+  if (window.google) {
+    const scripts = document.getElementsByTagName(&#39;script&#39;);
+    const googleCodes = [].filter.call(
+      scripts,
+      (script) =&gt; script.src.indexOf(apiKey) &gt; 0,
+    );
+
+    for (const script of googleCodes) {
+      document.head.removeChild(script);
+    }
+
+    window.google = undefined;
+  }
+};
+</code></pre>
+<p>참고 : <a href="https://stackoverflow.com/questions/29930274/fixing-you-have-included-the-google-maps-api-multiple-times-on-this-page-this" target="_blank" rel="noopener">stackoverflow</a></p>
+<p>그런데 이런 삽질 할 필요 없이 리액트 라우트에서 처리해주면 된다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-javascript">const loadScript = (apiKey) =&gt;
+  new Promise((resolve) =&gt; {
+    if (!window.google) {
+      return $.getScript(
+        `https:&#x2F;&#x2F;maps.googleapis.com&#x2F;maps&#x2F;api&#x2F;js?key=${apiKey}`,
+      ).done((script, textStatus) =&gt; {
+          resolve(&#39;done&#39;);
+      }).fail((jqxhr, settings, exception) =&gt; {
+        console.log(exception);
+        resolve(&#39;fail&#39;);
+      });
+    }
+
+    resolve(&#39;fail&#39;);
+  });
+
+let map;
+
+const initGoogleMap = (elementId, option) =&gt; {
+  &#x2F;&#x2F; 생략...
+
+  map = new window.google.maps.Map(document.getElementById(elementId), option);
+};
+</code></pre>
+<p>위처럼 로드와 초기화를 구분하여 컴포넌트화 해놓고 useParams 훅을 이용해서 페이지 이동시 구글 지도를 이미 로드했다면 초기화만 새로 해주는 식으로 사용하면 된다.</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style=""><code class="language-Javascript">const urlParams = useParams();
+
+useEffect(() =&gt; {
+  if (window.google) {
+    initGoogleMap();
+  }
+}, [urlParams.key]);
+</code></pre>
+</article>
+  <footer class="postFooter">
+    <div class="commentSection">
+      <button type="button" class="showCommentBtn">댓글 열기</button>
+      <div id="disqus_thread"></div>
+    </div>
+    <div class="postPager">
+      
+        <a href="/2020/07/28/nodemon-restart-command-rs/" class="prevPost">
+          <dl>
+            <dt><span>이전 글</span></dt>
+            <dd>nodemon 재시작 명령어 rs</dd>
+          </dl>
+        </a>
+      
+      
+        <a href="/2020/09/14/css-caution-on-spa/" class="nextPost">
+          <dl>
+            <dt><span>다음 글</span></dt>
+            <dd>SPA용 CSS 작업시 주의할 사항</dd>
+          </dl>
+        </a>
+      
+    </div>
+  </footer>
+</main>
+
+      <div class="goTopWrap">
+        <div class="goTop">
+          <a href="#">Go TOP</a>
+        </div>
+      </div>
+    </div>
+    <div class="siteFooter">
+      &copy toice
+    </div>
+  </div>
+  <script src="/lib/prismjs/prism.js?v0.3.7"></script>
+  <script>
+    var disqus_url = 'https://note.toice.net/2020/09/10/load-google-map-multiple-times-on-spa/';
+  </script>
+  <script src="/js/note.js?v0.3.7"></script>
+</body>
+</html>
